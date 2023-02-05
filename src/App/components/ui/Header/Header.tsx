@@ -12,19 +12,28 @@ function Header() {
         </div>
       </div>
       <nav>
-        <ul>
+        <ul className={styles.navigation}>
           <li>
-            <NavLink to="/">Homepage</NavLink>
+            LOGO
           </li>
           <li>
-            <NavLink to="test">TestPage</NavLink>
+            <NavLink className={styles.navigation__link} to="/">Main</NavLink>
+          </li>
+          <li>
+            Doctors
+          </li>
+          <li>
+            Services
+          </li>
+          <li>
+            Contacts
+          </li>
+          <li className={styles.navigation__buttons}>
+            <NavLink className={styles.navigation__btn} to="register">Register</NavLink>
+            <NavLink className={styles.navigation__btn} to="login">Login</NavLink>
           </li>
         </ul>
       </nav>
-      {/* <div className="header_btns">
-      </div> */}
-      <NavLink to="login">Login</NavLink>
-      <NavLink to="register">Register</NavLink>
     </header>
   );
 }
