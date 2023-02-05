@@ -1,5 +1,5 @@
 import sum from '../../utils/myFunc';
-import styles from './kek.module.scss';
+import styles from './HomePage.module.scss';
 
 function HomePage() {
   const kek = (id: number) => id;

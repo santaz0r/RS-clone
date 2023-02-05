@@ -1,0 +1,22 @@
+.header {
+  position: relative;
+  padding: 0;
+}
+.topinfo__wrapper {
+  background-color: #EDEEF0;
+  color: #1C2B43;
+  font-size: 13px;
+
+  .topinfo {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      margin: 0;
+      padding: 10px 0;
+    }
+  }
+}
+
