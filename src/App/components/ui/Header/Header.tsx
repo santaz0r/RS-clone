@@ -14,7 +14,7 @@ function Header() {
       <nav>
         <ul className={styles.navigation}>
           <li>
-            LOGO
+            <NavLink className={styles.navigation__logo} to="/" />
           </li>
           <li>
             <NavLink className={styles.navigation__link} to="/">Main</NavLink>
