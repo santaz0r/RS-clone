@@ -6,7 +6,7 @@ type TMessage = {
 };
 
 type TConfig = {
-  [key: string]: { [key: string]: { message: string } };
+  [key: string]: { [key: string]: { message: string; min?: string } };
 };
 
 function validator(data: Tdata, config: TConfig) {

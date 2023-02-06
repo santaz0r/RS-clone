@@ -36,7 +36,7 @@ function RegisterForm() {
       },
       min: {
         message: 'The password should be a minimum of 3 characters.',
-        value: 3,
+        value: '3',
       },
     },
   };
