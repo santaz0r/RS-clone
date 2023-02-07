@@ -1,9 +1,9 @@
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
-
 import HomePage from './pages/HomePage/HomePage';
 import MainLayout from './layout/Main/MainLayout';
 import Test from './pages/otherPage/test';
 import LoginLayout from './layout/Login/Login';
+import AppLoader from './components/ui/hoc/AppLoader';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -16,7 +16,11 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AppLoader>
+      <RouterProvider router={router} />
+    </AppLoader>
+  );
 }
 
 export default App;
