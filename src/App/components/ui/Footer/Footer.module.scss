@@ -1,17 +1,12 @@
 .footer {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-.footer__blackbar_wrapper {
-  width: 100%;
-  color: #1c2b43;
-  background-color: #edeef0;
-  font-size: 0.8125rem;
-  line-height: 0.875rem;
-  padding: 0.5rem 0;
+  &__blackbar_wrapper {
+    width: 100%;
+    color: #1c2b43;
+    background-color: #edeef0;
+    font-size: 0.8125rem;
+    line-height: 0.875rem;
+    padding: 0.5rem 0;
+  }
 }
 
 .footer__blackbar {
