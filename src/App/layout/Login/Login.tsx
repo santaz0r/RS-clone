@@ -11,7 +11,7 @@ function LoginLayout() {
       <RegisterForm />
       <p>
         Already have account?
-        <NavLink to="/login">
+        <NavLink to="/auth/login">
           <button type="button">Sign In</button>
         </NavLink>
       </p>
@@ -22,7 +22,7 @@ function LoginLayout() {
       <LoginForm />
       <p>
         Already have account?
-        <NavLink to="/register">
+        <NavLink to="/auth/register">
           <button type="button">Sign Up</button>
         </NavLink>
       </p>
