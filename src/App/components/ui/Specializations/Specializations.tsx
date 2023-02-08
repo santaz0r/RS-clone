@@ -4,8 +4,8 @@ import { getSpecializationById, getSpecializationsLoadingStatus } from '../../..
 function Specializations({ id }: { id: string }) {
   const specLoadingStatus = useAppSelector(getSpecializationsLoadingStatus());
   const spec = useAppSelector(getSpecializationById(id));
-  if (!specLoadingStatus) return <p>specialization: {spec?.name}</p>;
-  return <p>specialization: Loading...</p>;
+  if (!specLoadingStatus) return <div>specialization: {spec?.name}</div>;
+  return <div>specialization: Loading...</div>;
 }
 
 export default Specializations;

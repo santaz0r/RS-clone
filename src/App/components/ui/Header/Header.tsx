@@ -2,6 +2,9 @@ import { NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
 
 function Header() {
+  const isLogIn = true;
+  const isAdmin = true;
+
   return (
     <header className={styles.header}>
       <div className={styles.topinfo__wrapper}>
@@ -24,14 +27,22 @@ function Header() {
           <li>Doctors</li>
           <li>Services</li>
           <li>Contacts</li>
-          <li className={styles.navigation__buttons}>
-            <NavLink className={styles.navigation__btn} to="auth/register">
-              Register
-            </NavLink>
-            <NavLink className={styles.navigation__btn} to="auth/login">
-              Login
-            </NavLink>
-          </li>
+          {isLogIn && isAdmin ? (
+            <li className={styles.navigation__buttons}>
+              <NavLink className={styles.navigation__btn} to="dashboard">
+                Admin Dashboard
+              </NavLink>
+            </li>
+          ) : (
+            <li className={styles.navigation__buttons}>
+              <NavLink className={styles.navigation__btn} to="auth/register">
+                Register
+              </NavLink>
+              <NavLink className={styles.navigation__btn} to="auth/login">
+                Login
+              </NavLink>
+            </li>
+          )}
         </ul>
       </nav>
     </header>
