@@ -1,7 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { mainBackgroundsArray } from '../../../img/mainBackground/mainBackgroundsArray';
 import { randomInteger } from '../../utils/utils';
+import Doctors from '../../components/ui/Doctors/Doctors';
+
 import styles from './HomePage.module.scss';
+
+const MemoedDoctors = memo(Doctors);
 
 function HomePage() {
   const [backgroundNum, SetBackgroundNum] = useState(randomInteger(0, 6));
@@ -29,6 +33,10 @@ function HomePage() {
         <div className={styles.slider}>
           <h1 className={styles.slider__title}>Homepage</h1>
         </div>
+      </div>
+      <div>
+        <h3>Our Doctors</h3>
+        <MemoedDoctors />
       </div>
     </div>
   );

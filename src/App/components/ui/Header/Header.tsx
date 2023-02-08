@@ -17,20 +17,20 @@ function Header() {
             <NavLink className={styles.navigation__logo} to="/" />
           </li>
           <li>
-            <NavLink className={styles.navigation__link} to="/">Main</NavLink>
+            <NavLink className={styles.navigation__link} to="/">
+              Main
+            </NavLink>
           </li>
-          <li>
-            Doctors
-          </li>
-          <li>
-            Services
-          </li>
-          <li>
-            Contacts
-          </li>
+          <li>Doctors</li>
+          <li>Services</li>
+          <li>Contacts</li>
           <li className={styles.navigation__buttons}>
-            <NavLink className={styles.navigation__btn} to="register">Register</NavLink>
-            <NavLink className={styles.navigation__btn} to="login">Login</NavLink>
+            <NavLink className={styles.navigation__btn} to="auth/register">
+              Register
+            </NavLink>
+            <NavLink className={styles.navigation__btn} to="auth/login">
+              Login
+            </NavLink>
           </li>
         </ul>
       </nav>

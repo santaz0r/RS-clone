@@ -1,17 +1,25 @@
-import { NavLink, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import RegisterForm from '../../components/ui/RegisterForm';
 import LoginForm from '../../components/ui/LoginForm';
 
 function LoginLayout() {
   const { type } = useParams();
-  console.log(type);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (type !== 'register' && type !== 'login') {
+      navigate('/', { replace: true });
+    }
+  }, []);
+
   return type === 'register' ? (
     <>
       <h3>Register</h3>
       <RegisterForm />
       <p>
         Already have account?
-        <NavLink to="/login">
+        <NavLink to="/auth/login">
           <button type="button">Sign In</button>
         </NavLink>
       </p>
@@ -22,7 +30,7 @@ function LoginLayout() {
       <LoginForm />
       <p>
         Already have account?
-        <NavLink to="/register">
+        <NavLink to="/auth/register">
           <button type="button">Sign Up</button>
         </NavLink>
       </p>
