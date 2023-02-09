@@ -1,0 +1,16 @@
+.main__wrapper {
+  height: 470px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: 1.5s;
+}
+
+.main {
+  max-width: 1140px;
+  margin: 0 auto;
+
+  &__title{
+    margin: 0;
+  }
+}
