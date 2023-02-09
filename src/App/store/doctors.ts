@@ -6,7 +6,12 @@ import { AppDispatch, RootState } from './createStore';
 // типы изменятся позже
 
 type TDoctor = {
-  [key: string]: string;
+  name: string;
+  password: string;
+  specialization: string;
+  mail: string;
+  username: string;
+  _id: string;
 };
 
 type TDoctorState = {
@@ -37,16 +42,20 @@ const doctorsSlice = createSlice({
       state.entities = state.entities.filter((doc) => doc._id !== action.payload);
     },
     doctorCreated: (state, action) => {
-      state.entities.unshift(action.payload);
+      state.entities.push(action.payload);
+    },
+    doctorUpdateSuccessed: (state, action) => {
+      state.entities[state.entities.findIndex((doc) => doc._id === action.payload._id)] = action.payload;
     },
   },
 });
 
 const { actions, reducer: doctorsReducer } = doctorsSlice;
-const { doctorsRequested, doctorsReceived, doctorRemoved, doctorCreated } = actions;
+const { doctorsRequested, doctorsReceived, doctorRemoved, doctorCreated, doctorUpdateSuccessed } = actions;
 
-const removeDoctorRequested = createAction('comments/removeDoctorRequested');
-const createDoctorRequested = createAction('comments/createDoctorRequested');
+const removeDoctorRequested = createAction('doctors/removeDoctorRequested');
+const createDoctorRequested = createAction('doctors/createDoctorRequested');
+const updateDoctorRequested = createAction('doctors/updateDoctorRequested');
 
 export const loadDoctorsList = () => async (dispatch: AppDispatch) => {
   dispatch(doctorsRequested());
@@ -81,6 +90,17 @@ export const createDoctor = (payload: { [key: string]: string }) => async (dispa
     const { content } = await doctorsService.create(newDoc);
     console.log(content);
     dispatch(doctorCreated(newDoc));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateDoctor = (payload: { [key: string]: string }) => async (dispatch: AppDispatch) => {
+  dispatch(updateDoctorRequested());
+  try {
+    await doctorsService.update(payload);
+
+    dispatch(doctorUpdateSuccessed(payload));
   } catch (error) {
     console.log(error);
   }

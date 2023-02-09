@@ -1,35 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { getSpecializations } from '../../store/specializations';
 import validator from '../../utils/validator';
 import TextField from '../form/TextField';
 import SelectField from '../form/SelectedField';
 import { TSpec } from '../../types/types';
-import { createDoctor } from '../../store/doctors';
+import { updateDoctor } from '../../store/doctors';
 
+type TDoc = {
+  docData: {
+    name: string;
+    password: string;
+    specialization: string;
+    mail: string;
+    username: string;
+    _id: string;
+  };
+  onClose: () => void;
+};
 const initialState = {
   name: '',
   password: '',
   specialization: '',
   mail: '',
-  username: '',
 };
 
-function AddNewDoctorForm() {
+function EditDoctorForm({ docData, onClose }: TDoc) {
   const dispatch = useAppDispatch();
-  const [data, setData] = useState(initialState);
+  const [data, setData] = useState({
+    name: docData.name,
+    password: docData.password,
+    specialization: docData.specialization,
+    mail: docData.mail,
+  });
   const [errors, setErrors] = useState<{ [key: string]: string }>(initialState);
   const specializations = useAppSelector(getSpecializations());
-
+  const [isDisbale, setDisable] = useState(false);
   const validatorConfig = {
-    username: {
-      isRequired: {
-        message: 'USER Name is required',
-      },
-      noSpaces: {
-        message: 'add without spaces',
-      },
-    },
     name: {
       isRequired: {
         message: 'Name is required',
@@ -89,17 +96,24 @@ function AddNewDoctorForm() {
   }, [data]);
   const isValid = Object.keys(errors).length === 0;
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const isValidData = validate();
     if (!isValidData) return;
+    const fullData = {
+      ...data,
+      _id: docData._id,
+      username: docData.username,
+    };
+    setDisable(true);
+    await dispatch(updateDoctor(fullData));
 
-    dispatch(createDoctor(data));
+    onClose();
   };
 
   return (
     <>
-      <h3>Add new Doctor</h3>
+      <h3>Edit Doctor</h3>
       <form onSubmit={handleSubmit}>
         <TextField label="Name" name="name" onChange={handleChange} value={data.name} error={errors.name} />
         <TextField
@@ -111,13 +125,6 @@ function AddNewDoctorForm() {
           error={errors.password}
         />
         <TextField label="Email" name="mail" onChange={handleChange} value={data.mail} error={errors.mail} />
-        <TextField
-          label="User Name"
-          name="username"
-          onChange={handleChange}
-          value={data.username}
-          error={errors.username}
-        />
         <SelectField
           label="Specialization"
           name="specialization"
@@ -128,7 +135,7 @@ function AddNewDoctorForm() {
           options={transformData(specializations)}
         />
 
-        <button disabled={!isValid} type="submit">
+        <button disabled={!isValid || isDisbale} type="submit">
           Submit
         </button>
       </form>
@@ -136,4 +143,4 @@ function AddNewDoctorForm() {
   );
 }
 
-export default AddNewDoctorForm;
+export default EditDoctorForm;

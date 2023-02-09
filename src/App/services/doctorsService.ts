@@ -22,6 +22,13 @@ const doctorsService = {
     );
     return data;
   },
+  update: async (payload: { [key: string]: string }) => {
+    const { data }: AxiosResponse<{ content: { [key: string]: string } }> = await httpService.put(
+      `${doctorsEndpoint}update/${payload._id}`,
+      payload,
+    );
+    return data;
+  },
 };
 
 export default doctorsService;
