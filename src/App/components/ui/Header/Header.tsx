@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
+import { changeCurrentLanguage, getLocalizedText } from '../../../services/localizationService';
 
 function Header() {
   const isLogIn = true;
@@ -9,9 +10,12 @@ function Header() {
     <header className={styles.header}>
       <div className={styles.topinfo__wrapper}>
         <div className={styles.topinfo}>
-          <p>Medical center for extraordinary people</p>
-          <p>phone: +1 234 567-89-01 (call-center)</p>
-          <p>en / ru</p>
+          <p>{getLocalizedText('centerDescription')}</p>
+          <p>{getLocalizedText('callCenter')}</p>
+          <div className={styles.language}>
+            <button className={styles.language__selector} type="button" onClick={changeCurrentLanguage}>en</button>
+            <button className={styles.language__selector} type="button" onClick={changeCurrentLanguage}>ru</button>
+          </div>
         </div>
       </div>
       <nav>
@@ -21,12 +25,12 @@ function Header() {
           </li>
           <li>
             <NavLink className={styles.navigation__link} to="/">
-              Main
+              {getLocalizedText('main')}
             </NavLink>
           </li>
-          <li>Doctors</li>
-          <li>Services</li>
-          <li>Contacts</li>
+          <li>{getLocalizedText('doctors')}</li>
+          <li>{getLocalizedText('services')}</li>
+          <li>{getLocalizedText('contacts')}</li>
           {isLogIn && isAdmin ? (
             <li className={styles.navigation__buttons}>
               <NavLink className={styles.navigation__btn} to="dashboard">
@@ -36,10 +40,10 @@ function Header() {
           ) : (
             <li className={styles.navigation__buttons}>
               <NavLink className={styles.navigation__btn} to="auth/register">
-                Register
+                {getLocalizedText('register')}
               </NavLink>
               <NavLink className={styles.navigation__btn} to="auth/login">
-                Login
+                {getLocalizedText('login')}
               </NavLink>
             </li>
           )}
