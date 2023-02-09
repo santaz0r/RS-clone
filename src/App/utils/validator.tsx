@@ -27,6 +27,11 @@ function validator(data: Tdata, config: TConfig) {
         statusValidate = dataInput.length < Number(configOptions.value);
         break;
       }
+      case 'noSpaces': {
+        const spacesRegExp = /^\S+$/;
+        statusValidate = !spacesRegExp.test(dataInput);
+        break;
+      }
       default:
         break;
     }

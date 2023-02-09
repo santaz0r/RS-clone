@@ -4,6 +4,7 @@ import MainLayout from './layout/Main/MainLayout';
 import Test from './pages/otherPage/test';
 import LoginLayout from './layout/Login/Login';
 import AppLoader from './components/ui/hoc/AppLoader';
+import Dashboard from './components/ui/Dashboard/Dashboard';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -11,6 +12,7 @@ const router = createBrowserRouter(
       <Route index element={<HomePage />} />
       <Route path="test" element={<Test />} />
       <Route path="/auth/:type?" element={<LoginLayout />} />
+      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="*" element={<h1>Not Found</h1>} />
     </Route>,
   ),

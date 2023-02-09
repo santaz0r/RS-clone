@@ -3,6 +3,9 @@ import styles from './Header.module.scss';
 import { changeCurrentLanguage, getLocalizedText } from '../../../services/localizationService';
 
 function Header() {
+  const isLogIn = true;
+  const isAdmin = true;
+
   return (
     <header className={styles.header}>
       <div className={styles.topinfo__wrapper}>
@@ -28,14 +31,22 @@ function Header() {
           <li>{getLocalizedText('doctors')}</li>
           <li>{getLocalizedText('services')}</li>
           <li>{getLocalizedText('contacts')}</li>
-          <li className={styles.navigation__buttons}>
-            <NavLink className={styles.navigation__btn} to="auth/register">
-              {getLocalizedText('register')}
-            </NavLink>
-            <NavLink className={styles.navigation__btn} to="auth/login">
-              {getLocalizedText('login')}
-            </NavLink>
-          </li>
+          {isLogIn && isAdmin ? (
+            <li className={styles.navigation__buttons}>
+              <NavLink className={styles.navigation__btn} to="dashboard">
+                Admin Dashboard
+              </NavLink>
+            </li>
+          ) : (
+            <li className={styles.navigation__buttons}>
+              <NavLink className={styles.navigation__btn} to="auth/register">
+                {getLocalizedText('register')}
+              </NavLink>
+              <NavLink className={styles.navigation__btn} to="auth/login">
+                {getLocalizedText('login')}
+              </NavLink>
+            </li>
+          )}
         </ul>
       </nav>
     </header>
