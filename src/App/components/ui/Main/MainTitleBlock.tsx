@@ -28,7 +28,12 @@ function MainTitleBlock() {
         style={{ backgroundImage: `url(${mainBackgroundsArray[backgroundNum]})` }}
       >
         <div className={styles.main}>
-          <h1 className={styles.main__title}>Homepage</h1>
+          <h1 className={styles.main__title}>Welcome</h1>
+          <h2 className={styles.main__subtitle}>to medical online service</h2>
+          <p className={styles.main__text}>You   can find doctor that suites your requirments</p>
+          <p className={styles.main__text}>We offer help to people of all ages</p>
+          <p className={styles.main__phone}>phone: +1 234 567-89-01</p>
+          <p className={styles.main__smalltext}>* available 24/7</p>
         </div>
       </div>
     </div>
