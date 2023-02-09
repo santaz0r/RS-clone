@@ -1,5 +1,5 @@
 import { useState, useEffect, memo } from 'react';
-import { mainBackgroundsArray } from '../../../img/mainBackground/mainBackgroundsArray';
+import { mainBackgroundsArray } from '../../assets/mainBackground/mainBackgroundsArray';
 import { randomInteger } from '../../utils/utils';
 import Doctors from '../../components/ui/Doctors/Doctors';
 
