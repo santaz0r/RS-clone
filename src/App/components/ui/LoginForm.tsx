@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import TextField from '../form/TextField';
 import validator from '../../utils/validator';
 
-function LoginForm() {
+type TProps = {
+  setCurrentModal: React.Dispatch<React.SetStateAction<'register' | 'login'>>;
+}
+
+function LoginForm({ setCurrentModal }: TProps) {
   const [data, setData] = useState({
     userName: '',
     password: '',
@@ -47,6 +51,7 @@ function LoginForm() {
   };
   return (
     <form onSubmit={handleSubmit}>
+      <h2>Login</h2>
       <TextField
         label="User name"
         name="userName"
@@ -65,6 +70,9 @@ function LoginForm() {
       <button disabled={!isValid} type="submit">
         Submit
       </button>
+      <div>
+        <button type="button" onClick={() => setCurrentModal('register')}>Not registered? Create an account...</button>
+      </div>
     </form>
   );
 }
