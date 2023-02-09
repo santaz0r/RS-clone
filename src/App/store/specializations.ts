@@ -1,12 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AppDispatch, RootState } from './createStore';
 import specializationService from '../services/specializationsService';
+import { TSpec } from '../types/types';
 
 // типы изменятся позже
-
-type TSpec = {
-  [key: string]: string;
-};
 
 type TSpecState = {
   entities: TSpec[];
@@ -37,8 +34,8 @@ const { specializationsRequested, specializationsReceived } = actions;
 export const loadSpecializationsList = () => async (dispatch: AppDispatch) => {
   dispatch(specializationsRequested());
   try {
-    const data = await specializationService.fetchAll();
-    dispatch(specializationsReceived(data));
+    const { content } = await specializationService.get();
+    dispatch(specializationsReceived(content));
   } catch (error) {
     console.log(error);
   }
