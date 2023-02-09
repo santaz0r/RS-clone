@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import validator from '../../utils/validator';
 import TextField from '../form/TextField';
 
+import styles from './LoginForm.module.scss';
+
 type TProps = {
   setCurrentModal: React.Dispatch<React.SetStateAction<'register' | 'login'>>;
 }
@@ -23,23 +25,23 @@ function RegisterForm({ setCurrentModal }: TProps) {
   const validatorConfig = {
     userName: {
       isRequired: {
-        message: 'User name is required field',
+        message: '*user name is required',
       },
     },
     email: {
       isRequired: {
-        message: 'Email is required field',
+        message: '*email is required',
       },
       isEmail: {
-        message: 'Email is not correct',
+        message: '*email is not correct',
       },
     },
     password: {
       isRequired: {
-        message: 'Password is required field',
+        message: '*password is required',
       },
       min: {
-        message: 'The password should be a minimum of 3 characters.',
+        message: '*password should be 3 characters minimum',
         value: '3',
       },
     },
@@ -60,8 +62,8 @@ function RegisterForm({ setCurrentModal }: TProps) {
     console.log(data);
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Create account</h2>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <h2 className={styles.title}>Create account</h2>
       <TextField
         label="User name"
         name="userName"
@@ -78,11 +80,19 @@ function RegisterForm({ setCurrentModal }: TProps) {
         value={data.password}
         error={errors.password}
       />
-      <button disabled={!isValid} type="submit">
-        Submit
+      <button
+        disabled={!isValid}
+        type="submit"
+        className={styles.submit__btn}
+      >Submit
       </button>
       <div>
-        <button type="button" onClick={() => setCurrentModal('login')}>Already have an account? Login...</button>
+        <button
+          type="button"
+          onClick={() => setCurrentModal('login')}
+          className={styles.changeModal__btn}
+        >Already have an account? Login...
+        </button>
       </div>
     </form>
   );

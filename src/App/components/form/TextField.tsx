@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import styles from './TextField.module.scss';
+
 type TProps = {
   label: string;
   type?: string;
@@ -18,10 +20,10 @@ function TextField({ label, type, name, value, onChange, error }: TProps) {
   const toggleShowPassword = () => {
     setShowPassword((prevState) => !prevState);
   };
-  const getInputClasses = () => `default ${error ? ' invalid' : 'valid'}`;
+  // const getInputClasses = () => `default ${error ? ' invalid' : 'valid'}`;
 
   return (
-    <div>
+    <div className={styles.input__wrapper}>
       <label htmlFor={name}>{label}</label>
       <div>
         <input
@@ -30,14 +32,16 @@ function TextField({ label, type, name, value, onChange, error }: TProps) {
           name={name}
           value={value}
           onChange={handleChange}
-          className={getInputClasses()}
+          className={styles.input}
+          // className={getInputClasses()}
         />
+        {error && <div className={styles.error}>{error}</div>}
         {type === 'password' && (
-          <button type="button" onClick={toggleShowPassword}>
-            {showPassword ? 'hide password' : 'show password'}
-          </button>
+          <label htmlFor="chk" className={styles.pass_label}>
+            <input type="checkbox" id="chk" onChange={toggleShowPassword} checked={showPassword} />
+            show password
+          </label>
         )}
-        {error && <div className="has-error">{error}</div>}
       </div>
     </div>
   );
