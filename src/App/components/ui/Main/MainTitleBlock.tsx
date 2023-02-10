@@ -30,7 +30,7 @@ function MainTitleBlock() {
         <div className={styles.main}>
           <h1 className={styles.title}>Welcome</h1>
           <h2 className={styles.subtitle}>to medical online service</h2>
-          <p className={styles.text}>You   can find doctor that suites your requirments</p>
+          <p className={styles.text}>You   can find doctor that suites your requirements</p>
           <p className={styles.text}>We offer help to people of all ages</p>
           <p className={styles.phone}>phone: +1 234 567-89-01</p>
           <p className={styles.smalltext}>* available 24/7</p>
