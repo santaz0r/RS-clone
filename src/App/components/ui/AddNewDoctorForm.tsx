@@ -7,6 +7,7 @@ import SelectField from '../form/SelectedField';
 import { TSpec } from '../../types/types';
 import { createDoctor } from '../../store/doctors';
 import generateAvatar from '../../utils/generateAvatar';
+import { getLocalizedText } from '../../services/localizationService';
 
 const initialState = {
   name: '',
@@ -27,7 +28,7 @@ function AddNewDoctorForm() {
   const validatorConfig = {
     username: {
       isRequired: {
-        message: 'USER Name is required',
+        message: getLocalizedText('errMessage'),
       },
       noSpaces: {
         message: 'add without spaces',
@@ -35,7 +36,7 @@ function AddNewDoctorForm() {
     },
     name: {
       isRequired: {
-        message: 'Name is required',
+        message: getLocalizedText('errMessage'),
       },
       noSpaces: {
         message: 'add without spaces',
@@ -43,7 +44,7 @@ function AddNewDoctorForm() {
     },
     surname: {
       isRequired: {
-        message: 'Surname is required',
+        message: getLocalizedText('errMessage'),
       },
       noSpaces: {
         message: 'add without spaces',
@@ -51,7 +52,7 @@ function AddNewDoctorForm() {
     },
     specialization: {
       isRequired: {
-        message: 'Choose the specialization',
+        message: getLocalizedText('errMessage'),
       },
       noSpaces: {
         message: 'add without spaces',
@@ -59,7 +60,7 @@ function AddNewDoctorForm() {
     },
     password: {
       isRequired: {
-        message: 'Enter password',
+        message: getLocalizedText('errMessage'),
       },
       noSpaces: {
         message: 'add without spaces',
@@ -67,7 +68,7 @@ function AddNewDoctorForm() {
     },
     mail: {
       isRequired: {
-        message: 'Enter email',
+        message: getLocalizedText('errMessage'),
       },
       noSpaces: {
         message: 'add without spaces',
@@ -75,7 +76,7 @@ function AddNewDoctorForm() {
     },
     image: {
       isRequired: {
-        message: 'Enter photo url',
+        message: getLocalizedText('errMessage'),
       },
       isUrl: {
         message: 'Incorrect url',

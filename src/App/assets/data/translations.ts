@@ -47,6 +47,10 @@ const translations = {
     ru: 'Специализация',
     en: 'Specialization',
   },
+  errMessage: {
+    ru: 'Это поле обязательно',
+    en: 'This field is required',
+  },
 };
 
 export default translations;
