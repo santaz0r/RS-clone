@@ -28,61 +28,61 @@ function AddNewDoctorForm() {
   const validatorConfig = {
     username: {
       isRequired: {
-        message: getLocalizedText('errMessage'),
+        message: getLocalizedText('isRequired'),
       },
       noSpaces: {
-        message: 'add without spaces',
+        message: getLocalizedText('noSpaces'),
       },
     },
     name: {
       isRequired: {
-        message: getLocalizedText('errMessage'),
+        message: getLocalizedText('isRequired'),
       },
       noSpaces: {
-        message: 'add without spaces',
+        message: getLocalizedText('noSpaces'),
       },
     },
     surname: {
       isRequired: {
-        message: getLocalizedText('errMessage'),
+        message: getLocalizedText('isRequired'),
       },
       noSpaces: {
-        message: 'add without spaces',
+        message: getLocalizedText('noSpaces'),
       },
     },
     specialization: {
       isRequired: {
-        message: getLocalizedText('errMessage'),
+        message: getLocalizedText('isRequired'),
       },
       noSpaces: {
-        message: 'add without spaces',
+        message: getLocalizedText('noSpaces'),
       },
     },
     password: {
       isRequired: {
-        message: getLocalizedText('errMessage'),
+        message: getLocalizedText('isRequired'),
       },
       noSpaces: {
-        message: 'add without spaces',
+        message: getLocalizedText('noSpaces'),
       },
     },
     mail: {
       isRequired: {
-        message: getLocalizedText('errMessage'),
+        message: getLocalizedText('isRequired'),
       },
       noSpaces: {
-        message: 'add without spaces',
+        message: getLocalizedText('noSpaces'),
       },
     },
     image: {
       isRequired: {
-        message: getLocalizedText('errMessage'),
+        message: getLocalizedText('isRequired'),
       },
       isUrl: {
-        message: 'Incorrect url',
+        message: getLocalizedText('isUrl'),
       },
       noSpaces: {
-        message: 'add without spaces',
+        message: getLocalizedText('noSpaces'),
       },
     },
   };
@@ -154,7 +154,7 @@ function AddNewDoctorForm() {
         />
 
         <button disabled={!isValid} type="submit">
-          Submit
+          {getLocalizedText('submit')}
         </button>
       </form>
     </>

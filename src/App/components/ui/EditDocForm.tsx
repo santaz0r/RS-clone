@@ -6,6 +6,7 @@ import TextField from '../form/TextField';
 import SelectField from '../form/SelectedField';
 import { TSpec } from '../../types/types';
 import { updateDoctor } from '../../store/doctors';
+import { getLocalizedText } from '../../services/localizationService';
 
 type TDoc = {
   docData: {
@@ -45,53 +46,53 @@ function EditDoctorForm({ docData, onClose }: TDoc) {
   const validatorConfig = {
     name: {
       isRequired: {
-        message: 'Name is required',
+        message: getLocalizedText('isRequired'),
       },
       noSpaces: {
-        message: 'add without spaces',
+        message: getLocalizedText('noSpaces'),
       },
     },
     surname: {
       isRequired: {
-        message: 'Surname is required',
+        message: getLocalizedText('isRequired'),
       },
       noSpaces: {
-        message: 'add without spaces',
+        message: getLocalizedText('noSpaces'),
       },
     },
     specialization: {
       isRequired: {
-        message: 'Choose the specialization',
+        message: getLocalizedText('isRequired'),
       },
       noSpaces: {
-        message: 'add without spaces',
+        message: getLocalizedText('noSpaces'),
       },
     },
     password: {
       isRequired: {
-        message: 'Enter password',
+        message: getLocalizedText('isRequired'),
       },
       noSpaces: {
-        message: 'add without spaces',
+        message: getLocalizedText('noSpaces'),
       },
     },
     mail: {
       isRequired: {
-        message: 'Enter email',
+        message: getLocalizedText('isRequired'),
       },
       noSpaces: {
-        message: 'add without spaces',
+        message: getLocalizedText('noSpaces'),
       },
     },
     image: {
       isRequired: {
-        message: 'Enter photo url',
+        message: getLocalizedText('isRequired'),
       },
       isUrl: {
-        message: 'Incorrect url',
+        message: getLocalizedText('isUrl'),
       },
       noSpaces: {
-        message: 'add without spaces',
+        message: getLocalizedText('noSpaces'),
       },
     },
   };
@@ -163,7 +164,7 @@ function EditDoctorForm({ docData, onClose }: TDoc) {
         />
 
         <button disabled={!isValid || isDisbale} type="submit">
-          Submit
+          {getLocalizedText('submit')}
         </button>
       </form>
     </>

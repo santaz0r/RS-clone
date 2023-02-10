@@ -12,7 +12,11 @@ function Specializations({ id }: { id: string }) {
       </div>
     );
   }
-  return <div>{getLocalizedText('specialization')}: Loading...</div>;
+  return (
+    <div>
+      {getLocalizedText('specialization')}: {getLocalizedText('loading')}
+    </div>
+  );
 }
 
 export default Specializations;

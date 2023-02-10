@@ -6,6 +6,7 @@ import AddNewDoctorForm from '../AddNewDoctorForm';
 import Modal from '../../modal/Modal';
 import EditDoctorForm from '../EditDocForm';
 import { TDoc } from '../../../types/types';
+import { getLocalizedText } from '../../../services/localizationService';
 
 type TProps = {
   docData: TDoc;
@@ -44,17 +45,23 @@ function Dashboard() {
       <div style={{ width: '60%' }}>
         {doctors.map((doc) => (
           <div key={doc._id}>
-            <div>Name: {doc.name}</div>
-            <div>Surname: {doc.surname}</div>
+            <div>
+              {getLocalizedText('name')}: {doc.name}
+            </div>
+            <div>
+              {getLocalizedText('surname')}: {doc.surname}
+            </div>
             <img style={{ width: 200, height: 200 }} src={doc.image} alt="avatar" />
             <Specializations id={doc.specialization} />
-            <div>Contacts:</div>
-            <div>email: {doc.mail}</div>
+            <div>{getLocalizedText('contacts')}:</div>
+            <div>
+              {getLocalizedText('email')}: {doc.mail}
+            </div>
             <button onClick={() => handleDelete(doc._id)} type="button">
-              delete doc
+              {getLocalizedText('delete')}
             </button>
             <button onClick={() => handleEdit(doc)} type="button">
-              Edit
+              {getLocalizedText('edit')}
             </button>
             <hr />
           </div>
