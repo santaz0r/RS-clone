@@ -1,16 +1,15 @@
-.slider__wrapper {
-  height: 470px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  transition: 1.5s;
-}
-
-.slider {
+.carousel__wrapper {
   max-width: 1140px;
   margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
 
-  &__title{
-    margin: 0;
-  }
+.carousel__header {
+  margin: 0;
+  margin-bottom: 20px;
+  padding: 0;
+  font-family: "Segoe UI";
+  font-weight: 300;
+  font-size: 30px;
 }

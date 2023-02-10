@@ -4,7 +4,7 @@ import { getSpecializationById, getSpecializationsLoadingStatus } from '../../..
 function Specializations({ id }: { id: string }) {
   const specLoadingStatus = useAppSelector(getSpecializationsLoadingStatus());
   const spec = useAppSelector(getSpecializationById(id));
-  if (!specLoadingStatus) return <div>specialization: {spec?.name}</div>;
+  if (!specLoadingStatus) return <div>Specialization: {spec?.name}</div>;
   return <div>specialization: Loading...</div>;
 }
 

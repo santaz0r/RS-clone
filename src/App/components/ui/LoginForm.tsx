@@ -2,7 +2,13 @@ import React, { useState, useEffect } from 'react';
 import TextField from '../form/TextField';
 import validator from '../../utils/validator';
 
-function LoginForm() {
+import styles from './LoginForm.module.scss';
+
+type TProps = {
+  setCurrentModal: React.Dispatch<React.SetStateAction<'register' | 'login'>>;
+}
+
+function LoginForm({ setCurrentModal }: TProps) {
   const [data, setData] = useState({
     userName: '',
     password: '',
@@ -21,12 +27,12 @@ function LoginForm() {
   const validatorConfig = {
     userName: {
       isRequired: {
-        message: 'User name is required field',
+        message: '*user name is required',
       },
     },
     password: {
       isRequired: {
-        message: 'Password is required field',
+        message: '*password is required',
       },
     },
   };
@@ -46,7 +52,8 @@ function LoginForm() {
     console.log(data);
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <h2 className={styles.title}>Login</h2>
       <TextField
         label="User name"
         name="userName"
@@ -62,9 +69,20 @@ function LoginForm() {
         value={data.password}
         error={errors.password}
       />
-      <button disabled={!isValid} type="submit">
-        Submit
+      <button
+        disabled={!isValid}
+        type="submit"
+        className={styles.submit__btn}
+      >Submit
       </button>
+      <div>
+        <button
+          type="button"
+          onClick={() => setCurrentModal('register')}
+          className={styles.changeModal__btn}
+        >Not registered? Create an account...
+        </button>
+      </div>
     </form>
   );
 }

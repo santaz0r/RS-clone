@@ -1,10 +1,21 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import Modal from '../../modal/Modal';
+import LoginForm from '../LoginForm';
+import RegisterForm from '../RegisterForm';
 import styles from './Header.module.scss';
 import { changeCurrentLanguage, getLocalizedText } from '../../../services/localizationService';
 
 function Header() {
   const isLogIn = true;
-  const isAdmin = true;
+  const isAdmin = false;
+  const [isModalActive, setIsModalActive] = useState(false);
+  const [currentModal, setCurrentModal] = useState<'register' | 'login'>('register');
+
+  function handleButton(btn: 'register' | 'login') {
+    setCurrentModal(btn);
+    setIsModalActive(true);
+  }
 
   return (
     <header className={styles.header}>
@@ -39,16 +50,23 @@ function Header() {
             </li>
           ) : (
             <li className={styles.navigation__buttons}>
-              <NavLink className={styles.navigation__btn} to="auth/register">
+              <button type="button" className={styles.navigation__btn} onClick={() => handleButton('register')}>
                 {getLocalizedText('register')}
-              </NavLink>
-              <NavLink className={styles.navigation__btn} to="auth/login">
+              </button>
+              <button type="button" className={styles.navigation__btn} onClick={() => handleButton('login')}>
                 {getLocalizedText('login')}
-              </NavLink>
+              </button>
             </li>
           )}
         </ul>
       </nav>
+      {isModalActive && (
+        <Modal setActive={setIsModalActive}>
+          {currentModal === 'register'
+            ? <RegisterForm setCurrentModal={setCurrentModal} />
+            : <LoginForm setCurrentModal={setCurrentModal} />}
+        </Modal>
+      )}
     </header>
   );
 }

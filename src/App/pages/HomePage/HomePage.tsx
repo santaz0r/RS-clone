@@ -1,42 +1,15 @@
-import { useState, useEffect, memo } from 'react';
-import { mainBackgroundsArray } from '../../../img/mainBackground/mainBackgroundsArray';
-import { randomInteger } from '../../utils/utils';
-import Doctors from '../../components/ui/Doctors/Doctors';
+import MainTitleBlock from '../../components/ui/Main/MainTitleBlock';
+import DoctorsCarousel from '../../components/ui/Main/DoctorsCarousel';
 
 import styles from './HomePage.module.scss';
 
-const MemoedDoctors = memo(Doctors);
-
 function HomePage() {
-  const [backgroundNum, SetBackgroundNum] = useState(randomInteger(0, 6));
-
-  function changeBackground(num: number) {
-    if (num === mainBackgroundsArray.length - 1) num = 0;
-    const img = new Image();
-    img.src = mainBackgroundsArray[num];
-    img.onload = () => {
-      SetBackgroundNum(num);
-      setTimeout(() => changeBackground(num + 1), 6000);
-    };
-  }
-
-  useEffect(() => {
-    setTimeout(() => changeBackground(backgroundNum + 1), 6000);
-  }, []);
-
   return (
     <div>
-      <div
-        className={styles.slider__wrapper}
-        style={{ backgroundImage: `url(${mainBackgroundsArray[backgroundNum]})` }}
-      >
-        <div className={styles.slider}>
-          <h1 className={styles.slider__title}>Homepage</h1>
-        </div>
-      </div>
-      <div>
-        <h3>Our Doctors</h3>
-        <MemoedDoctors />
+      <MainTitleBlock />
+      <div className={styles.carousel__wrapper}>
+        <h2 className={styles.carousel__header}>Our Doctors:</h2>
+        <DoctorsCarousel />
       </div>
     </div>
   );
