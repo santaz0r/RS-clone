@@ -35,6 +35,66 @@ const translations = {
     ru: 'телефон: +1 234 567-89-01 (call-center)',
     en: 'phone: +1 234 567-89-01 (call-center)',
   },
+  name: {
+    ru: 'Имя',
+    en: 'Name',
+  },
+  surname: {
+    ru: 'Фамилия',
+    en: 'Surname',
+  },
+  specialization: {
+    ru: 'Специализация',
+    en: 'Specialization',
+  },
+  email: {
+    ru: 'почта',
+    en: 'email',
+  },
+  photo: {
+    ru: 'Фото',
+    en: 'Photo',
+  },
+  password: {
+    ru: 'Пароль',
+    en: 'Password',
+  },
+  'user name': {
+    ru: 'Имя аккаунта',
+    en: 'User name',
+  },
+  isRequired: {
+    ru: 'Это поле обязательно',
+    en: 'This field is required',
+  },
+  noSpaces: {
+    ru: 'Введите без пробелов',
+    en: 'Enter without spaces',
+  },
+  isUrl: {
+    ru: 'Некорректный url адрес',
+    en: 'Incorrect url',
+  },
+  loading: {
+    ru: 'загрузка...',
+    en: 'loading...',
+  },
+  delete: {
+    ru: 'Удалить',
+    en: 'Remove',
+  },
+  edit: {
+    ru: 'Изменить',
+    en: 'Edit',
+  },
+  submit: {
+    ru: 'Отправить',
+    en: 'Submit',
+  },
+  showPassword: {
+    ru: 'Показать пароль',
+    en: 'Show password',
+  },
 };
 
 export default translations;

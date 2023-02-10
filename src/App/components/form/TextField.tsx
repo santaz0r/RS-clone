@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import styles from './TextField.module.scss';
+import { getLocalizedText } from '../../services/localizationService';
 
 type TProps = {
   label: string;
@@ -21,10 +22,9 @@ function TextField({ label, type, name, value, onChange, error }: TProps) {
     setShowPassword((prevState) => !prevState);
   };
   // const getInputClasses = () => `default ${error ? ' invalid' : 'valid'}`;
-
   return (
     <div className={styles.input__wrapper}>
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name}>{getLocalizedText(label.toLowerCase())}</label>
       <div>
         <input
           type={showPassword ? 'text' : type}
@@ -39,7 +39,7 @@ function TextField({ label, type, name, value, onChange, error }: TProps) {
         {type === 'password' && (
           <label htmlFor="chk" className={styles.pass_label}>
             <input type="checkbox" id="chk" onChange={toggleShowPassword} checked={showPassword} />
-            show password
+            {getLocalizedText('showPassword')}
           </label>
         )}
       </div>

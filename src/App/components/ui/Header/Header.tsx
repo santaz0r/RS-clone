@@ -8,7 +8,7 @@ import { changeCurrentLanguage, getLocalizedText } from '../../../services/local
 
 function Header() {
   const isLogIn = true;
-  const isAdmin = false;
+  const isAdmin = true;
   const [isModalActive, setIsModalActive] = useState(false);
   const [currentModal, setCurrentModal] = useState<'register' | 'login'>('register');
 
@@ -24,8 +24,12 @@ function Header() {
           <p>{getLocalizedText('centerDescription')}</p>
           <p>{getLocalizedText('callCenter')}</p>
           <div className={styles.language}>
-            <button className={styles.language__selector} type="button" onClick={changeCurrentLanguage}>en</button>
-            <button className={styles.language__selector} type="button" onClick={changeCurrentLanguage}>ru</button>
+            <button className={styles.language__selector} type="button" onClick={changeCurrentLanguage}>
+              en
+            </button>
+            <button className={styles.language__selector} type="button" onClick={changeCurrentLanguage}>
+              ru
+            </button>
           </div>
         </div>
       </div>
@@ -62,9 +66,11 @@ function Header() {
       </nav>
       {isModalActive && (
         <Modal setActive={setIsModalActive}>
-          {currentModal === 'register'
-            ? <RegisterForm setCurrentModal={setCurrentModal} />
-            : <LoginForm setCurrentModal={setCurrentModal} />}
+          {currentModal === 'register' ? (
+            <RegisterForm setCurrentModal={setCurrentModal} />
+          ) : (
+            <LoginForm setCurrentModal={setCurrentModal} />
+          )}
         </Modal>
       )}
     </header>

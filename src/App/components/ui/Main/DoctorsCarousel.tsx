@@ -3,9 +3,10 @@ import 'react-multi-carousel/lib/styles.css';
 import { useAppSelector } from '../../../../hooks';
 import { getDoctorsList } from '../../../store/doctors';
 import Specializations from '../Specializations/Specializations';
-import noPhoto from '../../../assets/nophoto.jpg';
+// import noPhoto from '../../../assets/nophoto.jpg';
 
 import styles from './DoctorsCarousel.module.scss';
+import { getLocalizedText } from '../../../services/localizationService';
 
 const responsive = {
   desktop: {
@@ -50,8 +51,13 @@ function DoctorsCarousel() {
     >
       {doctors.map((doc) => (
         <div key={doc._id} className={styles.card}>
-          <div className={styles.card__img} style={{ backgroundImage: `url(${noPhoto})` }} />
-          <p>Name: {doc.name}</p>
+          <div className={styles.card__img} style={{ backgroundImage: `url(${doc.image})` }} />
+          <p>
+            {getLocalizedText('name')}: {doc.name}
+          </p>
+          <p>
+            {getLocalizedText('surname')}: {doc.surname}
+          </p>
           <Specializations id={doc.specialization} />
         </div>
       ))}

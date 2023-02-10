@@ -1,5 +1,6 @@
 import React from 'react';
 import { TSpec } from '../../types/types';
+import { getLocalizedText } from '../../services/localizationService';
 
 type TProps = {
   label: string;
@@ -19,7 +20,7 @@ function SelectField({ label, name, value, onChange, defaultOption, options, err
   return (
     <div className="mb-4">
       <label htmlFor={name} className="form-label">
-        {label}
+        {getLocalizedText(label.toLowerCase())}
       </label>
       <select className={getInputClasses()} id={name} name={name} value={value} onChange={handleChange}>
         <option disabled value="">
