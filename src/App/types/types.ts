@@ -2,6 +2,15 @@ type TSpec = {
   [key: string]: string | number;
 };
 
-type kek = '';
+type TDoc = {
+  name: string;
+  password: string;
+  specialization: string;
+  mail: string;
+  username: string;
+  image: string;
+  surname: string;
+  _id: string;
+};
 
-export type { TSpec, kek };
+export type { TSpec, TDoc };

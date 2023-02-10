@@ -6,6 +6,7 @@ import TextField from '../form/TextField';
 import SelectField from '../form/SelectedField';
 import { TSpec } from '../../types/types';
 import { createDoctor } from '../../store/doctors';
+import generateAvatar from '../../utils/generateAvatar';
 
 const initialState = {
   name: '',
@@ -13,6 +14,8 @@ const initialState = {
   specialization: '',
   mail: '',
   username: '',
+  image: generateAvatar(),
+  surname: '',
 };
 
 function AddNewDoctorForm() {
@@ -38,6 +41,14 @@ function AddNewDoctorForm() {
         message: 'add without spaces',
       },
     },
+    surname: {
+      isRequired: {
+        message: 'Surname is required',
+      },
+      noSpaces: {
+        message: 'add without spaces',
+      },
+    },
     specialization: {
       isRequired: {
         message: 'Choose the specialization',
@@ -57,6 +68,17 @@ function AddNewDoctorForm() {
     mail: {
       isRequired: {
         message: 'Enter email',
+      },
+      noSpaces: {
+        message: 'add without spaces',
+      },
+    },
+    image: {
+      isRequired: {
+        message: 'Enter photo url',
+      },
+      isUrl: {
+        message: 'Incorrect url',
       },
       noSpaces: {
         message: 'add without spaces',
@@ -102,6 +124,8 @@ function AddNewDoctorForm() {
       <h3>Add new Doctor</h3>
       <form onSubmit={handleSubmit}>
         <TextField label="Name" name="name" onChange={handleChange} value={data.name} error={errors.name} />
+        <TextField label="Surname" name="surname" onChange={handleChange} value={data.surname} error={errors.surname} />
+        <TextField label="Photo" name="image" onChange={handleChange} value={data.image} error={errors.image} />
         <TextField
           label="Password"
           name="password"

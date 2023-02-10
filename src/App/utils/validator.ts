@@ -32,6 +32,11 @@ function validator(data: Tdata, config: TConfig) {
         statusValidate = !spacesRegExp.test(dataInput);
         break;
       }
+      case 'isUrl': {
+        const urlRegExp = /[a-z]+:\/\/.+/g;
+        statusValidate = !urlRegExp.test(dataInput);
+        break;
+      }
       default:
         break;
     }

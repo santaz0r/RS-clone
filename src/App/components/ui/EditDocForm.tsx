@@ -14,6 +14,8 @@ type TDoc = {
     specialization: string;
     mail: string;
     username: string;
+    image: string;
+    surname: string;
     _id: string;
   };
   onClose: () => void;
@@ -23,6 +25,8 @@ const initialState = {
   password: '',
   specialization: '',
   mail: '',
+  image: '',
+  surname: '',
 };
 
 function EditDoctorForm({ docData, onClose }: TDoc) {
@@ -32,6 +36,8 @@ function EditDoctorForm({ docData, onClose }: TDoc) {
     password: docData.password,
     specialization: docData.specialization,
     mail: docData.mail,
+    image: docData.image,
+    surname: docData.surname,
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>(initialState);
   const specializations = useAppSelector(getSpecializations());
@@ -40,6 +46,14 @@ function EditDoctorForm({ docData, onClose }: TDoc) {
     name: {
       isRequired: {
         message: 'Name is required',
+      },
+      noSpaces: {
+        message: 'add without spaces',
+      },
+    },
+    surname: {
+      isRequired: {
+        message: 'Surname is required',
       },
       noSpaces: {
         message: 'add without spaces',
@@ -64,6 +78,17 @@ function EditDoctorForm({ docData, onClose }: TDoc) {
     mail: {
       isRequired: {
         message: 'Enter email',
+      },
+      noSpaces: {
+        message: 'add without spaces',
+      },
+    },
+    image: {
+      isRequired: {
+        message: 'Enter photo url',
+      },
+      isUrl: {
+        message: 'Incorrect url',
       },
       noSpaces: {
         message: 'add without spaces',
@@ -116,6 +141,8 @@ function EditDoctorForm({ docData, onClose }: TDoc) {
       <h3>Edit Doctor</h3>
       <form onSubmit={handleSubmit}>
         <TextField label="Name" name="name" onChange={handleChange} value={data.name} error={errors.name} />
+        <TextField label="Surname" name="surname" onChange={handleChange} value={data.surname} error={errors.surname} />
+        <TextField label="Photo" name="image" onChange={handleChange} value={data.image} error={errors.image} />
         <TextField
           label="Password"
           name="password"

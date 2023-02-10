@@ -11,6 +11,8 @@ type TDoctor = {
   specialization: string;
   mail: string;
   username: string;
+  image: string;
+  surname: string;
   _id: string;
 };
 
