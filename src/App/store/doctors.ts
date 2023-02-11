@@ -2,22 +2,10 @@ import { createSlice, createAction } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
 import doctorsService from '../services/doctorsService';
 import { AppDispatch, RootState } from './createStore';
-
-// типы изменятся позже
-
-type TDoctor = {
-  name: string;
-  password: string;
-  specialization: string;
-  mail: string;
-  username: string;
-  image: string;
-  surname: string;
-  _id: string;
-};
+import { TDoc } from '../types/types';
 
 type TDoctorState = {
-  entities: TDoctor[];
+  entities: TDoc[];
   isLoading: boolean;
 };
 

@@ -1,0 +1,21 @@
+import { NavLink } from 'react-router-dom';
+import { useAppDispatch } from '../../../hooks';
+import { logOut } from '../../store/usersStore';
+
+function NavProfile() {
+  const dispatch = useAppDispatch();
+  const handleLogOut = () => {
+    dispatch(logOut());
+  };
+  return (
+    <div>
+      some user name
+      <NavLink to="dashboard">Admin Dashboard</NavLink>
+      <button type="button" onClick={handleLogOut}>
+        logout
+      </button>
+    </div>
+  );
+}
+
+export default NavProfile;

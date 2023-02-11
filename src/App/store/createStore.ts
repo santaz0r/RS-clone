@@ -1,8 +1,13 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import doctorsReducer from './doctors';
 import specializationsReducer from './specializations';
+import usersReducer from './usersStore';
 
-const rootReducer = combineReducers({ doctors: doctorsReducer, specialization: specializationsReducer });
+const rootReducer = combineReducers({
+  doctors: doctorsReducer,
+  specialization: specializationsReducer,
+  users: usersReducer,
+});
 
 const store = configureStore({
   reducer: rootReducer,
