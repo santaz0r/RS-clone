@@ -1,11 +1,12 @@
 .footer {
   &__blackbar_wrapper {
     width: 100%;
-    color: #1c2b43;
-    background-color: #EDEEF0;
+    color: var(--info-text-color);
+    background-color: var(--info-background-color);
     font-size: 0.8125rem;
     line-height: 0.875rem;
     padding: 0.5rem 0;
+    transition: background-color 1s ease-in-out, color 1s ease-in-out;
   }
 }
 
@@ -26,7 +27,7 @@
 
 .github__link {
   display: flex;
-  color: #1c2b43;
+  color: var(--info-text-color);
   text-decoration: none;
   align-items: center;
   cursor: pointer;
@@ -45,7 +46,7 @@
   display: block;
   text-decoration: none;
   width: 90px;
-  color: #1c2b43;
+  color: var(--info-text-color);
   height: 30px;
   background: transparent url(../../../assets/rs_school.svg);
   background-position: center;

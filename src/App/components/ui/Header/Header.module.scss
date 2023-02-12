@@ -1,13 +1,16 @@
 .header {
   position: relative;
   padding: 0;
-  border-bottom: 1px solid #EDEEF0;
+  // border-bottom: 1px solid #EDEEF0;
+  background-color: var(--background-color);
+  transition: background-color 1s ease-in-out, color 1s ease-in-out;
 }
 
 .topinfo__wrapper {
-  background-color: #EDEEF0;
-  color: #1C2B43;
+  background-color: var(--info-background-color);
+  color: var(--info-text-color);
   font-size: 13px;
+  transition: background-color 1s ease-in-out, color 1s ease-in-out;
 
   .topinfo {
     max-width: 1140px;
@@ -30,25 +33,26 @@
   align-items: center;
   list-style: none;
   padding: 0;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 
   font-weight: bold;
   font-size: 14px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: rgba(0,0,0,.5);
+  color: var(--nav-text-color);
 
   &__logo {
     display: block;
     width: 250px;
-    height: 50px;
-    border-radius: 5px;
+    height: 39px;
+    border-radius: 0.25rem;
     overflow: hidden;
     background: url('../../../assets/logo.png');
     background-size: 100%;
     background-position: center;
     background-repeat: no-repeat;
+    filter: var(--brightness);
     transition: 0.2s;
 
     &:hover {
@@ -59,10 +63,10 @@
 
   &__link {
     text-decoration: none;
-    color: rgba(0,0,0,.5);
+    color: var(--nav-text-color);
 
     &:hover{
-      color: black;
+      color: var(--nav-text-color_hover);
       cursor: pointer;
     }
   }

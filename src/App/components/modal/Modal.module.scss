@@ -27,9 +27,10 @@
     transform: scale(1);
   }
   &__content {
-    padding: 20px;
+    padding: 20px 40px;
     border-radius: 20px;
-    background-color: #fff;
+    background-color: var(--background-color);
+    color: var(--text-color);
     position: absolute;
   }
 }
