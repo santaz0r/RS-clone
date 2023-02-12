@@ -1,11 +1,12 @@
+import { getLocalizedText } from '../../services/localizationService';
 import styles from './Contacts.module.scss';
 
 function Contacts() {
   return (
     <div className={styles.wrapper}>
-      <h1 className={styles.title}>Contacts</h1>
-      <h2 className={styles.subtitle}>or how to find us (better don`t)</h2>
-      <p className={styles.text}>Adress: no official address yet, but you can search on map</p>
+      <h1 className={styles.title}>{getLocalizedText('contacts')}</h1>
+      <h2 className={styles.subtitle}>{getLocalizedText('contactsData')}</h2>
+      <p className={styles.text}>{getLocalizedText('contactsAdress')}</p>
       <iframe
         title="This is a unique title"
         // eslint-disable-next-line max-len
@@ -17,8 +18,8 @@ function Contacts() {
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
       />
-      <p className={styles.phone}>phone: +1 234 567-89-01</p>
-      <p className={styles.smalltext}>*phone number is also fictional</p>
+      <p className={styles.phone}>{getLocalizedText('contactsPhone')}</p>
+      <p className={styles.smalltext}>{getLocalizedText('contactsPhoneComment')}</p>
     </div>
   );
 }
