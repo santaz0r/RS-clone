@@ -1,3 +1,37 @@
-.contacts__wrapper {
-  
+.wrapper {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 30px 0;
+  font-family: "Segoe UI";
+  font-weight: 300;
+  border-top: 1px solid rgb(186, 186, 186);
+  color: var(--text-color);
+
+  .title{
+    margin: 0;
+    font-size: 40px;
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+  .subtitle{
+    margin: 0;
+    font-size: 35px;
+    margin-bottom: 30px;
+    font-weight: 300;
+  }
+  .text{
+    margin: 0;
+    font-size: 30px;
+  }
+  .phone{
+    margin-top: 20px;
+    margin-bottom: 0;
+    font-size: 30px;
+    font-weight: 400;
+  }
+  .smalltext{
+    margin: 0;
+    font-size: 20px;
+    font-weight: 300;
+  }
 }
