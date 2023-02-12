@@ -3,18 +3,25 @@ import validator from '../../utils/validator';
 import TextField from '../form/TextField';
 
 import styles from './LoginForm.module.scss';
+import { useAppDispatch } from '../../../hooks';
+import { signUp } from '../../store/usersStore';
 
 type TProps = {
   setCurrentModal: React.Dispatch<React.SetStateAction<'register' | 'login'>>;
-}
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-function RegisterForm({ setCurrentModal }: TProps) {
+function RegisterForm({ setCurrentModal, setActive }: TProps) {
+  const dispatch = useAppDispatch();
+
   const [data, setData] = useState({
-    userName: '',
+    username: '',
+    name: '',
     password: '',
-    email: '',
+    mail: '',
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [isDisabled, setIsDisabled] = useState(false);
   const handleChange = (target: { name: string; value: string }) => {
     setData((prev) => ({
       ...prev,
@@ -23,12 +30,17 @@ function RegisterForm({ setCurrentModal }: TProps) {
   };
 
   const validatorConfig = {
-    userName: {
+    name: {
+      isRequired: {
+        message: '*name is required',
+      },
+    },
+    username: {
       isRequired: {
         message: '*user name is required',
       },
     },
-    email: {
+    mail: {
       isRequired: {
         message: '*email is required',
       },
@@ -57,21 +69,28 @@ function RegisterForm({ setCurrentModal }: TProps) {
     validate();
   }, [data]);
   const isValid = Object.keys(errors).length === 0;
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const isValidForm = validate();
+    if (!isValidForm) return;
+    setIsDisabled(true);
     console.log(data);
+    await dispatch(signUp(data));
+    setIsDisabled(false);
+    setActive(false);
   };
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <h2 className={styles.title}>Create account</h2>
       <TextField
         label="User name"
-        name="userName"
+        name="username"
         onChange={handleChange}
-        value={data.userName}
-        error={errors.userName}
+        value={data.username}
+        error={errors.username}
       />
-      <TextField label="Email" name="email" onChange={handleChange} value={data.email} error={errors.email} />
+      <TextField label="Name" name="name" onChange={handleChange} value={data.name} error={errors.name} />
+      <TextField label="Email" name="mail" onChange={handleChange} value={data.mail} error={errors.mail} />
       <TextField
         label="Password"
         name="password"
@@ -80,18 +99,12 @@ function RegisterForm({ setCurrentModal }: TProps) {
         value={data.password}
         error={errors.password}
       />
-      <button
-        disabled={!isValid}
-        type="submit"
-        className={styles.submit__btn}
-      >Submit
+      <button disabled={!isValid || isDisabled} type="submit" className={styles.submit__btn}>
+        {isDisabled ? 'waiting' : 'Submit'}
       </button>
       <div>
-        <button
-          type="button"
-          onClick={() => setCurrentModal('login')}
-          className={styles.changeModal__btn}
-        >Already have an account? Login...
+        <button type="button" onClick={() => setCurrentModal('login')} className={styles.changeModal__btn}>
+          Already have an account? Login...
         </button>
       </div>
     </form>

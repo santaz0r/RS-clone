@@ -5,17 +5,23 @@ import LoginForm from '../LoginForm';
 import RegisterForm from '../RegisterForm';
 import styles from './Header.module.scss';
 import { changeCurrentLanguage, getLocalizedText } from '../../../services/localizationService';
+import { useAppSelector } from '../../../../hooks';
+import { getCurrentUserData } from '../../../store/usersStore';
+import NavProfile from '../../NavProfile/NavProfile';
 
 function Header() {
+  const { id, role } = useAppSelector(getCurrentUserData());
+
   const isLogIn = true;
-  const isAdmin = true;
+  const isAdmin = role === 'client';
+  console.log(id);
   const [isModalActive, setIsModalActive] = useState(false);
   const [currentModal, setCurrentModal] = useState<'register' | 'login'>('register');
 
-  function handleButton(btn: 'register' | 'login') {
+  const handleButton = (btn: 'register' | 'login') => {
     setCurrentModal(btn);
     setIsModalActive(true);
-  }
+  };
 
   return (
     <header className={styles.header}>
@@ -47,11 +53,7 @@ function Header() {
           <li>{getLocalizedText('services')}</li>
           <li>{getLocalizedText('contacts')}</li>
           {isLogIn && isAdmin ? (
-            <li className={styles.navigation__buttons}>
-              <NavLink className={styles.navigation__btn} to="dashboard">
-                Admin Dashboard
-              </NavLink>
-            </li>
+            <NavProfile />
           ) : (
             <li className={styles.navigation__buttons}>
               <button type="button" className={styles.navigation__btn} onClick={() => handleButton('register')}>
@@ -67,9 +69,9 @@ function Header() {
       {isModalActive && (
         <Modal setActive={setIsModalActive}>
           {currentModal === 'register' ? (
-            <RegisterForm setCurrentModal={setCurrentModal} />
+            <RegisterForm setCurrentModal={setCurrentModal} setActive={setIsModalActive} />
           ) : (
-            <LoginForm setCurrentModal={setCurrentModal} />
+            <LoginForm setCurrentModal={setCurrentModal} setActive={setIsModalActive} />
           )}
         </Modal>
       )}
