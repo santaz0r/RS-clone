@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { mainBackgroundsArray } from '../../../assets/mainBackgrounds/mainBackgroundsArray';
+import { getLocalizedText } from '../../../services/localizationService';
 import { randomInteger } from '../../../utils/utils';
 
 import styles from './MainTitleBlock.module.scss';
@@ -28,12 +29,12 @@ function MainTitleBlock() {
         style={{ backgroundImage: `url(${mainBackgroundsArray[backgroundNum]})` }}
       >
         <div className={styles.main}>
-          <h1 className={styles.title}>Welcome</h1>
-          <h2 className={styles.subtitle}>to medical online service</h2>
-          <p className={styles.text}>You   can find doctor that suites your requirements</p>
-          <p className={styles.text}>We offer help to people of all ages</p>
-          <p className={styles.phone}>phone: +1 234 567-89-01</p>
-          <p className={styles.smalltext}>* available 24/7</p>
+          <h1 className={styles.title}>{getLocalizedText('mainPageTitle')}</h1>
+          <h2 className={styles.subtitle}>{getLocalizedText('mainPageSubtitle')}</h2>
+          <p className={styles.text}>{getLocalizedText('mainPageText')}</p>
+          <p className={styles.text}>{getLocalizedText('mainPageText2')}</p>
+          <p className={styles.phone}>{getLocalizedText('contactsPhone')}</p>
+          <p className={styles.smalltext}>{getLocalizedText('contactsPhoneComment2')}</p>
         </div>
       </div>
     </div>

@@ -108,8 +108,32 @@ const translations = {
     en: 'phone: +1 234 567-89-01',
   },
   contactsPhoneComment: {
-    ru: 'телефон тоже самый настоящий',
+    ru: '*телефон тоже самый настоящий',
     en: '*phone number is also fictional',
+  },
+  contactsPhoneComment2: {
+    ru: '* доступен 24/7',
+    en: '* available 24/7',
+  },
+  mainPageTitle: {
+    ru: 'Добро пожаловать',
+    en: 'Welcome',
+  },
+  mainPageSubtitle: {
+    ru: 'в медицинскую онлайн службу',
+    en: 'to medical online service',
+  },
+  mainPageText: {
+    ru: 'Здесь Вы можете найти подходящего специалиста',
+    en: 'You can find doctor that suites your requirements',
+  },
+  mainPageText2: {
+    ru: 'Мы предлалагем помощь людям всех возрастов',
+    en: 'We offer help to people of all ages',
+  },
+  ourDoctors: {
+    ru: 'Наши специалисты:',
+    en: 'Our Doctors:',
   },
 };
 
