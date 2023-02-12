@@ -1,5 +1,4 @@
 import { createSlice, createAction } from '@reduxjs/toolkit';
-import { nanoid } from 'nanoid';
 import doctorsService from '../services/doctorsService';
 import { AppDispatch, RootState } from './createStore';
 import { TDoc } from '../types/types';
@@ -61,7 +60,6 @@ export const removeDoctor = (docId: string) => async (dispatch: AppDispatch) => 
   dispatch(removeDoctorRequested());
   try {
     const { content } = await doctorsService.remove(docId);
-    console.log(content);
     if (!content) {
       dispatch(doctorRemoved(docId));
     }
@@ -73,13 +71,8 @@ export const removeDoctor = (docId: string) => async (dispatch: AppDispatch) => 
 export const createDoctor = (payload: { [key: string]: string }) => async (dispatch: AppDispatch) => {
   dispatch(createDoctorRequested());
   try {
-    const newDoc = {
-      ...payload,
-      _id: nanoid(),
-    };
-    const { content } = await doctorsService.create(newDoc);
-    console.log(content);
-    dispatch(doctorCreated(newDoc));
+    const { content } = await doctorsService.create(payload);
+    dispatch(doctorCreated(content));
   } catch (error) {
     console.log(error);
   }
@@ -89,7 +82,6 @@ export const updateDoctor = (payload: { [key: string]: string }) => async (dispa
   dispatch(updateDoctorRequested());
   try {
     await doctorsService.update(payload);
-
     dispatch(doctorUpdateSuccessed(payload));
   } catch (error) {
     console.log(error);

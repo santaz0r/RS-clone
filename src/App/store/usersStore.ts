@@ -66,7 +66,7 @@ export const signUp = (payload: TregisterData) => async (dispatch: AppDispatch) 
     console.log(error);
   }
 };
-export const logOut = () => (dispatch: AppDispatch) => {
+export const logOut = () => async (dispatch: AppDispatch) => {
   localStorageService.removeAuth();
   dispatch(userLoggedOut());
 };
