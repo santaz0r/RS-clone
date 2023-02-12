@@ -2,6 +2,7 @@
   width: 320px;
   display: flex;
   flex-direction: column;
+  background-color: var(--background-color);
 
   .title{
     align-self: center;
@@ -36,5 +37,6 @@
     text-decoration: underline;
     background: none;
     cursor: pointer;
+    color: var(--text-color);
   }
 }

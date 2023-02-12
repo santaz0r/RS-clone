@@ -1,3 +1,5 @@
+import styles from './DarkMode.module.scss';
+
 function DarkMode() {
   let theme: null | string = null;
   if (localStorage) {
@@ -21,7 +23,7 @@ function DarkMode() {
     console.log(theme);
   }
   return (
-    <button type="button" onClick={switchTheme}>🌛</button>
+    <button type="button" onClick={switchTheme} className={styles.button}>🌞 / 🌛</button>
   );
 }
 
