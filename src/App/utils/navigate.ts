@@ -1,4 +1,4 @@
 import { useNavigate } from 'react-router-dom';
 
 const navigate = useNavigate();
-export default navigate;
+export default navigate; // изза него ошибка

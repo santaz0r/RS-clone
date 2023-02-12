@@ -1,13 +1,12 @@
 import { NavLink } from 'react-router-dom';
 import { useAppDispatch } from '../../../hooks';
 import { logOut } from '../../store/usersStore';
-import navigate from '../../utils/navigate';
 
 function NavProfile() {
   const dispatch = useAppDispatch();
   const handleLogOut = () => {
     dispatch(logOut());
-    navigate('/', { replace: true });
+    // navigate('/', { replace: true });
   };
   return (
     <div>
