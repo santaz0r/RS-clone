@@ -3,6 +3,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  filter: var(--brightness);
   transition: 1.5s;
 }
 

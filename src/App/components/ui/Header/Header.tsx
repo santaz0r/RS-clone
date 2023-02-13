@@ -8,6 +8,7 @@ import { changeCurrentLanguage, getLocalizedText } from '../../../services/local
 import { useAppSelector } from '../../../../hooks';
 import { getCurrentUserData } from '../../../store/usersStore';
 import NavProfile from '../../NavProfile/NavProfile';
+import DarkMode from '../../DarkMode/DarkMode';
 
 function Header() {
   const { id, role } = useAppSelector(getCurrentUserData());
@@ -37,6 +38,7 @@ function Header() {
               ru
             </button>
           </div>
+          <DarkMode />
         </div>
       </div>
       <nav>
