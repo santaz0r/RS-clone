@@ -32,7 +32,7 @@ const translations = {
     en: 'Medical center for extraordinary people',
   },
   callCenter: {
-    ru: 'телефон: +1 234 567-89-01 (call-center)',
+    ru: 'телефон: +1 234 567-89-01 (колл-центр)',
     en: 'phone: +1 234 567-89-01 (call-center)',
   },
   name: {
@@ -94,6 +94,46 @@ const translations = {
   showPassword: {
     ru: 'Показать пароль',
     en: 'Show password',
+  },
+  contactsData: {
+    ru: 'или как нас найти (но лучше не надо)',
+    en: 'or how to find us (better don`t)',
+  },
+  contactsAdress: {
+    ru: 'Адрес: наш официальный адрес на самой настоящей карте',
+    en: 'Adress: no official address yet, but you can search on map',
+  },
+  contactsPhone: {
+    ru: 'телефон: +1 234 567-89-01',
+    en: 'phone: +1 234 567-89-01',
+  },
+  contactsPhoneComment: {
+    ru: '*телефон тоже самый настоящий',
+    en: '*phone number is also fictional',
+  },
+  contactsPhoneComment2: {
+    ru: '* доступен 24/7',
+    en: '* available 24/7',
+  },
+  mainPageTitle: {
+    ru: 'Добро пожаловать',
+    en: 'Welcome',
+  },
+  mainPageSubtitle: {
+    ru: 'в медицинскую онлайн службу',
+    en: 'to medical online service',
+  },
+  mainPageText: {
+    ru: 'Здесь Вы можете найти подходящего специалиста',
+    en: 'You can find doctor that suites your requirements',
+  },
+  mainPageText2: {
+    ru: 'Мы предлалагем помощь людям всех возрастов',
+    en: 'We offer help to people of all ages',
+  },
+  ourDoctors: {
+    ru: 'Наши специалисты:',
+    en: 'Our Doctors:',
   },
 };
 

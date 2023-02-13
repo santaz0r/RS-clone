@@ -53,7 +53,11 @@ function Header() {
           </li>
           <li>{getLocalizedText('doctors')}</li>
           <li>{getLocalizedText('services')}</li>
-          <li>{getLocalizedText('contacts')}</li>
+          <li>
+            <NavLink className={styles.navigation__link} to="/contacts">
+              {getLocalizedText('contacts')}
+            </NavLink>
+          </li>
           {isLogIn && isAdmin ? (
             <NavProfile />
           ) : (
