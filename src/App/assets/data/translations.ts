@@ -75,6 +75,14 @@ const translations = {
     ru: 'Некорректный url адрес',
     en: 'Incorrect url',
   },
+  isEmail: {
+    ru: 'Некорректный email адрес',
+    en: 'Incorrect email',
+  },
+  passMin: {
+    ru: 'Пароль должен быть минимум 3 символа',
+    en: 'password should be 3 characters minimum',
+  },
   loading: {
     ru: 'загрузка...',
     en: 'loading...',
@@ -134,6 +142,22 @@ const translations = {
   ourDoctors: {
     ru: 'Наши специалисты:',
     en: 'Our Doctors:',
+  },
+  cancel: {
+    ru: 'Отменить',
+    en: 'Cancel',
+  },
+  mySessions: {
+    ru: 'Мои приемы',
+    en: 'My sessions',
+  },
+  yourDoc: {
+    ru: 'Ваш врач',
+    en: 'Your doctor',
+  },
+  takingTime: {
+    ru: 'Время приема',
+    en: 'Time of taking',
   },
 };
 

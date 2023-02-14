@@ -3,8 +3,9 @@ import TextField from '../form/TextField';
 import validator from '../../utils/validator';
 
 import styles from './LoginForm.module.scss';
-import { useAppDispatch } from '../../../hooks';
-import { login } from '../../store/usersStore';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { getAuthErrors, login } from '../../store/users';
+import { getLocalizedText } from '../../services/localizationService';
 
 type TProps = {
   setCurrentModal: React.Dispatch<React.SetStateAction<'register' | 'login'>>;
@@ -22,22 +23,22 @@ function LoginForm({ setCurrentModal, setActive }: TProps) {
     password: '',
   });
   const [isDisabled, setIsDisabled] = useState(false);
+  const loginError = useAppSelector(getAuthErrors());
   const handleChange = (target: { name: string; value: string }) => {
     setData((prev) => ({
       ...prev,
       [target.name]: target.value,
     }));
   };
-
   const validatorConfig = {
     username: {
       isRequired: {
-        message: '*user name is required',
+        message: getLocalizedText('isRequired'),
       },
     },
     password: {
       isRequired: {
-        message: '*password is required',
+        message: getLocalizedText('isRequired'),
       },
     },
   };
@@ -57,10 +58,9 @@ function LoginForm({ setCurrentModal, setActive }: TProps) {
     const isValidForm = validate();
     if (!isValidForm) return;
     setIsDisabled(true);
-    console.log(data);
-    await dispatch(login(data));
+    await dispatch(login({ data, setModal: setActive }));
+
     setIsDisabled(false);
-    setActive(false);
   };
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
@@ -83,6 +83,7 @@ function LoginForm({ setCurrentModal, setActive }: TProps) {
       <button disabled={!isValid || isDisabled} type="submit" className={styles.submit__btn}>
         {isDisabled ? 'waiting' : 'Submit'}
       </button>
+      {loginError && <p>{loginError}</p>}
       <div>
         <button type="button" onClick={() => setCurrentModal('register')} className={styles.changeModal__btn}>
           Not registered? Create an account...

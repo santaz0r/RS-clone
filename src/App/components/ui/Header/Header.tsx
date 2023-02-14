@@ -6,19 +6,18 @@ import RegisterForm from '../RegisterForm';
 import styles from './Header.module.scss';
 import { changeCurrentLanguage, getLocalizedText } from '../../../services/localizationService';
 import { useAppSelector } from '../../../../hooks';
-import { getCurrentUserData } from '../../../store/usersStore';
+import { getCurrentUserData, getIsLogin } from '../../../store/users';
 import NavProfile from '../../NavProfile/NavProfile';
 import DarkMode from '../../DarkMode/DarkMode';
 
 function Header() {
-  const { id, role } = useAppSelector(getCurrentUserData());
+  const { role } = useAppSelector(getCurrentUserData());
 
-  const isLogIn = true;
+  const isLogIn = useAppSelector(getIsLogin());
   const isAdmin = role === 'client';
-  console.log(id);
+
   const [isModalActive, setIsModalActive] = useState(false);
   const [currentModal, setCurrentModal] = useState<'register' | 'login'>('register');
-
   const handleButton = (btn: 'register' | 'login') => {
     setCurrentModal(btn);
     setIsModalActive(true);
@@ -58,8 +57,8 @@ function Header() {
               {getLocalizedText('contacts')}
             </NavLink>
           </li>
-          {isLogIn && isAdmin ? (
-            <NavProfile />
+          {isLogIn ? (
+            <NavProfile isAdmin={isAdmin} />
           ) : (
             <li className={styles.navigation__buttons}>
               <button type="button" className={styles.navigation__btn} onClick={() => handleButton('register')}>
