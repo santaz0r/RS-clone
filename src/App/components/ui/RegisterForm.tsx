@@ -3,8 +3,9 @@ import validator from '../../utils/validator';
 import TextField from '../form/TextField';
 
 import styles from './LoginForm.module.scss';
-import { useAppDispatch } from '../../../hooks';
-import { signUp } from '../../store/usersStore';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { getAuthErrors, signUp } from '../../store/users';
+import { getLocalizedText } from '../../services/localizationService';
 
 type TProps = {
   setCurrentModal: React.Dispatch<React.SetStateAction<'register' | 'login'>>;
@@ -21,6 +22,8 @@ function RegisterForm({ setCurrentModal, setActive }: TProps) {
     mail: '',
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const registerError = useAppSelector(getAuthErrors());
+
   const [isDisabled, setIsDisabled] = useState(false);
   const handleChange = (target: { name: string; value: string }) => {
     setData((prev) => ({
@@ -32,28 +35,28 @@ function RegisterForm({ setCurrentModal, setActive }: TProps) {
   const validatorConfig = {
     name: {
       isRequired: {
-        message: '*name is required',
+        message: getLocalizedText('isRequired'),
       },
     },
     username: {
       isRequired: {
-        message: '*user name is required',
+        message: getLocalizedText('isRequired'),
       },
     },
     mail: {
       isRequired: {
-        message: '*email is required',
+        message: getLocalizedText('isRequired'),
       },
       isEmail: {
-        message: '*email is not correct',
+        message: getLocalizedText('isEmail'),
       },
     },
     password: {
       isRequired: {
-        message: '*password is required',
+        message: getLocalizedText('isRequired'),
       },
       min: {
-        message: '*password should be 3 characters minimum',
+        message: getLocalizedText('passMin'),
         value: '3',
       },
     },
@@ -74,10 +77,8 @@ function RegisterForm({ setCurrentModal, setActive }: TProps) {
     const isValidForm = validate();
     if (!isValidForm) return;
     setIsDisabled(true);
-    console.log(data);
-    await dispatch(signUp(data));
+    await dispatch(signUp(data, setActive));
     setIsDisabled(false);
-    setActive(false);
   };
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
@@ -102,6 +103,7 @@ function RegisterForm({ setCurrentModal, setActive }: TProps) {
       <button disabled={!isValid || isDisabled} type="submit" className={styles.submit__btn}>
         {isDisabled ? 'waiting' : 'Submit'}
       </button>
+      {registerError && <p>{registerError}</p>}
       <div>
         <button type="button" onClick={() => setCurrentModal('login')} className={styles.changeModal__btn}>
           Already have an account? Login...

@@ -1,4 +1,5 @@
 import { createSlice, createAction } from '@reduxjs/toolkit';
+import axios from 'axios';
 import doctorsService from '../services/doctorsService';
 import { AppDispatch, RootState } from './createStore';
 import { TDoc } from '../types/types';
@@ -6,11 +7,15 @@ import { TDoc } from '../types/types';
 type TDoctorState = {
   entities: TDoc[];
   isLoading: boolean;
+  createError: string;
+  dataError: string;
 };
 
 const initialState: TDoctorState = {
   entities: [],
   isLoading: true,
+  createError: '',
+  dataError: '',
 };
 
 const doctorsSlice = createSlice({
@@ -24,14 +29,18 @@ const doctorsSlice = createSlice({
       state.entities = action.payload;
       state.isLoading = false;
     },
-    // doctorsRequestFailed: (state, action) => {
-    // для ошибок
-    // }
+    doctorsRequestFailed: (state, action) => {
+      state.dataError = action.payload;
+      state.isLoading = false;
+    },
     doctorRemoved: (state, action) => {
       state.entities = state.entities.filter((doc) => doc._id !== action.payload);
     },
     doctorCreated: (state, action) => {
       state.entities.push(action.payload);
+    },
+    doctorCreateFailed: (state, action) => {
+      state.createError = action.payload;
     },
     doctorUpdateSuccessed: (state, action) => {
       state.entities[state.entities.findIndex((doc) => doc._id === action.payload._id)] = action.payload;
@@ -40,7 +49,15 @@ const doctorsSlice = createSlice({
 });
 
 const { actions, reducer: doctorsReducer } = doctorsSlice;
-const { doctorsRequested, doctorsReceived, doctorRemoved, doctorCreated, doctorUpdateSuccessed } = actions;
+const {
+  doctorsRequestFailed,
+  doctorsRequested,
+  doctorsReceived,
+  doctorRemoved,
+  doctorCreated,
+  doctorUpdateSuccessed,
+  doctorCreateFailed,
+} = actions;
 
 const removeDoctorRequested = createAction('doctors/removeDoctorRequested');
 const createDoctorRequested = createAction('doctors/createDoctorRequested');
@@ -52,7 +69,9 @@ export const loadDoctorsList = () => async (dispatch: AppDispatch) => {
     const { content } = await doctorsService.get();
     dispatch(doctorsReceived(content));
   } catch (error) {
-    console.log(error);
+    if (axios.isAxiosError(error)) {
+      dispatch(doctorsRequestFailed(error.message));
+    }
   }
 };
 
@@ -74,7 +93,10 @@ export const createDoctor = (payload: { [key: string]: string }) => async (dispa
     const { content } = await doctorsService.create(payload);
     dispatch(doctorCreated(content));
   } catch (error) {
-    console.log(error);
+    if (axios.isAxiosError(error)) {
+      const message: string = error.response?.data;
+      dispatch(doctorCreateFailed(message));
+    }
   }
 };
 
@@ -96,4 +118,6 @@ export const getDoctorById = (id: string) => (state: RootState) => {
   }
   return null;
 };
+export const getDataError = () => (state: RootState) => state.doctors.dataError;
+
 export default doctorsReducer;

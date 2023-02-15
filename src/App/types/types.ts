@@ -13,4 +13,11 @@ type TDoc = {
   _id: string;
 };
 
-export type { TSpec, TDoc };
+type TSession = {
+  _id: string;
+  doctorId: string;
+  clientId: string;
+  date: string;
+};
+
+export type { TSpec, TDoc, TSession };
