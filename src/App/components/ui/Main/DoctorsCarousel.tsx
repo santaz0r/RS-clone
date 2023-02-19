@@ -1,5 +1,6 @@
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { NavLink } from 'react-router-dom';
 import { useAppSelector } from '../../../../hooks';
 import { getDoctorsList } from '../../../store/doctors';
 import Specializations from '../Specializations/Specializations';
@@ -59,6 +60,9 @@ function DoctorsCarousel() {
             {getLocalizedText('surname')}: {doc.surname}
           </p>
           <Specializations id={doc.specialization} />
+          <NavLink to={`/doctor/${doc._id}`}>
+            <button type="button">{getLocalizedText('more')}</button>
+          </NavLink>
         </div>
       ))}
     </Carousel>

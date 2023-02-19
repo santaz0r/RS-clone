@@ -1,13 +1,17 @@
 import { useAppSelector } from '../../../hooks';
 import DocCardInfo from '../../components/ui/DocCard/DocCardInfo';
 import { getLocalizedText } from '../../services/localizationService';
-import { getSessionsByCurrentClient, getSessionsLoadingStatus } from '../../store/sessions';
+import { getSessionsByCurrentClient, getSessionsList, getSessionsLoadingStatus } from '../../store/sessions';
 import { getCurrentUserData } from '../../store/users';
 
 function Sessions() {
-  const { id } = useAppSelector(getCurrentUserData());
+  const { id, role } = useAppSelector(getCurrentUserData());
   const sessionsLoadingStatus = useAppSelector(getSessionsLoadingStatus());
-  const sessions = id ? useAppSelector(getSessionsByCurrentClient(id)) : [];
+  const sessions = id
+    ? role === 'admin'
+      ? useAppSelector(getSessionsList())
+      : useAppSelector(getSessionsByCurrentClient(id))
+    : [];
   const handleCancel = (sessionId: string) => {
     console.log('id приема: ', sessionId);
   };
