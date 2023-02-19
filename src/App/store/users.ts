@@ -20,7 +20,11 @@ type TAuthProps = {
 const initialState = localStorageService.hasUser()
   ? {
       error: '',
-      auth: { userId: localStorageService.getUserId().id, role: localStorageService.getUserId().role },
+      auth: {
+        userId: localStorageService.getUserData().id,
+        role: localStorageService.getUserData().role,
+        username: localStorageService.getUserData().username,
+      },
       isLoggedIn: true,
     }
   : {
@@ -61,7 +65,7 @@ export const login =
     try {
       const { content } = await authService.login({ username, password });
       localStorageService.setUser(content);
-      dispatch(authRequestSuccess({ userId: content.id, role: content.role }));
+      dispatch(authRequestSuccess({ userId: content._id, role: content.role, username: content.username }));
       setModal(false);
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -78,7 +82,7 @@ export const signUp = (payload: TregisterData, setModal: TAuthProps['setModal'])
     await authService.registerClient(payload);
     const { content } = await authService.login({ username, password });
     localStorageService.setUser(content);
-    dispatch(authRequestSuccess({ userId: content.id, role: content.role }));
+    dispatch(authRequestSuccess({ userId: content._id, role: content.role, username: content.username }));
     setModal(false);
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -95,6 +99,7 @@ export const logOut = () => async (dispatch: AppDispatch) => {
 export const getCurrentUserData = () => (state: RootState) => ({
   id: state.users.auth?.userId,
   role: state.users.auth?.role,
+  username: state.users.auth?.username,
 });
 
 export const getIsLogin = () => (state: RootState) => state.users.isLoggedIn;

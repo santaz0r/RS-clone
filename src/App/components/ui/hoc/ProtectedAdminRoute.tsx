@@ -7,7 +7,7 @@ import { getCurrentUserData, getIsLogin } from '../../../store/users';
 function ProtectedAdminRoute({ children }: { children: React.ReactElement }) {
   const isLogin = useAppSelector(getIsLogin());
   const { role } = useAppSelector(getCurrentUserData());
-  const isAdmin = role === 'client';
+  const isAdmin = role === 'admin';
   if (!isLogin || !isAdmin) {
     return <Navigate to="/" />;
   }

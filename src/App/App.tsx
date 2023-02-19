@@ -7,6 +7,7 @@ import Contacts from './pages/Contacts/Contacts';
 import Sessions from './pages/Sessinos/Sessions';
 import ProtectedRoute from './components/ui/hoc/ProtectedRoute';
 import ProtectedAdminRoute from './components/ui/hoc/ProtectedAdminRoute';
+import DoctorPage from './pages/DoctorPage/DoctorPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
         }
       />
       <Route path="/contacts" element={<Contacts />} />
+      <Route path="/doctor/:id" element={<DoctorPage />} />
       <Route
         path="/my-sessions"
         element={

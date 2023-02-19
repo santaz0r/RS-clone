@@ -93,6 +93,7 @@ export const createDoctor = (payload: { [key: string]: string }) => async (dispa
     const { content } = await doctorsService.create(payload);
     dispatch(doctorCreated(content));
   } catch (error) {
+    console.log(error);
     if (axios.isAxiosError(error)) {
       const message: string = error.response?.data;
       dispatch(doctorCreateFailed(message));
