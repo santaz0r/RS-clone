@@ -33,7 +33,11 @@ function SelectField({ label, name, value, onChange, defaultOption, options, err
             </option>
           ))}
       </select>
-      {error && <div className="invalid-feedback">{error}</div>}
+      {error && (
+        <div style={{ color: 'red', fontSize: 14 }} className="invalid-feedback">
+          {error}
+        </div>
+      )}
     </div>
   );
 }
