@@ -152,8 +152,8 @@ const translations = {
     en: 'My sessions',
   },
   yourDoc: {
-    ru: 'Ваш врач',
-    en: 'Your doctor',
+    ru: 'Врач',
+    en: 'Doctor',
   },
   takingTime: {
     ru: 'Время приема',
@@ -170,6 +170,29 @@ const translations = {
   emptyDoctorsList: {
     ru: 'Нет врачей данной специализации',
     en: 'No doctors with the selected specialization',
+  more: {
+    ru: 'Подробнее',
+    en: 'More details',
+  },
+  choosetime: {
+    ru: 'Выберете время: ',
+    en: 'Choose the time: ',
+  },
+  chooseDate: {
+    ru: 'Выберете дату',
+    en: 'Choose the date',
+  },
+  timeOfSession: {
+    ru: 'Запись на прием',
+    en: 'Sign up to the doctor',
+  },
+  occupied: {
+    ru: 'Все часы заняты на эту дату',
+    en: 'This day is full',
+  },
+  alreadySingUp: {
+    ru: 'Вы уже записались к данному врачу',
+    en: 'You are already sing up for this doctor',
   },
 };
 

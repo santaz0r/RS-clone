@@ -67,7 +67,7 @@ function Dashboard() {
           </div>
         ))}
       </div>
-      <div>
+      <div style={{ width: '35%' }}>
         <AddNewDoctorForm />
       </div>
       {isModalActive && (

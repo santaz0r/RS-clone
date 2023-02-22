@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAction } from '@reduxjs/toolkit';
 import { TSession } from '../types/types';
 import sessionsService from '../services/sessionsService';
 import { AppDispatch, RootState } from './createStore';
@@ -24,16 +24,30 @@ const sessionsSlice = createSlice({
       state.entities = action.payload;
       state.isLoading = false;
     },
+    sessionsCreated: (state, action) => {
+      state.entities.push(action.payload);
+    },
   },
 });
 const { actions, reducer: sessionsReducer } = sessionsSlice;
-const { sessionsRequested, sessionsReceived } = actions;
+const { sessionsRequested, sessionsReceived, sessionsCreated } = actions;
+const createSessionsRequested = createAction('sessions/createSessionsRequested');
 
 export const loadSessionsList = () => async (dispatch: AppDispatch) => {
   dispatch(sessionsRequested());
   try {
     const { content } = await sessionsService.getAll();
     dispatch(sessionsReceived(content));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const createSession = (payload: { [key: string]: string }) => async (dispatch: AppDispatch) => {
+  dispatch(createSessionsRequested());
+  try {
+    await sessionsService.create(payload);
+    dispatch(sessionsCreated(payload));
   } catch (error) {
     console.log(error);
   }
