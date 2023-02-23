@@ -31,6 +31,14 @@ const translations = {
     ru: 'Выйти',
     en: 'Logout',
   },
+  switchToLogin: {
+    ru: 'Уже есть аккаунт? Войти...',
+    en: 'Already have an account? Login...',
+  },
+  switchToRegister: {
+    ru: 'Не зарегистрированы? Создать аккаунт...',
+    en: 'Not registered? Create an account...',
+  },
   adminDash: {
     ru: 'Админка',
     en: 'Admin dash',

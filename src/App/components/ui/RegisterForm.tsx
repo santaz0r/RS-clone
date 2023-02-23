@@ -82,7 +82,7 @@ function RegisterForm({ setCurrentModal, setActive }: TProps) {
   };
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <h2 className={styles.title}>Create account</h2>
+      <h2 className={styles.title}>{getLocalizedText('register')}</h2>
       <TextField
         label="User name"
         name="username"
@@ -106,7 +106,7 @@ function RegisterForm({ setCurrentModal, setActive }: TProps) {
       {registerError && <p>{registerError}</p>}
       <div>
         <button type="button" onClick={() => setCurrentModal('login')} className={styles.changeModal__btn}>
-          Already have an account? Login...
+          {getLocalizedText('switchToLogin')}
         </button>
       </div>
     </form>
