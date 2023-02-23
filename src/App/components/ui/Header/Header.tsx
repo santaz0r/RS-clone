@@ -6,20 +6,19 @@ import RegisterForm from '../RegisterForm';
 import styles from './Header.module.scss';
 import { changeCurrentLanguage, getLocalizedText } from '../../../services/localizationService';
 import { useAppSelector } from '../../../../hooks';
-import { getIsLogin } from '../../../store/users';
+import { getCurrentUserData, getIsLogin } from '../../../store/users';
 import NavProfile from '../NavProfile/NavProfile';
 import DarkMode from '../../DarkMode/DarkMode';
 
 function Header() {
   const isLogIn = useAppSelector(getIsLogin());
-
+  const { username } = useAppSelector(getCurrentUserData());
   const [isModalActive, setIsModalActive] = useState(false);
   const [currentModal, setCurrentModal] = useState<'register' | 'login'>('register');
   const handleButton = (btn: 'register' | 'login') => {
     setCurrentModal(btn);
     setIsModalActive(true);
   };
-
   return (
     <header className={styles.header}>
       <div className={styles.topinfo__wrapper}>
@@ -30,11 +29,13 @@ function Header() {
             <button className={styles.language__selector} type="button" onClick={changeCurrentLanguage}>
               en
             </button>
+            /
             <button className={styles.language__selector} type="button" onClick={changeCurrentLanguage}>
               ru
             </button>
           </div>
           <DarkMode />
+          {isLogIn && <p className={styles.welcome}>{getLocalizedText('welcome')}, {username}</p>}
         </div>
       </div>
       <nav>
@@ -52,7 +53,7 @@ function Header() {
               {getLocalizedText('doctors')}
             </NavLink>
           </li>
-          <li>{getLocalizedText('services')}</li>
+          {/* <li>{getLocalizedText('services')}</li> */}
           <li>
             <NavLink className={styles.navigation__link} to="/contacts">
               {getLocalizedText('contacts')}

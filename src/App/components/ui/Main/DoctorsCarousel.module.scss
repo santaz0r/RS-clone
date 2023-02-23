@@ -2,6 +2,7 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   margin: 0 auto;
   width: 300px;
   height: 400px;
@@ -10,13 +11,45 @@
   padding: 20px;
   color: var(--text-color);
 
-  &__img{
+  &__img {
     width: 250px;
     height: 250px;
     align-self: center;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    transition: 0.4s;
     // border: 1px solid rgb(237, 237, 237);
+    &:hover{
+      transform: scale(1.1);
+    }
+  }
+  &__name {
+    text-transform: capitalize;
+  }
+
+  &__btn {
+    align-self: center;
+    display: block;
+    width: 120px;
+    height: 35px;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: #007bff;
+    color: #fff;
+    font-family: var(--font-family);
+    text-transform: none;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #0056b3;
+    }
   }
 }

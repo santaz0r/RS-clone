@@ -9,7 +9,7 @@ type TProps = {
 function Modal({ children, setActive }: TProps) {
   return (
     <div className={styles.wrapper}>
-      <button className={`${styles.modal} ${styles.modal__active}`} type="button" onClick={() => setActive(false)}>
+      <button className={styles.modal} type="button" onClick={() => setActive(false)}>
         lul
       </button>
       <div className={styles.modal__content}>{children}</div>

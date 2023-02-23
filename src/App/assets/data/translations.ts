@@ -27,6 +27,26 @@ const translations = {
     ru: 'Войти',
     en: 'Login',
   },
+  logout: {
+    ru: 'Выйти',
+    en: 'Logout',
+  },
+  switchToLogin: {
+    ru: 'Уже есть аккаунт? Войти...',
+    en: 'Already have an account? Login...',
+  },
+  switchToRegister: {
+    ru: 'Не зарегистрированы? Создать аккаунт...',
+    en: 'Not registered? Create an account...',
+  },
+  adminDash: {
+    ru: 'Админка',
+    en: 'Admin dash',
+  },
+  welcome: {
+    ru: 'Добро пожаловать',
+    en: 'Welcome',
+  },
   centerDescription: {
     ru: 'Медицинский центр для экстраординарных людей',
     en: 'Medical center for extraordinary people',
@@ -148,7 +168,7 @@ const translations = {
     en: 'Cancel',
   },
   mySessions: {
-    ru: 'Мои приемы',
+    ru: 'Мои записи',
     en: 'My sessions',
   },
   yourDoc: {
