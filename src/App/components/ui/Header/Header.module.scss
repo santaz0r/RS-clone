@@ -105,6 +105,7 @@
 .language {
   display: flex;
   align-items: center;
+  color: var(--info-text-color);
 
   &__selector{
     text-decoration: none;
@@ -113,6 +114,7 @@
     transition: 0.2s;
     border: none;
     background: none;
+    color: var(--info-text-color);
     cursor: pointer;
 
     &_active {
