@@ -18,15 +18,18 @@ const timeOptions = [
   { label: '17:00', value: '17:00:00' },
   { label: '18:00', value: '18:00:00' },
 ];
+type TParams = {
+  id: string;
+};
 
 function DoctorPage() {
-  const { id } = useParams();
+  const { id } = useParams<keyof TParams>() as TParams;
   const dispatch = useAppDispatch();
   const { id: userId, role } = useAppSelector(getCurrentUserData());
-  const doctor = id ? useAppSelector(getDoctorById(id)) : null;
-  const currentDocSessions = doctor ? useAppSelector(getSessionsByCurrentDoctor(doctor?._id)) : null;
-  const currentUserSessions = userId ? useAppSelector(getSessionsByCurrentClient(userId)) : null;
-  console.log('currentUserSessions', currentUserSessions);
+  const doctor = useAppSelector(getDoctorById(id));
+
+  const currentDocSessions = doctor ? useAppSelector(getSessionsByCurrentDoctor(doctor._id)) : undefined;
+  const currentUserSessions = useAppSelector(getSessionsByCurrentClient(userId!));
 
   const timestamp = new Date();
   const todayDate = `${timestamp.getFullYear().toString()}-${(timestamp.getMonth() + 1)
@@ -42,9 +45,9 @@ function DoctorPage() {
     time: '',
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({ date: '', time: '' });
-  console.log(currentDocSessions);
+
   const hasSession = currentUserSessions?.some((sess) => sess.doctorId === doctor?._id);
-  console.log(hasSession);
+
   const filteredOptions = timeOptions.filter((time) => {
     if (currentDocSessions?.length) {
       for (let i = 0; i < currentDocSessions.length; i += 1) {
@@ -56,13 +59,17 @@ function DoctorPage() {
     }
     return [];
   });
-  const dateNow = new Date();
-  console.log(dateNow.toLocaleString());
-  // const kekFilter = filteredOptions.filter(time=> {
 
-  // })
+  const hoursNow = timestamp.getHours();
+  const dayNow = timestamp.getDate();
 
-  console.log(filteredOptions);
+  const filteredTimeOption = filteredOptions.filter((time) => {
+    if (dayNow.toString() === sessionsData.date.split('-')[2]) {
+      return Number(time.value.split(':')[0]) > hoursNow;
+    }
+    return time;
+  });
+
   const validatorConfig = {
     date: {
       isRequired: {
@@ -140,13 +147,13 @@ function DoctorPage() {
                 pattern="\d{4}-\d{2}-\d{2}"
               />
               {!hasSession ? (
-                filteredOptions.length ? (
+                filteredTimeOption.length ? (
                   <SelectField
                     defaultOption="choose..."
                     label="ChooseTime"
                     name="time"
                     onChange={handleTimeChange}
-                    options={filteredOptions}
+                    options={filteredTimeOption}
                     value={sessionsData.time}
                     error={errors.time}
                   />

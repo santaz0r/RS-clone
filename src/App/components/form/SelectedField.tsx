@@ -22,17 +22,21 @@ function SelectField({ label, name, value, onChange, defaultOption, options, err
       <label htmlFor={name} className="form-label">
         {getLocalizedText(label.toLowerCase())}
       </label>
-      <select className={getInputClasses()} id={name} name={name} value={value} onChange={handleChange}>
-        <option disabled value="">
-          {defaultOption}
-        </option>
-        {options &&
-          options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-      </select>
+      {options.length ? (
+        <select className={getInputClasses()} id={name} name={name} value={value} onChange={handleChange}>
+          <option disabled value="">
+            {defaultOption}
+          </option>
+          {options &&
+            options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+        </select>
+      ) : (
+        <p>{getLocalizedText('occupied')}</p>
+      )}
       {error && (
         <div style={{ color: 'red', fontSize: 14 }} className="invalid-feedback">
           {error}

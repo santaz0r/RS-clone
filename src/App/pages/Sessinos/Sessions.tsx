@@ -1,11 +1,17 @@
-import { useAppSelector } from '../../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import DocCardInfo from '../../components/ui/DocCard/DocCardInfo';
 import { getLocalizedText } from '../../services/localizationService';
-import { getSessionsByCurrentClient, getSessionsList, getSessionsLoadingStatus } from '../../store/sessions';
+import {
+  getSessionsByCurrentClient,
+  getSessionsList,
+  getSessionsLoadingStatus,
+  removeSession,
+} from '../../store/sessions';
 import { getCurrentUserData } from '../../store/users';
 
 function Sessions() {
   const { id, role } = useAppSelector(getCurrentUserData());
+  const dispatch = useAppDispatch();
   const sessionsLoadingStatus = useAppSelector(getSessionsLoadingStatus());
   const sessions = id
     ? role === 'admin'
@@ -14,6 +20,7 @@ function Sessions() {
     : [];
   const handleCancel = (sessionId: string) => {
     console.log('id приема: ', sessionId);
+    dispatch(removeSession(sessionId));
   };
   if (sessionsLoadingStatus) return <h2>{getLocalizedText('loading')}</h2>;
   return (

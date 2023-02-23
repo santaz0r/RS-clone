@@ -113,12 +113,8 @@ export const updateDoctor = (payload: { [key: string]: string }) => async (dispa
 
 export const getDoctorsLoadingStatus = () => (state: RootState) => state.doctors.isLoading;
 export const getDoctorsList = () => (state: RootState) => state.doctors.entities;
-export const getDoctorById = (id: string) => (state: RootState) => {
-  if (state.doctors.entities) {
-    return state.doctors.entities.find((doc) => doc._id === id);
-  }
-  return null;
-};
+export const getDoctorById = (id: string) => (state: RootState) => state.doctors.entities.find((doc) => doc._id === id);
+
 export const getDataError = () => (state: RootState) => state.doctors.dataError;
 
 export default doctorsReducer;

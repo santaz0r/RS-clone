@@ -13,6 +13,10 @@ const sessionsService = {
     const { data } = await httpService.post(`${sessionsEndpoint}create/`, payload);
     return data;
   },
+  deleteSession: async (sessionsId: string) => {
+    const { data } = await httpService.delete(`${sessionsEndpoint}delete/${sessionsId}`);
+    return data;
+  },
 };
 
 export default sessionsService;
