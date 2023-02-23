@@ -3,6 +3,12 @@
   gap: 15px;
   align-items: center;
 
+  .navigation__welcome {
+    text-transform: capitalize;
+    font-weight: 400;
+    font-size: 16px;
+  }
+
   .navigation__btn {
     display: block;
     width: 120px;

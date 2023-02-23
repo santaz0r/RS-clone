@@ -6,13 +6,13 @@ import RegisterForm from '../RegisterForm';
 import styles from './Header.module.scss';
 import { changeCurrentLanguage, getLocalizedText } from '../../../services/localizationService';
 import { useAppSelector } from '../../../../hooks';
-import { getIsLogin } from '../../../store/users';
+import { getCurrentUserData, getIsLogin } from '../../../store/users';
 import NavProfile from '../NavProfile/NavProfile';
 import DarkMode from '../../DarkMode/DarkMode';
 
 function Header() {
   const isLogIn = useAppSelector(getIsLogin());
-
+  const { username } = useAppSelector(getCurrentUserData());
   const [isModalActive, setIsModalActive] = useState(false);
   const [currentModal, setCurrentModal] = useState<'register' | 'login'>('register');
   const handleButton = (btn: 'register' | 'login') => {
@@ -35,6 +35,7 @@ function Header() {
             </button>
           </div>
           <DarkMode />
+          {isLogIn && <p className={styles.welcome}>{getLocalizedText('welcome')}, {username}</p>}
         </div>
       </div>
       <nav>

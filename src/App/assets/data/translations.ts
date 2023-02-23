@@ -35,6 +35,10 @@ const translations = {
     ru: 'Админка',
     en: 'Admin dash',
   },
+  welcome: {
+    ru: 'Добро пожаловать',
+    en: 'Welcome',
+  },
   centerDescription: {
     ru: 'Медицинский центр для экстраординарных людей',
     en: 'Medical center for extraordinary people',
