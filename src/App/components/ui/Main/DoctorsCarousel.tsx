@@ -53,16 +53,14 @@ function DoctorsCarousel() {
       {doctors.map((doc) => (
         <div key={doc._id} className={styles.card}>
           <div className={styles.card__img} style={{ backgroundImage: `url(${doc.image})` }} />
-          <p>
-            {getLocalizedText('name')}: {doc.name}
-          </p>
-          <p>
+          <div className={styles.card__name}>
+            {getLocalizedText('name')}: {doc.name} {doc.surname}
+          </div>
+          {/* <div>
             {getLocalizedText('surname')}: {doc.surname}
-          </p>
+          </div> */}
           <Specializations id={doc.specialization} />
-          <NavLink to={`/doctor/${doc._id}`}>
-            <button type="button">{getLocalizedText('more')}</button>
-          </NavLink>
+          <NavLink className={styles.card__btn} to={`/doctor/${doc._id}`}>{getLocalizedText('more')}</NavLink>
         </div>
       ))}
     </Carousel>

@@ -20,7 +20,6 @@ function DarkMode() {
       localStorage.setItem('theme', 'dark');
       theme = 'dark';
     }
-    console.log(theme);
   }
   return (
     <button type="button" onClick={switchTheme} className={styles.button}>🌞 / 🌛</button>
