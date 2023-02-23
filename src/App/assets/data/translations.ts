@@ -159,6 +159,17 @@ const translations = {
     ru: 'Время приема',
     en: 'Time of taking',
   },
+  makeAppointment: {
+    ru: 'Записаться',
+    en: 'Make appointment',
+  },
+  logInRequiredToAppointment: {
+    ru: 'Для записи войдите в учётную запись',
+    en: 'Login to make an appointment',
+  },
+  emptyDoctorsList: {
+    ru: 'Нет врачей данной специализации',
+    en: 'No doctors with the selected specialization',
   more: {
     ru: 'Подробнее',
     en: 'More details',

@@ -3,6 +3,7 @@ import HomePage from './pages/HomePage/HomePage';
 import MainLayout from './layout/Main/MainLayout';
 import AppLoader from './components/ui/hoc/AppLoader';
 import Dashboard from './components/ui/Dashboard/Dashboard';
+import Doctors from './components/ui/Doctors/Doctors';
 import Contacts from './pages/Contacts/Contacts';
 import Sessions from './pages/Sessinos/Sessions';
 import ProtectedRoute from './components/ui/hoc/ProtectedRoute';
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
         }
       />
       <Route path="/contacts" element={<Contacts />} />
+      <Route path="/doctors" element={<Doctors />} />
       <Route path="/doctor/:id" element={<DoctorPage />} />
       <Route
         path="/my-sessions"

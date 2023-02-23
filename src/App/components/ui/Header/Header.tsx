@@ -47,7 +47,11 @@ function Header() {
               {getLocalizedText('main')}
             </NavLink>
           </li>
-          <li>{getLocalizedText('doctors')}</li>
+          <li>
+            <NavLink className={styles.navigation__link} to="/doctors">
+              {getLocalizedText('doctors')}
+            </NavLink>
+          </li>
           <li>{getLocalizedText('services')}</li>
           <li>
             <NavLink className={styles.navigation__link} to="/contacts">
