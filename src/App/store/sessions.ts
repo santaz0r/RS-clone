@@ -27,11 +27,15 @@ const sessionsSlice = createSlice({
     sessionsCreated: (state, action) => {
       state.entities.push(action.payload);
     },
+    sessionRemoved: (state, action) => {
+      state.entities = state.entities.filter((sess) => sess._id !== action.payload);
+    },
   },
 });
 const { actions, reducer: sessionsReducer } = sessionsSlice;
-const { sessionsRequested, sessionsReceived, sessionsCreated } = actions;
+const { sessionsRequested, sessionsReceived, sessionsCreated, sessionRemoved } = actions;
 const createSessionsRequested = createAction('sessions/createSessionsRequested');
+const removeSessionRequested = createAction('session/removeSessionRequested');
 
 export const loadSessionsList = () => async (dispatch: AppDispatch) => {
   dispatch(sessionsRequested());
@@ -53,12 +57,25 @@ export const createSession = (payload: { [key: string]: string }) => async (disp
   }
 };
 
+export const removeSession = (sessionsId: string) => async (dispatch: AppDispatch) => {
+  dispatch(removeSessionRequested());
+  try {
+    const { content } = await sessionsService.deleteSession(sessionsId);
+    if (!content) {
+      dispatch(sessionRemoved(sessionsId));
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getSessionsList = () => (state: RootState) => state.sessions.entities;
 export const getSessionsByCurrentClient = (id: string) => (state: RootState) =>
   state.sessions.entities.filter((s) => s.clientId === id);
 
 export const getSessionsByCurrentDoctor = (id: string) => (state: RootState) =>
   state.sessions.entities.filter((s) => s.doctorId === id);
+
 export const getSessionsLoadingStatus = () => (state: RootState) => state.sessions.isLoading;
 
 export default sessionsReducer;
