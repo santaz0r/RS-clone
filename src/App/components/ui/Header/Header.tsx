@@ -19,7 +19,6 @@ function Header() {
     setCurrentModal(btn);
     setIsModalActive(true);
   };
-
   return (
     <header className={styles.header}>
       <div className={styles.topinfo__wrapper}>
