@@ -8,6 +8,7 @@ import SelectField from '../../components/form/SelectedField';
 import { getLocalizedText } from '../../services/localizationService';
 import validator from '../../utils/validator';
 import { createSession, getSessionsByCurrentClient, getSessionsByCurrentDoctor } from '../../store/sessions';
+import styles from './DoctorPage.module.scss';
 
 const timeOptions = [
   { label: '12:00', value: '12:00:00' },
@@ -112,26 +113,26 @@ function DoctorPage() {
 
   if (!doctor) return <h3>Not found</h3>;
   return (
-    <div>
+    <div className={styles.wrapper}>
       <h3>
         Имя: {doctor.name} {doctor.surname}
       </h3>
       <img src={doctor.image} alt="docPhoto" width={150} />
       <Specializations id={doctor.specialization} />
-      <div>
+      <p className={styles.description}>
         Description:
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. A officia id ducimus quidem nemo aspernatur illum
-          doloribus nam quis dolorem officiis expedita, dignissimos enim accusamus quisquam quod libero, delectus sit
-          facilis, aliquam praesentium? Libero hic voluptatem, nisi magni animi ullam velit minima perferendis rem
-          officiis tempora minus dolorum aperiam odio commodi soluta suscipit corrupti consectetur maiores totam
-          excepturi! Architecto id ipsum dignissimos voluptatum eligendi nulla consectetur explicabo deleniti minus odit
-          molestias itaque quos iure maiores eaque inventore, odio sed. Debitis assumenda sequi porro incidunt quae
-          eveniet ea, excepturi dolorum tempora dolores ex reiciendis quas, labore omnis dolore sit eligendi in quisquam
-          minus nesciunt a corrupti sint eaque molestiae. Consectetur quam aspernatur quidem, doloremque perferendis
-          quaerat possimus dignissimos adipisci aut cupiditate?
-        </p>
-      </div>
+      </p>
+      <p className={styles.description__text}>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. A officia id ducimus quidem nemo aspernatur illum
+        doloribus nam quis dolorem officiis expedita, dignissimos enim accusamus quisquam quod libero, delectus sit
+        facilis, aliquam praesentium? Libero hic voluptatem, nisi magni animi ullam velit minima perferendis rem
+        officiis tempora minus dolorum aperiam odio commodi soluta suscipit corrupti consectetur maiores totam
+        excepturi! Architecto id ipsum dignissimos voluptatum eligendi nulla consectetur explicabo deleniti minus odit
+        molestias itaque quos iure maiores eaque inventore, odio sed. Debitis assumenda sequi porro incidunt quae
+        eveniet ea, excepturi dolorum tempora dolores ex reiciendis quas, labore omnis dolore sit eligendi in quisquam
+        minus nesciunt a corrupti sint eaque molestiae. Consectetur quam aspernatur quidem, doloremque perferendis
+        quaerat possimus dignissimos adipisci aut cupiditate?
+      </p>
       {role === 'client' ? (
         <div>
           <h3>{getLocalizedText('timeOfSession')}</h3>
@@ -163,7 +164,7 @@ function DoctorPage() {
               ) : (
                 <div>{getLocalizedText('alreadySingUp')}</div>
               )}
-              <button disabled={!isValid} type="submit">
+              <button className={styles.btn} disabled={!isValid} type="submit">
                 {getLocalizedText('submit')}
               </button>
             </form>
