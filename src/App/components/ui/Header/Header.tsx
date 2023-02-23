@@ -29,6 +29,7 @@ function Header() {
             <button className={styles.language__selector} type="button" onClick={changeCurrentLanguage}>
               en
             </button>
+            /
             <button className={styles.language__selector} type="button" onClick={changeCurrentLanguage}>
               ru
             </button>

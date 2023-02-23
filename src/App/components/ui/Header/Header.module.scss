@@ -106,26 +106,31 @@
 
 .language {
   display: flex;
-  gap: 15px;
-  margin: 3px 0;
+  align-items: center;
+  // gap: 15px;
+  // margin: 3px 0;
 
   &__selector{
-    display: block;
-    width: 50px;
-    height: 35px;
-    border-radius: 0.25rem;
-    background-color: aquamarine;
-    color: grey;
+    // display: block;
+    // width: 50px;
+    // height: 35px;
+    // border-radius: 0.25rem;
+    // background-color: aquamarine;
+    // color: grey;
     text-decoration: none;
     text-transform: none;
     font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
     transition: 0.2s;
+    border: none;
+    background: none;
+    cursor: pointer;
 
     &:hover {
-      background-color: aqua;
+      // background-color: aqua;
+      opacity: 0.5;
     }
   }
 }
