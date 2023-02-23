@@ -4,13 +4,12 @@
 
   .filters {
     width: 20%;
-    
+
     .filter {
       // margin: 5% 20%;
       font-size: 1.6rem;
     }
   }
-
 
   .emptyList {
     display: flex;
@@ -72,6 +71,7 @@
           border: 1px solid gainsboro;
           border-radius: 15px;
           padding: 4% 10%;
+          cursor: pointer;
         }
       }
 
