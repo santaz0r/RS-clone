@@ -1,6 +1,8 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
+import { getLocalizedText } from '../../../services/localizationService';
 import { getCurrentUserData, logOut } from '../../../store/users';
+import styles from './NavProfile.module.scss';
 
 function NavProfile() {
   const dispatch = useAppDispatch();
@@ -12,14 +14,14 @@ function NavProfile() {
     navigate('/', { replace: true });
   };
   return (
-    <div>
+    <li className={styles.navigation__buttons}>
       <div>{username}</div>
-      {isAdmin && <NavLink to="dashboard">Admin Dashboard</NavLink>}
-      <NavLink to="/my-sessions">My sessions</NavLink>
-      <button type="button" onClick={handleLogOut}>
-        logout
+      {isAdmin && <NavLink className={styles.navigation__btn} to="dashboard">{getLocalizedText('adminDash')}</NavLink>}
+      <NavLink className={styles.navigation__btn} to="/my-sessions">{getLocalizedText('mySessions')}</NavLink>
+      <button type="button" className={styles.navigation__btn} onClick={handleLogOut}>
+        {getLocalizedText('logout')}
       </button>
-    </div>
+    </li>
   );
 }
 

@@ -1,0 +1,29 @@
+.navigation__buttons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+
+  .navigation__btn {
+    display: block;
+    width: 120px;
+    height: 35px;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: #007bff;
+    color: #fff;
+    font-family: var(--font-family);
+    text-transform: none;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}

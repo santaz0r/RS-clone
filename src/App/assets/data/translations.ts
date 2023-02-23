@@ -27,6 +27,14 @@ const translations = {
     ru: 'Войти',
     en: 'Login',
   },
+  logout: {
+    ru: 'Выйти',
+    en: 'Logout',
+  },
+  adminDash: {
+    ru: 'Админка',
+    en: 'Admin dash',
+  },
   centerDescription: {
     ru: 'Медицинский центр для экстраординарных людей',
     en: 'Medical center for extraordinary people',
@@ -148,7 +156,7 @@ const translations = {
     en: 'Cancel',
   },
   mySessions: {
-    ru: 'Мои приемы',
+    ru: 'Мои записи',
     en: 'My sessions',
   },
   yourDoc: {
