@@ -35,7 +35,7 @@ function SelectField({ label, name, value, onChange, defaultOption, options, err
             ))}
         </select>
       ) : (
-        'Not exsist'
+        <p>{getLocalizedText('occupied')}</p>
       )}
       {error && (
         <div style={{ color: 'red', fontSize: 14 }} className="invalid-feedback">

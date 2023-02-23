@@ -170,6 +170,7 @@ const translations = {
   emptyDoctorsList: {
     ru: 'Нет врачей данной специализации',
     en: 'No doctors with the selected specialization',
+  },
   more: {
     ru: 'Подробнее',
     en: 'More details',
