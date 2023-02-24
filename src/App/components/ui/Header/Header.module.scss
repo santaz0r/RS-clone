@@ -1,7 +1,5 @@
 .header {
-  // position: relative;
   padding: 0;
-  // border-bottom: 1px solid #EDEEF0;
   background-color: var(--background-color);
   transition: background-color 1s ease-in-out, color 1s ease-in-out;
 }
@@ -107,29 +105,24 @@
 .language {
   display: flex;
   align-items: center;
-  // gap: 15px;
-  // margin: 3px 0;
+  color: var(--info-text-color);
 
   &__selector{
-    // display: block;
-    // width: 50px;
-    // height: 35px;
-    // border-radius: 0.25rem;
-    // background-color: aquamarine;
-    // color: grey;
     text-decoration: none;
     text-transform: none;
     font-weight: 500;
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
     transition: 0.2s;
     border: none;
     background: none;
+    color: var(--info-text-color);
     cursor: pointer;
 
+    &_active {
+      pointer-events: none;
+      text-decoration: underline;
+    }
+
     &:hover {
-      // background-color: aqua;
       opacity: 0.5;
     }
   }

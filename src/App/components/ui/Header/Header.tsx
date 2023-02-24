@@ -4,7 +4,7 @@ import Modal from '../../modal/Modal';
 import LoginForm from '../LoginForm';
 import RegisterForm from '../RegisterForm';
 import styles from './Header.module.scss';
-import { changeCurrentLanguage, getLocalizedText } from '../../../services/localizationService';
+import { changeCurrentLanguage, getCurrentLanguage, getLocalizedText } from '../../../services/localizationService';
 import { useAppSelector } from '../../../../hooks';
 import { getCurrentUserData, getIsLogin } from '../../../store/users';
 import NavProfile from '../NavProfile/NavProfile';
@@ -15,6 +15,7 @@ function Header() {
   const { username } = useAppSelector(getCurrentUserData());
   const [isModalActive, setIsModalActive] = useState(false);
   const [currentModal, setCurrentModal] = useState<'register' | 'login'>('register');
+  const currentLang = getCurrentLanguage();
   const handleButton = (btn: 'register' | 'login') => {
     setCurrentModal(btn);
     setIsModalActive(true);
@@ -26,11 +27,21 @@ function Header() {
           <p>{getLocalizedText('centerDescription')}</p>
           <p>{getLocalizedText('callCenter')}</p>
           <div className={styles.language}>
-            <button className={styles.language__selector} type="button" onClick={changeCurrentLanguage}>
+            <button
+              className={`${styles.language__selector} ${currentLang === 'en' ? styles.language__selector_active : ''}`}
+              type="button"
+              onClick={changeCurrentLanguage}
+              disabled={currentLang === 'en'}
+            >
               en
             </button>
             /
-            <button className={styles.language__selector} type="button" onClick={changeCurrentLanguage}>
+            <button
+              className={`${styles.language__selector} ${currentLang === 'ru' ? styles.language__selector_active : ''}`}
+              type="button"
+              onClick={changeCurrentLanguage}
+              disabled={currentLang === 'ru'}
+            >
               ru
             </button>
           </div>
