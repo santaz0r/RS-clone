@@ -8,6 +8,8 @@ import EditDoctorForm from '../EditDocForm';
 import { TDoc } from '../../../types/types';
 import { getLocalizedText } from '../../../services/localizationService';
 
+import styles from './Dashboard.module.scss';
+
 type TProps = {
   docData: TDoc;
 };
@@ -41,29 +43,28 @@ function Dashboard() {
   };
 
   return (
-    <div style={{ display: 'flex' }}>
-      <div style={{ width: '60%' }}>
+    <div className={styles.dash__wrapper}>
+      <div className={styles.dash__docs}>
         {doctors.map((doc) => (
-          <div key={doc._id}>
-            <div>
-              {getLocalizedText('name')}: {doc.name}
+          <div key={doc._id} className={styles.dash__doc}>
+            <div className={styles.doc__name}>
+              {doc.name} {doc.surname}
             </div>
-            <div>
-              {getLocalizedText('surname')}: {doc.surname}
-            </div>
-            <img style={{ width: 200, height: 200 }} src={doc.image} alt="avatar" />
+
+            <img src={doc.image} alt="avatar" />
             <Specializations id={doc.specialization} />
             <div>{getLocalizedText('contacts')}:</div>
             <div>
-              {getLocalizedText('email')}: {doc.mail}
+              - {getLocalizedText('email')}: {doc.mail}
             </div>
-            <button onClick={() => handleDelete(doc._id)} type="button">
-              {getLocalizedText('delete')}
-            </button>
-            <button onClick={() => handleEdit(doc)} type="button">
-              {getLocalizedText('edit')}
-            </button>
-            <hr />
+            <div className={styles.doc__btns}>
+              <button className={styles.doc__btn} onClick={() => handleDelete(doc._id)} type="button">
+                {getLocalizedText('delete')}
+              </button>
+              <button className={styles.doc__btn} onClick={() => handleEdit(doc)} type="button">
+                {getLocalizedText('edit')}
+              </button>
+            </div>
           </div>
         ))}
       </div>

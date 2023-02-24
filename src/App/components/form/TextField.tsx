@@ -24,7 +24,9 @@ function TextField({ label, type, name, value, onChange, error }: TProps) {
   // const getInputClasses = () => `default ${error ? ' invalid' : 'valid'}`;
   return (
     <div className={styles.input__wrapper}>
-      <label htmlFor={name}>{getLocalizedText(label.toLowerCase())}</label>
+      <label className={styles.input__label} htmlFor={name}>
+        {getLocalizedText(label.toLowerCase())}
+      </label>
       <div>
         <input
           type={showPassword ? 'text' : type}

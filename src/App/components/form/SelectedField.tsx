@@ -1,6 +1,7 @@
 import React from 'react';
 import { TSpec } from '../../types/types';
 import { getLocalizedText } from '../../services/localizationService';
+import styles from './SelectField.module.scss';
 
 type TProps = {
   label: string;
@@ -16,32 +17,33 @@ function SelectField({ label, name, value, onChange, defaultOption, options, err
   const handleChange = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
     onChange({ name: target.name, value: target.value });
   };
-  const getInputClasses = () => 'some classes';
+  // const getInputClasses = () => 'some classes';
   return (
-    <div className="mb-4">
-      <label htmlFor={name} className="form-label">
+    <div>
+      <label htmlFor={name} className={styles.input__label}>
         {getLocalizedText(label.toLowerCase())}
       </label>
-      {options.length ? (
-        <select className={getInputClasses()} id={name} name={name} value={value} onChange={handleChange}>
-          <option disabled value="">
-            {defaultOption}
-          </option>
-          {options &&
-            options.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
+      <div className={styles.my_select}>
+        {options.length ? (
+          <>
+            <select className={styles.select} id={name} name={name} value={value} onChange={handleChange}>
+              <option disabled value="">
+                {defaultOption}
               </option>
-            ))}
-        </select>
-      ) : (
-        <p>{getLocalizedText('occupied')}</p>
-      )}
-      {error && (
-        <div style={{ color: 'red', fontSize: 14 }} className="invalid-feedback">
-          {error}
-        </div>
-      )}
+              {options &&
+                options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+            </select>
+            <span className={styles.arrow} />
+          </>
+        ) : (
+          <p>{getLocalizedText('occupied')}</p>
+        )}
+      </div>
+      {error && <div className={styles.error}>{error}</div>}
     </div>
   );
 }
