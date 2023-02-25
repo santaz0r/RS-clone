@@ -3,6 +3,7 @@ import validator from '../../utils/validator';
 import TextField from '../form/TextField';
 
 import styles from './LoginForm.module.scss';
+import btnStyle from './FormBtn.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { getAuthErrors, signUp } from '../../store/users';
 import { getLocalizedText } from '../../services/localizationService';
@@ -100,7 +101,7 @@ function RegisterForm({ setCurrentModal, setActive }: TProps) {
         value={data.password}
         error={errors.password}
       />
-      <button disabled={!isValid || isDisabled} type="submit" className={styles.submit__btn}>
+      <button disabled={!isValid || isDisabled} type="submit" className={btnStyle.submit_btn}>
         {isDisabled ? 'waiting' : 'Submit'}
       </button>
       {registerError && <p>{registerError}</p>}
