@@ -4,6 +4,7 @@ import { getDoctorsLoadingStatus, loadDoctorsList } from '../../../store/doctors
 import { loadSpecializationsList } from '../../../store/specializations';
 import { loadSessionsList } from '../../../store/sessions';
 import { getIsLogin } from '../../../store/users';
+import styles from './AppLoader.module.scss';
 
 function AppLoader({ children }: { children: React.ReactElement }) {
   const dispatch = useAppDispatch();
@@ -15,7 +16,7 @@ function AppLoader({ children }: { children: React.ReactElement }) {
 
     dispatch(loadSessionsList());
   }, [isLogedin]);
-  if (doctorsStatusLoading) return <h1>Loading</h1>;
+  if (doctorsStatusLoading) return <h1 className={styles.loader__title}>Loading...</h1>;
   return children;
 }
 

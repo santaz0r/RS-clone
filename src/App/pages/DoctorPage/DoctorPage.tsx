@@ -119,9 +119,7 @@ function DoctorPage() {
       </h3>
       <img src={doctor.image} alt="docPhoto" width={150} />
       <Specializations id={doctor.specialization} />
-      <p className={styles.description}>
-        Description:
-      </p>
+      <p className={styles.description}>{getLocalizedText('descr')}:</p>
       <p className={styles.description__text}>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. A officia id ducimus quidem nemo aspernatur illum
         doloribus nam quis dolorem officiis expedita, dignissimos enim accusamus quisquam quod libero, delectus sit
@@ -135,11 +133,12 @@ function DoctorPage() {
       </p>
       {role === 'client' ? (
         <div>
-          <h3>{getLocalizedText('timeOfSession')}</h3>
+          <h3 className={styles.singup_title}>{getLocalizedText('timeOfSession')}</h3>
           <div>
             <form onSubmit={handleSubmit}>
               {getLocalizedText('chooseDate')}:{' '}
               <input
+                className={styles.date__input}
                 type="date"
                 value={sessionsData.date}
                 onChange={handleDateChange}
@@ -149,15 +148,18 @@ function DoctorPage() {
               />
               {!hasSession ? (
                 filteredTimeOption.length ? (
-                  <SelectField
-                    defaultOption="choose..."
-                    label="ChooseTime"
-                    name="time"
-                    onChange={handleTimeChange}
-                    options={filteredTimeOption}
-                    value={sessionsData.time}
-                    error={errors.time}
-                  />
+                  <div style={{ width: '30%' }}>
+                    <SelectField
+                      defaultOption="choose"
+                      label="ChooseTime"
+                      name="time"
+                      onChange={handleTimeChange}
+                      options={filteredTimeOption}
+                      value={sessionsData.time}
+                      error={errors.time}
+                      disabledOption
+                    />
+                  </div>
                 ) : (
                   <div>{getLocalizedText('occupied')}</div>
                 )
@@ -170,6 +172,8 @@ function DoctorPage() {
             </form>
           </div>
         </div>
+      ) : role !== 'admin' && role !== 'doctor' ? (
+        <h3 className={styles.login_for}>{getLocalizedText('loginFor')}</h3>
       ) : null}
     </div>
   );

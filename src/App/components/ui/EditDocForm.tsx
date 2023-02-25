@@ -163,6 +163,7 @@ function EditDoctorForm({ docData, onClose }: TDoc) {
           error={errors.specialization}
           defaultOption="Choose..."
           options={transformData(specializations)}
+          disabledOption
         />
 
         <button className={btnStyle.submit_btn} disabled={!isValid || isDisbale} type="submit">

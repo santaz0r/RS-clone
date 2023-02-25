@@ -15,6 +15,9 @@
     margin: 0 5px 5px 0;
     color: var(--text-color);
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     img {
       object-fit: contain;
       width: 100%;
