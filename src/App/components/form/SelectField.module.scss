@@ -31,25 +31,6 @@
   color: var(--text-color);
 }
 
-select {
-  appearance: none;
-  background-color: transparent;
-  border: none;
-  padding: 0 1em 0 0;
-  margin: 0;
-  width: 100%;
-  font-family: inherit;
-  font-size: inherit;
-  cursor: inherit;
-  line-height: inherit;
-  outline: none;
-  color: var(--text-color);
-
-  option {
-    color: black;
-  }
-}
-
 .my_select {
   position: relative;
   border: 1px solid var(--text-color);
@@ -60,6 +41,24 @@ select {
   display: grid;
   padding: 0.25em 0.5em;
   z-index: 1;
+  select {
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+    outline: none;
+    color: var(--text-color);
+
+    option {
+      color: black;
+    }
+  }
 }
 
 select,
