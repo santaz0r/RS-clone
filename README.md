@@ -40,6 +40,7 @@
 + Свой REST API server
   + NodeJS + ExpressJs
   + MVC
+  + CORS
 + React Router Dom
   + SPA навигация
 + React-redux
