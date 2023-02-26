@@ -4,22 +4,22 @@ import Modal from '../../modal/Modal';
 import LoginForm from '../LoginForm';
 import RegisterForm from '../RegisterForm';
 import styles from './Header.module.scss';
-import { changeCurrentLanguage, getLocalizedText } from '../../../services/localizationService';
+import { changeCurrentLanguage, getCurrentLanguage, getLocalizedText } from '../../../services/localizationService';
 import { useAppSelector } from '../../../../hooks';
-import { getIsLogin } from '../../../store/users';
+import { getCurrentUserData, getIsLogin } from '../../../store/users';
 import NavProfile from '../NavProfile/NavProfile';
 import DarkMode from '../../DarkMode/DarkMode';
 
 function Header() {
   const isLogIn = useAppSelector(getIsLogin());
-
+  const { username } = useAppSelector(getCurrentUserData());
   const [isModalActive, setIsModalActive] = useState(false);
   const [currentModal, setCurrentModal] = useState<'register' | 'login'>('register');
+  const currentLang = getCurrentLanguage();
   const handleButton = (btn: 'register' | 'login') => {
     setCurrentModal(btn);
     setIsModalActive(true);
   };
-
   return (
     <header className={styles.header}>
       <div className={styles.topinfo__wrapper}>
@@ -27,14 +27,30 @@ function Header() {
           <p>{getLocalizedText('centerDescription')}</p>
           <p>{getLocalizedText('callCenter')}</p>
           <div className={styles.language}>
-            <button className={styles.language__selector} type="button" onClick={changeCurrentLanguage}>
+            <button
+              className={`${styles.language__selector} ${currentLang === 'en' ? styles.language__selector_active : ''}`}
+              type="button"
+              onClick={changeCurrentLanguage}
+              disabled={currentLang === 'en'}
+            >
               en
             </button>
-            <button className={styles.language__selector} type="button" onClick={changeCurrentLanguage}>
+            /
+            <button
+              className={`${styles.language__selector} ${currentLang === 'ru' ? styles.language__selector_active : ''}`}
+              type="button"
+              onClick={changeCurrentLanguage}
+              disabled={currentLang === 'ru'}
+            >
               ru
             </button>
           </div>
           <DarkMode />
+          {isLogIn && (
+            <p className={styles.welcome}>
+              {getLocalizedText('welcome')}, {username}
+            </p>
+          )}
         </div>
       </div>
       <nav>
@@ -47,8 +63,11 @@ function Header() {
               {getLocalizedText('main')}
             </NavLink>
           </li>
-          <li>{getLocalizedText('doctors')}</li>
-          <li>{getLocalizedText('services')}</li>
+          <li>
+            <NavLink className={styles.navigation__link} to="/doctors">
+              {getLocalizedText('doctors')}
+            </NavLink>
+          </li>
           <li>
             <NavLink className={styles.navigation__link} to="/contacts">
               {getLocalizedText('contacts')}

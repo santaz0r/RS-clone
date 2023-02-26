@@ -8,6 +8,7 @@ import SelectField from '../../components/form/SelectedField';
 import { getLocalizedText } from '../../services/localizationService';
 import validator from '../../utils/validator';
 import { createSession, getSessionsByCurrentClient, getSessionsByCurrentDoctor } from '../../store/sessions';
+import styles from './DoctorPage.module.scss';
 
 const timeOptions = [
   { label: '12:00', value: '12:00:00' },
@@ -18,15 +19,18 @@ const timeOptions = [
   { label: '17:00', value: '17:00:00' },
   { label: '18:00', value: '18:00:00' },
 ];
+type TParams = {
+  id: string;
+};
 
 function DoctorPage() {
-  const { id } = useParams();
+  const { id } = useParams<keyof TParams>() as TParams;
   const dispatch = useAppDispatch();
   const { id: userId, role } = useAppSelector(getCurrentUserData());
-  const doctor = id ? useAppSelector(getDoctorById(id)) : null;
-  const currentDocSessions = doctor ? useAppSelector(getSessionsByCurrentDoctor(doctor?._id)) : null;
-  const currentUserSessions = userId ? useAppSelector(getSessionsByCurrentClient(userId)) : null;
-  console.log('currentUserSessions', currentUserSessions);
+  const doctor = useAppSelector(getDoctorById(id));
+
+  const currentDocSessions = doctor ? useAppSelector(getSessionsByCurrentDoctor(doctor._id)) : undefined;
+  const currentUserSessions = useAppSelector(getSessionsByCurrentClient(userId!));
 
   const timestamp = new Date();
   const todayDate = `${timestamp.getFullYear().toString()}-${(timestamp.getMonth() + 1)
@@ -42,9 +46,9 @@ function DoctorPage() {
     time: '',
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({ date: '', time: '' });
-  console.log(currentDocSessions);
+
   const hasSession = currentUserSessions?.some((sess) => sess.doctorId === doctor?._id);
-  console.log(hasSession);
+
   const filteredOptions = timeOptions.filter((time) => {
     if (currentDocSessions?.length) {
       for (let i = 0; i < currentDocSessions.length; i += 1) {
@@ -56,13 +60,17 @@ function DoctorPage() {
     }
     return [];
   });
-  const dateNow = new Date();
-  console.log(dateNow.toLocaleString());
-  // const kekFilter = filteredOptions.filter(time=> {
 
-  // })
+  const hoursNow = timestamp.getHours();
+  const dayNow = timestamp.getDate();
 
-  console.log(filteredOptions);
+  const filteredTimeOption = filteredOptions.filter((time) => {
+    if (dayNow.toString() === sessionsData.date.split('-')[2]) {
+      return Number(time.value.split(':')[0]) > hoursNow;
+    }
+    return time;
+  });
+
   const validatorConfig = {
     date: {
       isRequired: {
@@ -105,33 +113,32 @@ function DoctorPage() {
 
   if (!doctor) return <h3>Not found</h3>;
   return (
-    <div>
+    <div className={styles.wrapper}>
       <h3>
         Имя: {doctor.name} {doctor.surname}
       </h3>
       <img src={doctor.image} alt="docPhoto" width={150} />
       <Specializations id={doctor.specialization} />
-      <div>
-        Description:
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. A officia id ducimus quidem nemo aspernatur illum
-          doloribus nam quis dolorem officiis expedita, dignissimos enim accusamus quisquam quod libero, delectus sit
-          facilis, aliquam praesentium? Libero hic voluptatem, nisi magni animi ullam velit minima perferendis rem
-          officiis tempora minus dolorum aperiam odio commodi soluta suscipit corrupti consectetur maiores totam
-          excepturi! Architecto id ipsum dignissimos voluptatum eligendi nulla consectetur explicabo deleniti minus odit
-          molestias itaque quos iure maiores eaque inventore, odio sed. Debitis assumenda sequi porro incidunt quae
-          eveniet ea, excepturi dolorum tempora dolores ex reiciendis quas, labore omnis dolore sit eligendi in quisquam
-          minus nesciunt a corrupti sint eaque molestiae. Consectetur quam aspernatur quidem, doloremque perferendis
-          quaerat possimus dignissimos adipisci aut cupiditate?
-        </p>
-      </div>
+      <p className={styles.description}>{getLocalizedText('descr')}:</p>
+      <p className={styles.description__text}>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. A officia id ducimus quidem nemo aspernatur illum
+        doloribus nam quis dolorem officiis expedita, dignissimos enim accusamus quisquam quod libero, delectus sit
+        facilis, aliquam praesentium? Libero hic voluptatem, nisi magni animi ullam velit minima perferendis rem
+        officiis tempora minus dolorum aperiam odio commodi soluta suscipit corrupti consectetur maiores totam
+        excepturi! Architecto id ipsum dignissimos voluptatum eligendi nulla consectetur explicabo deleniti minus odit
+        molestias itaque quos iure maiores eaque inventore, odio sed. Debitis assumenda sequi porro incidunt quae
+        eveniet ea, excepturi dolorum tempora dolores ex reiciendis quas, labore omnis dolore sit eligendi in quisquam
+        minus nesciunt a corrupti sint eaque molestiae. Consectetur quam aspernatur quidem, doloremque perferendis
+        quaerat possimus dignissimos adipisci aut cupiditate?
+      </p>
       {role === 'client' ? (
         <div>
-          <h3>{getLocalizedText('timeOfSession')}</h3>
+          <h3 className={styles.singup_title}>{getLocalizedText('timeOfSession')}</h3>
           <div>
             <form onSubmit={handleSubmit}>
               {getLocalizedText('chooseDate')}:{' '}
               <input
+                className={styles.date__input}
                 type="date"
                 value={sessionsData.date}
                 onChange={handleDateChange}
@@ -140,28 +147,33 @@ function DoctorPage() {
                 pattern="\d{4}-\d{2}-\d{2}"
               />
               {!hasSession ? (
-                filteredOptions.length ? (
-                  <SelectField
-                    defaultOption="choose..."
-                    label="ChooseTime"
-                    name="time"
-                    onChange={handleTimeChange}
-                    options={filteredOptions}
-                    value={sessionsData.time}
-                    error={errors.time}
-                  />
+                filteredTimeOption.length ? (
+                  <div style={{ width: '30%' }}>
+                    <SelectField
+                      defaultOption="choose"
+                      label="ChooseTime"
+                      name="time"
+                      onChange={handleTimeChange}
+                      options={filteredTimeOption}
+                      value={sessionsData.time}
+                      error={errors.time}
+                      disabledOption
+                    />
+                  </div>
                 ) : (
                   <div>{getLocalizedText('occupied')}</div>
                 )
               ) : (
                 <div>{getLocalizedText('alreadySingUp')}</div>
               )}
-              <button disabled={!isValid} type="submit">
+              <button className={styles.btn} disabled={!isValid} type="submit">
                 {getLocalizedText('submit')}
               </button>
             </form>
           </div>
         </div>
+      ) : role !== 'admin' && role !== 'doctor' ? (
+        <h3 className={styles.login_for}>{getLocalizedText('loginFor')}</h3>
       ) : null}
     </div>
   );

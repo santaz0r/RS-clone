@@ -9,10 +9,7 @@ function DocCardInfo({ id }: { id: string }) {
     return (
       <>
         <div>
-          {getLocalizedText('name')}: {doc.name}
-        </div>
-        <div>
-          {getLocalizedText('surname')}: {doc.surname}
+          {getLocalizedText('name')}: {doc.name} {doc.surname}
         </div>
         <div>
           <Specializations id={doc.specialization} />

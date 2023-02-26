@@ -1,0 +1,19 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-color);
+  border: 1px solid var(--text-color);
+  border-radius: 10px;
+  padding: 10px;
+  transition: 1s;
+}
+
+.title {
+  align-self: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--text-color);
+  transition: 1s;
+}

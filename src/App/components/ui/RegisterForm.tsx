@@ -3,6 +3,7 @@ import validator from '../../utils/validator';
 import TextField from '../form/TextField';
 
 import styles from './LoginForm.module.scss';
+import btnStyle from './FormBtn.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { getAuthErrors, signUp } from '../../store/users';
 import { getLocalizedText } from '../../services/localizationService';
@@ -82,7 +83,7 @@ function RegisterForm({ setCurrentModal, setActive }: TProps) {
   };
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <h2 className={styles.title}>Create account</h2>
+      <h2 className={styles.title}>{getLocalizedText('register')}</h2>
       <TextField
         label="User name"
         name="username"
@@ -100,13 +101,13 @@ function RegisterForm({ setCurrentModal, setActive }: TProps) {
         value={data.password}
         error={errors.password}
       />
-      <button disabled={!isValid || isDisabled} type="submit" className={styles.submit__btn}>
+      <button disabled={!isValid || isDisabled} type="submit" className={btnStyle.submit_btn}>
         {isDisabled ? 'waiting' : 'Submit'}
       </button>
-      {registerError && <p>{registerError}</p>}
+      {registerError && <p style={{ color: 'red' }}>{registerError}</p>}
       <div>
         <button type="button" onClick={() => setCurrentModal('login')} className={styles.changeModal__btn}>
-          Already have an account? Login...
+          {getLocalizedText('switchToLogin')}
         </button>
       </div>
     </form>

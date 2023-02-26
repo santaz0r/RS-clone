@@ -8,6 +8,8 @@ import { TSpec } from '../../types/types';
 import { createDoctor } from '../../store/doctors';
 import generateAvatar from '../../utils/generateAvatar';
 import { getLocalizedText } from '../../services/localizationService';
+import styles from './Form.module.scss';
+import btnStyle from './FormBtn.module.scss';
 
 const initialState = {
   name: '',
@@ -122,8 +124,8 @@ function AddNewDoctorForm() {
 
   return (
     <>
-      <h3>Add new Doctor</h3>
-      <form onSubmit={handleSubmit}>
+      <h3 className={styles.title}>Add new Doctor</h3>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <TextField label="Name" name="name" onChange={handleChange} value={data.name} error={errors.name} />
         <TextField label="Surname" name="surname" onChange={handleChange} value={data.surname} error={errors.surname} />
         <TextField label="Photo" name="image" onChange={handleChange} value={data.image} error={errors.image} />
@@ -149,11 +151,12 @@ function AddNewDoctorForm() {
           onChange={handleChange}
           value={data.specialization}
           error={errors.specialization}
-          defaultOption="Choose..."
+          defaultOption="Choose"
           options={transformData(specializations)}
+          disabledOption
         />
 
-        <button disabled={!isValid} type="submit">
+        <button className={btnStyle.submit_btn} disabled={!isValid} type="submit">
           {getLocalizedText('submit')}
         </button>
       </form>

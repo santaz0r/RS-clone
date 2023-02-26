@@ -1,0 +1,63 @@
+.dash {
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  &__docs {
+    display: flex;
+    flex-wrap: wrap;
+    width: 55%;
+  }
+  &__doc {
+    width: 200px;
+    padding: 15px;
+    border: 1px solid gray;
+    margin: 0 5px 5px 0;
+    color: var(--text-color);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    img {
+      object-fit: contain;
+      width: 100%;
+    }
+  }
+}
+
+.doc {
+  &__name {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  &__btns {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+  }
+  &__btn {
+    align-self: center;
+
+    width: 45%;
+    height: 35px;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: #007bff;
+    color: #fff;
+    font-family: var(--font-family);
+    text-transform: none;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    cursor: pointer;
+    &:hover {
+      scale: 1.05;
+    }
+  }
+}

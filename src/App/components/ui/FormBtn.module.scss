@@ -1,0 +1,27 @@
+.submit_btn {
+  margin-top: 20px;
+  align-self: center;
+  width: 95%;
+  height: 35px;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: #007bff;
+  color: #fff;
+  font-family: var(--font-family);
+  text-transform: none;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+  cursor: pointer;
+  &:hover {
+    scale: 1.05;
+  }
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}

@@ -1,6 +1,6 @@
 import translations from '../assets/data/translations';
 
-function getCurrentLanguage() {
+export function getCurrentLanguage() {
   return localStorage.getItem('language') || 'en';
 }
 

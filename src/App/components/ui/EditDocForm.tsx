@@ -7,6 +7,8 @@ import SelectField from '../form/SelectedField';
 import { TSpec } from '../../types/types';
 import { updateDoctor } from '../../store/doctors';
 import { getLocalizedText } from '../../services/localizationService';
+import styles from './Form.module.scss';
+import btnStyle from './FormBtn.module.scss';
 
 type TDoc = {
   docData: {
@@ -139,8 +141,8 @@ function EditDoctorForm({ docData, onClose }: TDoc) {
 
   return (
     <>
-      <h3>Edit Doctor</h3>
-      <form onSubmit={handleSubmit}>
+      <h3 className={styles.title}>Edit Doctor</h3>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <TextField label="Name" name="name" onChange={handleChange} value={data.name} error={errors.name} />
         <TextField label="Surname" name="surname" onChange={handleChange} value={data.surname} error={errors.surname} />
         <TextField label="Photo" name="image" onChange={handleChange} value={data.image} error={errors.image} />
@@ -161,9 +163,10 @@ function EditDoctorForm({ docData, onClose }: TDoc) {
           error={errors.specialization}
           defaultOption="Choose..."
           options={transformData(specializations)}
+          disabledOption
         />
 
-        <button disabled={!isValid || isDisbale} type="submit">
+        <button className={btnStyle.submit_btn} disabled={!isValid || isDisbale} type="submit">
           {getLocalizedText('submit')}
         </button>
       </form>

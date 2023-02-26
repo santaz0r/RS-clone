@@ -27,6 +27,26 @@ const translations = {
     ru: 'Войти',
     en: 'Login',
   },
+  logout: {
+    ru: 'Выйти',
+    en: 'Logout',
+  },
+  switchToLogin: {
+    ru: 'Уже есть аккаунт? Войти...',
+    en: 'Already have an account? Login...',
+  },
+  switchToRegister: {
+    ru: 'Не зарегистрированы? Создать аккаунт...',
+    en: 'Not registered? Create an account...',
+  },
+  adminDash: {
+    ru: 'Админка',
+    en: 'Admin dash',
+  },
+  welcome: {
+    ru: 'Добро пожаловать',
+    en: 'Welcome',
+  },
   centerDescription: {
     ru: 'Медицинский центр для экстраординарных людей',
     en: 'Medical center for extraordinary people',
@@ -152,7 +172,7 @@ const translations = {
     en: 'Cancel',
   },
   mySessions: {
-    ru: 'Мои приемы',
+    ru: 'Мои записи',
     en: 'My sessions',
   },
   yourDoc: {
@@ -162,6 +182,18 @@ const translations = {
   takingTime: {
     ru: 'Время приема',
     en: 'Time of taking',
+  },
+  makeAppointment: {
+    ru: 'Записаться',
+    en: 'Make appointment',
+  },
+  logInRequiredToAppointment: {
+    ru: 'Для записи войдите в учётную запись',
+    en: 'Login to make an appointment',
+  },
+  emptyDoctorsList: {
+    ru: 'Нет врачей данной специализации',
+    en: 'No doctors with the selected specialization',
   },
   more: {
     ru: 'Подробнее',
@@ -190,6 +222,30 @@ const translations = {
   manageSpecializations: {
     ru: 'Управление специализациями',
     en: 'Manage Specializations',
+  },
+  allSessions: {
+    ru: 'Все записи',
+    en: 'All sessions',
+  },
+  all: {
+    ru: 'Все',
+    en: 'All',
+  },
+  choose: {
+    ru: 'Выбрать...',
+    en: 'Choose...',
+  },
+  loginFor: {
+    ru: 'Войдите чтобы записаться на прием',
+    en: 'Login for make an appointment',
+  },
+  descr: {
+    ru: 'Описание',
+    en: 'Description',
+  },
+  empty: {
+    ru: 'Пусто',
+    en: "It's empty",
   },
 };
 

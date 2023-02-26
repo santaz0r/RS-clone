@@ -2,7 +2,8 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import HomePage from './pages/HomePage/HomePage';
 import MainLayout from './layout/Main/MainLayout';
 import AppLoader from './components/ui/hoc/AppLoader';
-import Dashboard from './components/ui/Dashboard/Dashboard';
+import Dashboard from './pages/Dashboard/Dashboard';
+import Doctors from './pages/Doctors/Doctors';
 import Contacts from './pages/Contacts/Contacts';
 import Sessions from './pages/Sessinos/Sessions';
 import ManageSpecializations from './pages/Manage/ManageSpecializations';
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
         }
       />
       <Route path="/contacts" element={<Contacts />} />
+      <Route path="/doctors" element={<Doctors />} />
       <Route path="/doctor/:id" element={<DoctorPage />} />
       <Route
         path="/my-sessions"
