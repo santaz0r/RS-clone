@@ -37,7 +37,8 @@
  
 ## Было реализовано
 + Приложение написано на Type Script
-+ Свой REST API server
++ Свой сервер
+  + REST API
   + NodeJS + ExpressJs
   + MVC
   + CORS
