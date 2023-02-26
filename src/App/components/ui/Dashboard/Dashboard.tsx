@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import { getDoctorsList, removeDoctor } from '../../../store/doctors';
 import Specializations from '../Specializations/Specializations';
@@ -75,6 +76,9 @@ function Dashboard() {
           <EditDoctorForm docData={docData} onClose={handleModalClose} />
         </Modal>
       )}
+      <NavLink to="/manage/specializations">
+        <button type="button">{getLocalizedText('manageSpecializations')}</button>
+      </NavLink>
     </div>
   );
 }

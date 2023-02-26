@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAction } from '@reduxjs/toolkit';
+import axios from 'axios';
 import { AppDispatch, RootState } from './createStore';
 import specializationService from '../services/specializationsService';
 import { TSpec } from '../types/types';
@@ -8,11 +9,13 @@ import { TSpec } from '../types/types';
 type TSpecState = {
   entities: TSpec[];
   isLoading: boolean;
+  createError: string;
 };
 
 const initialState: TSpecState = {
   entities: [],
   isLoading: true,
+  createError: '',
 };
 
 const specializationsSlice = createSlice({
@@ -26,10 +29,33 @@ const specializationsSlice = createSlice({
       state.entities = action.payload;
       state.isLoading = false;
     },
+    specializationCreated: (state, action) => {
+      state.entities.push(action.payload);
+    },
+    specializationCreateFailed: (state, action) => {
+      state.createError = action.payload;
+    },
+    specializationUpdateSuccessed: (state, action) => {
+      state.entities[state.entities.findIndex((spec) => spec._id === action.payload._id)] = action.payload;
+    },
+    specializationRemoved: (state, action) => {
+      state.entities = state.entities.filter((spec) => spec._id !== action.payload);
+    },
   },
 });
 const { actions, reducer: specializationsReducer } = specializationsSlice;
-const { specializationsRequested, specializationsReceived } = actions;
+const {
+  specializationsRequested,
+  specializationsReceived,
+  specializationCreated,
+  specializationCreateFailed,
+  specializationUpdateSuccessed,
+  specializationRemoved,
+} = actions;
+
+const createSpecializationRequested = createAction('specializations/createSpecializationRequested');
+const updateSpecializationRequested = createAction('specializations/updateSpecializationRequested');
+const removeSpecializationRequested = createAction('specializations/removeSpecializationRequested');
 
 export const loadSpecializationsList = () => async (dispatch: AppDispatch) => {
   dispatch(specializationsRequested());
@@ -38,6 +64,42 @@ export const loadSpecializationsList = () => async (dispatch: AppDispatch) => {
     dispatch(specializationsReceived(content));
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const removeSpecialization = (specId: string) => async (dispatch: AppDispatch) => {
+  dispatch(removeSpecializationRequested());
+  try {
+    const { content } = await specializationService.remove(specId);
+    if (!content) {
+      dispatch(specializationRemoved(specId));
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateSpecialization = (payload: { [key: string]: string }) => async (dispatch: AppDispatch) => {
+  dispatch(updateSpecializationRequested());
+  try {
+    await specializationService.update(payload);
+    dispatch(specializationUpdateSuccessed(payload));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const createSpecialization = (payload: { [key: string]: string }) => async (dispatch: AppDispatch) => {
+  dispatch(createSpecializationRequested());
+  try {
+    const { content } = await specializationService.create(payload);
+    dispatch(specializationCreated(content));
+  } catch (error) {
+    console.log(error);
+    if (axios.isAxiosError(error)) {
+      const message: string = error.response?.data;
+      dispatch(specializationCreateFailed(message));
+    }
   }
 };
 
