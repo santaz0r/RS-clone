@@ -41,6 +41,7 @@
   + NodeJS + ExpressJs
   + MVC
   + CORS
+  + MongoDB
 + React Router Dom
   + SPA навигация
 + React-redux
