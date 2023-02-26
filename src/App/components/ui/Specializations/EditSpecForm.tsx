@@ -4,6 +4,7 @@ import validator from '../../../utils/validator';
 import TextField from '../../form/TextField';
 import { updateSpecialization } from '../../../store/specializations';
 import { getLocalizedText } from '../../../services/localizationService';
+import btnStyle from '../FormBtn.module.scss';
 
 type TSpec = {
   specData: {
@@ -71,7 +72,7 @@ function EditSpecializationForm({ specData, onClose }: TSpec) {
       <h3>Edit Specialization</h3>
       <form onSubmit={handleSubmit}>
         <TextField label="Name" name="name" onChange={handleChange} value={data.name} error={errors.name} />
-        <button disabled={!isValid || isDisbale} type="submit">
+        <button className={btnStyle.submit_btn} disabled={!isValid || isDisbale} type="submit">
           {getLocalizedText('submit')}
         </button>
       </form>
