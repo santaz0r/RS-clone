@@ -1,0 +1,129 @@
+.header {
+  padding: 0;
+  background-color: var(--background-color);
+  transition: background-color 1s ease-in-out, color 1s ease-in-out;
+}
+
+.topinfo__wrapper {
+  background-color: var(--info-background-color);
+  color: var(--info-text-color);
+  font-size: 13px;
+  transition: background-color 1s ease-in-out, color 1s ease-in-out;
+
+  .topinfo {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      margin: 0;
+      padding: 10px 0;
+    }
+
+    .welcome {
+      text-transform: capitalize;
+    }
+  }
+}
+
+.navigation {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--nav-text-color);
+
+  &__logo {
+    display: block;
+    width: 250px;
+    height: 39px;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    background: url('../../../assets/logo.png');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: var(--brightness);
+    transition: 0.2s;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+
+  &__link {
+    text-decoration: none;
+    color: var(--nav-text-color);
+
+    &:hover{
+      color: var(--nav-text-color_hover);
+      cursor: pointer;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 15px;
+
+    .navigation__btn {
+      display: block;
+      width: 120px;
+      height: 35px;
+      border: none;
+      border-radius: 0.25rem;
+      background-color: #007bff;
+      color: #fff;
+      font-family: var(--font-family);
+      text-transform: none;
+      font-weight: 400;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+}
+
+.language {
+  display: flex;
+  align-items: center;
+  color: var(--info-text-color);
+
+  &__selector{
+    text-decoration: none;
+    text-transform: none;
+    font-weight: 500;
+    transition: 0.2s;
+    border: none;
+    background: none;
+    color: var(--info-text-color);
+    cursor: pointer;
+
+    &_active {
+      pointer-events: none;
+      text-decoration: underline;
+    }
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
