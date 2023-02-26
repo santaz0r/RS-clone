@@ -4,6 +4,7 @@ import { createSpecialization } from '../../../store/specializations';
 import validator from '../../../utils/validator';
 import TextField from '../../form/TextField';
 import { getLocalizedText } from '../../../services/localizationService';
+import btnStyle from '../FormBtn.module.scss';
 
 const initialState = {
   name: '',
@@ -53,7 +54,12 @@ function AddNewSpecializationForm() {
       <h3>Add new Specialization</h3>
       <form onSubmit={handleSubmit}>
         <TextField label="Name" name="name" onChange={handleChange} value={data.name} error={errors.name} />
-        <button disabled={!isValid} type="submit">
+        <button
+          className={btnStyle.submit_btn}
+          style={{ height: '25px', fontSize: '16px', margin: 0 }}
+          disabled={!isValid}
+          type="submit"
+        >
           {getLocalizedText('submit')}
         </button>
       </form>

@@ -4,8 +4,6 @@ import { AppDispatch, RootState } from './createStore';
 import specializationService from '../services/specializationsService';
 import { TSpec } from '../types/types';
 
-// типы изменятся позже
-
 type TSpecState = {
   entities: TSpec[];
   isLoading: boolean;
