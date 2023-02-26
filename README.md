@@ -36,6 +36,7 @@
  - видеть все записи на прием
  
 ## Было реализовано
+- Свой REST API server
 - React-redux
 - Protected Routes для админов и для клиентов
 - Axios
