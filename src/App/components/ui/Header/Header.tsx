@@ -30,7 +30,7 @@ function Header() {
             <button
               className={`${styles.language__selector} ${currentLang === 'en' ? styles.language__selector_active : ''}`}
               type="button"
-              onClick={changeCurrentLanguage}
+              onClick={(e) => changeCurrentLanguage(e as unknown as MouseEvent)}
               disabled={currentLang === 'en'}
             >
               en
@@ -39,7 +39,7 @@ function Header() {
             <button
               className={`${styles.language__selector} ${currentLang === 'ru' ? styles.language__selector_active : ''}`}
               type="button"
-              onClick={changeCurrentLanguage}
+              onClick={(e) => changeCurrentLanguage(e as unknown as MouseEvent)}
               disabled={currentLang === 'ru'}
             >
               ru
