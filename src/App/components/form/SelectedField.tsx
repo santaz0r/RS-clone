@@ -11,9 +11,10 @@ type TProps = {
   value: string;
   error: string;
   onChange: (target: { name: string; value: string }) => void;
+  disabledOption: boolean;
 };
 
-function SelectField({ label, name, value, onChange, defaultOption, options, error }: TProps) {
+function SelectField({ label, name, value, onChange, defaultOption, options, error, disabledOption }: TProps) {
   const handleChange = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
     onChange({ name: target.name, value: target.value });
   };
@@ -27,8 +28,8 @@ function SelectField({ label, name, value, onChange, defaultOption, options, err
         {options.length ? (
           <>
             <select className={styles.select} id={name} name={name} value={value} onChange={handleChange}>
-              <option disabled value="">
-                {defaultOption}
+              <option disabled={disabledOption} value="DEFAULT" key="DEFAULT">
+                {getLocalizedText(defaultOption.toLowerCase())}
               </option>
               {options &&
                 options.map((option) => (

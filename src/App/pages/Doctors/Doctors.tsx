@@ -1,12 +1,14 @@
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useAppSelector } from '../../../../hooks';
-import { getDoctorsList } from '../../../store/doctors';
-import Specializations from '../Specializations/Specializations';
-import { getSpecializations } from '../../../store/specializations';
-import { getIsLogin } from '../../../store/users';
+import { useAppSelector } from '../../../hooks';
+import { getDoctorsList } from '../../store/doctors';
+import Specializations from '../../components/ui/Specializations/Specializations';
+import { getSpecializations } from '../../store/specializations';
+import { getIsLogin } from '../../store/users';
 import styles from './Doctors.module.scss';
-import { getLocalizedText } from '../../../services/localizationService';
+import { getLocalizedText } from '../../services/localizationService';
+import SelectField from '../../components/form/SelectedField';
+import { TSpec } from '../../types/types';
 
 function RenderDoctorTile(props: { filters: string }) {
   const isLogIn = useAppSelector(getIsLogin());
@@ -21,7 +23,7 @@ function RenderDoctorTile(props: { filters: string }) {
       {doctors.map((doctor) => (
         <div className={styles.doctor} key={doctor._id}>
           <div className={styles.photoName}>
-            <img className={styles.photo__img} src={doctor.image} alt="" />
+            <img className={styles.photo__img} src={doctor.image} alt={doctor.name} />
             <div className={styles.name}>
               {doctor.name} {doctor.surname}
             </div>
@@ -50,23 +52,32 @@ function Doctors() {
   const specializations = useAppSelector(getSpecializations());
   const [filters, setFilters] = useState('DEFAULT');
 
-  const handleSpecFilterChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setFilters(e.target.value);
+  const handleChange = (target: { name: string; value: string }) => {
+    setFilters(target.value);
+  };
+  const transformData = (array: TSpec[]) => {
+    if (array) {
+      return array.map((spec) => ({
+        label: spec.name,
+        value: spec._id,
+      }));
+    }
+    return [];
   };
 
   return (
     <div className={styles.filtersDoctors}>
       <div className={styles.filters}>
-        <select onChange={handleSpecFilterChange} value={filters} className={styles.filter}>
-          <option value="DEFAULT" key="DEFAULT">
-            All
-          </option>
-          {specializations.map((spec) => (
-            <option value={spec._id} key={spec._id}>
-              {spec.name}
-            </option>
-          ))}
-        </select>
+        <SelectField
+          defaultOption="All"
+          error=""
+          label="Specialization"
+          name="spec"
+          onChange={handleChange}
+          options={transformData(specializations)}
+          value={filters}
+          disabledOption={false}
+        />
       </div>
       <RenderDoctorTile filters={filters} />
     </div>

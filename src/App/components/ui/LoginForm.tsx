@@ -84,7 +84,7 @@ function LoginForm({ setCurrentModal, setActive }: TProps) {
       <button disabled={!isValid || isDisabled} type="submit" className={btnStyle.submit_btn}>
         {isDisabled ? 'waiting' : 'Submit'}
       </button>
-      {loginError && <p>{loginError}</p>}
+      {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
       <div>
         <button type="button" onClick={() => setCurrentModal('register')} className={styles.changeModal__btn}>
           {getLocalizedText('switchToRegister')}

@@ -15,8 +15,14 @@ function NavProfile() {
   };
   return (
     <li className={styles.navigation__buttons}>
-      {isAdmin && <NavLink className={styles.navigation__btn} to="dashboard">{getLocalizedText('adminDash')}</NavLink>}
-      <NavLink className={styles.navigation__btn} to="/my-sessions">{getLocalizedText('mySessions')}</NavLink>
+      {isAdmin && (
+        <NavLink className={styles.navigation__btn} to="dashboard">
+          {getLocalizedText('adminDash')}
+        </NavLink>
+      )}
+      <NavLink className={styles.navigation__btn} to="/my-sessions">
+        {isAdmin ? getLocalizedText('allSessions') : getLocalizedText('mySessions')}
+      </NavLink>
       <button type="button" className={styles.navigation__btn} onClick={handleLogOut}>
         {getLocalizedText('logout')}
       </button>

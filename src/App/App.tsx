@@ -2,8 +2,8 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import HomePage from './pages/HomePage/HomePage';
 import MainLayout from './layout/Main/MainLayout';
 import AppLoader from './components/ui/hoc/AppLoader';
-import Dashboard from './components/ui/Dashboard/Dashboard';
-import Doctors from './components/ui/Doctors/Doctors';
+import Dashboard from './pages/Dashboard/Dashboard';
+import Doctors from './pages/Doctors/Doctors';
 import Contacts from './pages/Contacts/Contacts';
 import Sessions from './pages/Sessinos/Sessions';
 import ProtectedRoute from './components/ui/hoc/ProtectedRoute';

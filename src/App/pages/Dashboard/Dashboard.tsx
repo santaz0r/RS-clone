@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../../hooks';
-import { getDoctorsList, removeDoctor } from '../../../store/doctors';
-import Specializations from '../Specializations/Specializations';
-import AddNewDoctorForm from '../AddNewDoctorForm';
-import Modal from '../../modal/Modal';
-import EditDoctorForm from '../EditDocForm';
-import { TDoc } from '../../../types/types';
-import { getLocalizedText } from '../../../services/localizationService';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { getDoctorsList, removeDoctor } from '../../store/doctors';
+import Specializations from '../../components/ui/Specializations/Specializations';
+import AddNewDoctorForm from '../../components/ui/AddNewDoctorForm';
+import Modal from '../../components/modal/Modal';
+import EditDoctorForm from '../../components/ui/EditDocForm';
+import { TDoc } from '../../types/types';
+import { getLocalizedText } from '../../services/localizationService';
 
 import styles from './Dashboard.module.scss';
 

@@ -215,6 +215,30 @@ const translations = {
     ru: 'Вы уже записались к данному врачу',
     en: 'You are already sing up for this doctor',
   },
+  allSessions: {
+    ru: 'Все записи',
+    en: 'All sessions',
+  },
+  all: {
+    ru: 'Все',
+    en: 'All',
+  },
+  choose: {
+    ru: 'Выбрать...',
+    en: 'Choose...',
+  },
+  loginFor: {
+    ru: 'Войдите чтобы записаться на прием',
+    en: 'Login for make an appointment',
+  },
+  descr: {
+    ru: 'Описание',
+    en: 'Description',
+  },
+  empty: {
+    ru: 'Пусто',
+    en: "It's empty",
+  },
 };
 
 export default translations;

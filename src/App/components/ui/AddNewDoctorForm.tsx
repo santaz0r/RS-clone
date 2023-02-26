@@ -151,8 +151,9 @@ function AddNewDoctorForm() {
           onChange={handleChange}
           value={data.specialization}
           error={errors.specialization}
-          defaultOption="Choose..."
+          defaultOption="Choose"
           options={transformData(specializations)}
+          disabledOption
         />
 
         <button className={btnStyle.submit_btn} disabled={!isValid} type="submit">
