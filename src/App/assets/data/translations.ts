@@ -107,6 +107,10 @@ const translations = {
     ru: 'загрузка...',
     en: 'loading...',
   },
+  add: {
+    ru: 'Добавить',
+    en: 'Add',
+  },
   delete: {
     ru: 'Удалить',
     en: 'Remove',
@@ -214,6 +218,10 @@ const translations = {
   alreadySingUp: {
     ru: 'Вы уже записались к данному врачу',
     en: 'You are already sing up for this doctor',
+  },
+  manageSpecializations: {
+    ru: 'Управление специализациями',
+    en: 'Manage Specializations',
   },
   allSessions: {
     ru: 'Все записи',

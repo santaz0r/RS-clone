@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import Doctors from './pages/Doctors/Doctors';
 import Contacts from './pages/Contacts/Contacts';
 import Sessions from './pages/Sessinos/Sessions';
+import ManageSpecializations from './pages/Manage/ManageSpecializations';
 import ProtectedRoute from './components/ui/hoc/ProtectedRoute';
 import ProtectedAdminRoute from './components/ui/hoc/ProtectedAdminRoute';
 import DoctorPage from './pages/DoctorPage/DoctorPage';
@@ -31,6 +32,14 @@ const router = createBrowserRouter(
           <ProtectedRoute>
             <Sessions />
           </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/manage/specializations"
+        element={
+          <ProtectedAdminRoute>
+            <ManageSpecializations />
+          </ProtectedAdminRoute>
         }
       />
       <Route path="*" element={<h1>Not Found</h1>} />

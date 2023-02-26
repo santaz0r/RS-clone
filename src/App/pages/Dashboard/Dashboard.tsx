@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { getDoctorsList, removeDoctor } from '../../store/doctors';
 import Specializations from '../../components/ui/Specializations/Specializations';
@@ -7,7 +8,6 @@ import Modal from '../../components/modal/Modal';
 import EditDoctorForm from '../../components/ui/EditDocForm';
 import { TDoc } from '../../types/types';
 import { getLocalizedText } from '../../services/localizationService';
-
 import styles from './Dashboard.module.scss';
 
 type TProps = {
@@ -76,6 +76,9 @@ function Dashboard() {
           <EditDoctorForm docData={docData} onClose={handleModalClose} />
         </Modal>
       )}
+      <NavLink to="/manage/specializations">
+        <button type="button">{getLocalizedText('manageSpecializations')}</button>
+      </NavLink>
     </div>
   );
 }
