@@ -247,6 +247,14 @@ const translations = {
     ru: 'Пусто',
     en: "It's empty",
   },
+  addNewDoc: {
+    ru: 'Добавить врача',
+    en: 'Add new Doctor',
+  },
+  addNewSpec: {
+    ru: 'Добавить специализацию',
+    en: 'Add new specialization',
+  },
 };
 
 export default translations;

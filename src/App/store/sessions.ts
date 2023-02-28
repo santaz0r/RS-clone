@@ -50,8 +50,8 @@ export const loadSessionsList = () => async (dispatch: AppDispatch) => {
 export const createSession = (payload: { [key: string]: string }) => async (dispatch: AppDispatch) => {
   dispatch(createSessionsRequested());
   try {
-    await sessionsService.create(payload);
-    dispatch(sessionsCreated(payload));
+    const { content } = await sessionsService.create(payload);
+    dispatch(sessionsCreated(content));
   } catch (error) {
     console.log(error);
   }

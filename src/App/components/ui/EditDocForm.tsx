@@ -161,7 +161,7 @@ function EditDoctorForm({ docData, onClose }: TDoc) {
           onChange={handleChange}
           value={data.specialization}
           error={errors.specialization}
-          defaultOption="Choose..."
+          defaultOption="Choose"
           options={transformData(specializations)}
           disabledOption
         />

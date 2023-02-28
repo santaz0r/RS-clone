@@ -124,7 +124,7 @@ function AddNewDoctorForm() {
 
   return (
     <>
-      <h3 className={styles.title}>Add new Doctor</h3>
+      <h3 className={styles.title}>{getLocalizedText('addNewDoc')}</h3>
       <form className={styles.form} onSubmit={handleSubmit}>
         <TextField label="Name" name="name" onChange={handleChange} value={data.name} error={errors.name} />
         <TextField label="Surname" name="surname" onChange={handleChange} value={data.surname} error={errors.surname} />

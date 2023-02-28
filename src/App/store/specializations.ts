@@ -39,6 +39,9 @@ const specializationsSlice = createSlice({
     specializationRemoved: (state, action) => {
       state.entities = state.entities.filter((spec) => spec._id !== action.payload);
     },
+    createSpecializationRequested: (state) => {
+      state.createError = '';
+    },
   },
 });
 const { actions, reducer: specializationsReducer } = specializationsSlice;
@@ -49,9 +52,9 @@ const {
   specializationCreateFailed,
   specializationUpdateSuccessed,
   specializationRemoved,
+  createSpecializationRequested,
 } = actions;
 
-const createSpecializationRequested = createAction('specializations/createSpecializationRequested');
 const updateSpecializationRequested = createAction('specializations/updateSpecializationRequested');
 const removeSpecializationRequested = createAction('specializations/removeSpecializationRequested');
 
@@ -109,5 +112,6 @@ export const getSpecializationById = (id: string) => (state: RootState) => {
   }
   return null;
 };
+export const getErrors = () => (state: RootState) => state.specialization.createError;
 
 export default specializationsReducer;

@@ -28,6 +28,7 @@ function DoctorPage() {
   const dispatch = useAppDispatch();
   const { id: userId, role } = useAppSelector(getCurrentUserData());
   const doctor = useAppSelector(getDoctorById(id));
+  const [isDisbale, setDisable] = useState(false);
 
   const currentDocSessions = doctor ? useAppSelector(getSessionsByCurrentDoctor(doctor._id)) : undefined;
   const currentUserSessions = useAppSelector(getSessionsByCurrentClient(userId!));
@@ -66,7 +67,7 @@ function DoctorPage() {
 
   const filteredTimeOption = filteredOptions.filter((time) => {
     if (dayNow.toString() === sessionsData.date.split('-')[2]) {
-      return Number(time.value.split(':')[0]) > hoursNow;
+      return Number(time.value.split(':')[0]) < hoursNow;
     }
     return time;
   });
@@ -103,11 +104,13 @@ function DoctorPage() {
     setSessionData((prevState) => ({ ...prevState, [target.name]: target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setDisable(true);
     const sessionDate = `${sessionsData.date}T${sessionsData.time}.000Z`;
     if (userId && doctor?._id) {
-      dispatch(createSession({ clientId: userId, doctorId: doctor?._id, date: sessionDate }));
+      await dispatch(createSession({ clientId: userId, doctorId: doctor?._id, date: sessionDate }));
+      setDisable(false);
     }
   };
 
@@ -166,7 +169,7 @@ function DoctorPage() {
               ) : (
                 <div>{getLocalizedText('alreadySingUp')}</div>
               )}
-              <button className={styles.btn} disabled={!isValid} type="submit">
+              <button className={styles.btn} disabled={!isValid || isDisbale} type="submit">
                 {getLocalizedText('submit')}
               </button>
             </form>

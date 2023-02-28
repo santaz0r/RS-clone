@@ -33,7 +33,7 @@ function Sessions() {
       <div className={styles.sessions__wrapper}>
         {sessions.length ? (
           sessions.map((s) => (
-            <div className={styles.sessions__item__wrapper}>
+            <div className={styles.sessions__item__wrapper} key={s._id}>
               <div className={styles.sessions__item} key={s._id}>
                 <div className={styles.sessions__doc}>
                   {getLocalizedText('yourDoc')}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useAppDispatch } from '../../../../hooks';
-import { createSpecialization } from '../../../store/specializations';
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
+import { createSpecialization, getErrors } from '../../../store/specializations';
 import validator from '../../../utils/validator';
 import TextField from '../../form/TextField';
 import { getLocalizedText } from '../../../services/localizationService';
@@ -14,6 +14,7 @@ function AddNewSpecializationForm() {
   const dispatch = useAppDispatch();
   const [data, setData] = useState(initialState);
   const [errors, setErrors] = useState<{ [key: string]: string }>(initialState);
+  const specError = useAppSelector(getErrors());
 
   const validatorConfig = {
     name: {
@@ -51,9 +52,10 @@ function AddNewSpecializationForm() {
 
   return (
     <>
-      <h3>Add new Specialization</h3>
+      <h3>{getLocalizedText('addNewSpec')}</h3>
       <form onSubmit={handleSubmit}>
         <TextField label="Name" name="name" onChange={handleChange} value={data.name} error={errors.name} />
+        {specError && <div style={{ color: 'red' }}>{specError}</div>}
         <button
           className={btnStyle.submit_btn}
           style={{ height: '25px', fontSize: '16px', margin: 0 }}
