@@ -5,7 +5,7 @@ import validator from '../../utils/validator';
 import TextField from '../form/TextField';
 import SelectField from '../form/SelectedField';
 import { TSpec } from '../../types/types';
-import { createDoctor } from '../../store/doctors';
+import { createDoctor, getCreateError } from '../../store/doctors';
 import generateAvatar from '../../utils/generateAvatar';
 import { getLocalizedText } from '../../services/localizationService';
 import styles from './Form.module.scss';
@@ -25,7 +25,9 @@ function AddNewDoctorForm() {
   const dispatch = useAppDispatch();
   const [data, setData] = useState(initialState);
   const [errors, setErrors] = useState<{ [key: string]: string }>(initialState);
+  const [isDisbale, setDisable] = useState(false);
   const specializations = useAppSelector(getSpecializations());
+  const createError = useAppSelector(getCreateError());
 
   const validatorConfig = {
     username: {
@@ -114,12 +116,14 @@ function AddNewDoctorForm() {
   }, [data]);
   const isValid = Object.keys(errors).length === 0;
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const isValidData = validate();
+    setDisable(true);
     if (!isValidData) return;
 
-    dispatch(createDoctor(data));
+    await dispatch(createDoctor(data));
+    setDisable(false);
   };
 
   return (
@@ -155,8 +159,8 @@ function AddNewDoctorForm() {
           options={transformData(specializations)}
           disabledOption
         />
-
-        <button className={btnStyle.submit_btn} disabled={!isValid} type="submit">
+        {createError && <div style={{ color: 'red' }}>{createError}</div>}
+        <button className={btnStyle.submit_btn} disabled={!isValid || isDisbale} type="submit">
           {getLocalizedText('submit')}
         </button>
       </form>

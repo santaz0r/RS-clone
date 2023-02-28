@@ -45,6 +45,9 @@ const doctorsSlice = createSlice({
     doctorUpdateSuccessed: (state, action) => {
       state.entities[state.entities.findIndex((doc) => doc._id === action.payload._id)] = action.payload;
     },
+    createDoctorRequested: (state) => {
+      state.createError = '';
+    },
   },
 });
 
@@ -57,10 +60,10 @@ const {
   doctorCreated,
   doctorUpdateSuccessed,
   doctorCreateFailed,
+  createDoctorRequested,
 } = actions;
 
 const removeDoctorRequested = createAction('doctors/removeDoctorRequested');
-const createDoctorRequested = createAction('doctors/createDoctorRequested');
 const updateDoctorRequested = createAction('doctors/updateDoctorRequested');
 
 export const loadDoctorsList = () => async (dispatch: AppDispatch) => {
@@ -116,5 +119,6 @@ export const getDoctorsList = () => (state: RootState) => state.doctors.entities
 export const getDoctorById = (id: string) => (state: RootState) => state.doctors.entities.find((doc) => doc._id === id);
 
 export const getDataError = () => (state: RootState) => state.doctors.dataError;
+export const getCreateError = () => (state: RootState) => state.doctors.createError;
 
 export default doctorsReducer;
