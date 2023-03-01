@@ -38,7 +38,8 @@ function DoctorPage() {
   const timestamp = new Date();
   const todayDate = `${timestamp.getFullYear().toString()}-${(timestamp.getMonth() + 1)
     .toString()
-    .padStart(2, '0')}-${timestamp.getDate().toString()}`;
+    .padStart(2, '0')}-${timestamp.getDate().toString().padStart(2, '0')}`;
+
   const deltaMonth = todayDate
     .split('-')
     .map((i, index) => (index === 1 ? (Number(i) + 2).toString().padStart(2, '0') : i))
@@ -69,7 +70,7 @@ function DoctorPage() {
 
   const filteredTimeOption = filteredOptions.filter((time) => {
     if (dayNow.toString() === sessionsData.date.split('-')[2]) {
-      return Number(time.value.split(':')[0]) > hoursNow;
+      return Number(time.value.split(':')[0]) < hoursNow;
     }
     return time;
   });
