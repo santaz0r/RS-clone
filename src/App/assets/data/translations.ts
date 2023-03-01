@@ -123,6 +123,10 @@ const translations = {
     ru: 'Отправить',
     en: 'Submit',
   },
+  waiting: {
+    ru: 'Ожидайте',
+    en: 'Waiting',
+  },
   showPassword: {
     ru: 'Показать пароль',
     en: 'Show password',

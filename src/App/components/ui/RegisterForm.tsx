@@ -103,7 +103,7 @@ function RegisterForm({ setCurrentModal, setActive }: TProps) {
         error={errors.password}
       />
       <button disabled={!isValid || isDisabled} type="submit" className={btnStyle.submit_btn}>
-        {isDisabled ? 'waiting' : 'Submit'}
+        {isDisabled ? locText('waiting', currentLang) : locText('submit', currentLang)}
       </button>
       {registerError && <p style={{ color: 'red' }}>{registerError}</p>}
       <div>

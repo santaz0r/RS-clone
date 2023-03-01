@@ -84,7 +84,7 @@ function LoginForm({ setCurrentModal, setActive }: TProps) {
         error={errors.password}
       />
       <button disabled={!isValid || isDisabled} type="submit" className={btnStyle.submit_btn}>
-        {isDisabled ? 'waiting' : 'Submit'}
+        {isDisabled ? locText('waiting', currentLang) : locText('submit', currentLang)}
       </button>
       {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
       <div>
