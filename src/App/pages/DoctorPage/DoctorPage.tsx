@@ -67,7 +67,7 @@ function DoctorPage() {
 
   const filteredTimeOption = filteredOptions.filter((time) => {
     if (dayNow.toString() === sessionsData.date.split('-')[2]) {
-      return Number(time.value.split(':')[0]) < hoursNow;
+      return Number(time.value.split(':')[0]) > hoursNow;
     }
     return time;
   });
