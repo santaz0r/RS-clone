@@ -1,12 +1,15 @@
-import { getLocalizedText } from '../../services/localizationService';
+import { useAppSelector } from '../../../hooks';
+import { locText } from '../../services/locText';
+import { getLang } from '../../store/language';
 import styles from './Contacts.module.scss';
 
 function Contacts() {
+  const currentLang = useAppSelector(getLang());
   return (
     <div className={styles.wrapper}>
-      <h1 className={styles.title}>{getLocalizedText('contacts')}</h1>
-      <h2 className={styles.subtitle}>{getLocalizedText('contactsData')}</h2>
-      <p className={styles.text}>{getLocalizedText('contactsAdress')}</p>
+      <h1 className={styles.title}>{locText('contacts', currentLang)}</h1>
+      <h2 className={styles.subtitle}>{locText('contactsData', currentLang)}</h2>
+      <p className={styles.text}>{locText('contactsAdress', currentLang)}</p>
       <iframe
         title="This is a unique title"
         // eslint-disable-next-line max-len
@@ -18,8 +21,8 @@ function Contacts() {
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
       />
-      <p className={styles.phone}>{getLocalizedText('contactsPhone')}</p>
-      <p className={styles.smalltext}>{getLocalizedText('contactsPhoneComment')}</p>
+      <p className={styles.phone}>{locText('contactsPhone', currentLang)}</p>
+      <p className={styles.smalltext}>{locText('contactsPhoneComment', currentLang)}</p>
     </div>
   );
 }

@@ -1,36 +1,44 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Modal from '../../modal/Modal';
 import LoginForm from '../LoginForm';
 import RegisterForm from '../RegisterForm';
 import styles from './Header.module.scss';
-import { changeCurrentLanguage, getCurrentLanguage, getLocalizedText } from '../../../services/localizationService';
-import { useAppSelector } from '../../../../hooks';
+
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import { getCurrentUserData, getIsLogin } from '../../../store/users';
 import NavProfile from '../NavProfile/NavProfile';
 import DarkMode from '../../DarkMode/DarkMode';
+import { getLang, switchLang } from '../../../store/language';
+import { locText } from '../../../services/locText';
 
 function Header() {
   const isLogIn = useAppSelector(getIsLogin());
+  const dispatch = useAppDispatch();
   const { username } = useAppSelector(getCurrentUserData());
   const [isModalActive, setIsModalActive] = useState(false);
   const [currentModal, setCurrentModal] = useState<'register' | 'login'>('register');
-  const currentLang = getCurrentLanguage();
+  const currentLang = useAppSelector(getLang());
   const handleButton = (btn: 'register' | 'login') => {
     setCurrentModal(btn);
     setIsModalActive(true);
+  };
+  const changeLang = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (e.currentTarget.textContent) {
+      dispatch(switchLang(e.currentTarget.textContent));
+    }
   };
   return (
     <header className={styles.header}>
       <div className={styles.topinfo__wrapper}>
         <div className={styles.topinfo}>
-          <p>{getLocalizedText('centerDescription')}</p>
-          <p>{getLocalizedText('callCenter')}</p>
+          <p>{locText('centerDescription', currentLang)}</p>
+          <p>{locText('callCenter', currentLang)}</p>
           <div className={styles.language}>
             <button
               className={`${styles.language__selector} ${currentLang === 'en' ? styles.language__selector_active : ''}`}
               type="button"
-              onClick={(e) => changeCurrentLanguage(e as unknown as MouseEvent)}
+              onClick={changeLang}
               disabled={currentLang === 'en'}
             >
               en
@@ -39,7 +47,7 @@ function Header() {
             <button
               className={`${styles.language__selector} ${currentLang === 'ru' ? styles.language__selector_active : ''}`}
               type="button"
-              onClick={(e) => changeCurrentLanguage(e as unknown as MouseEvent)}
+              onClick={changeLang}
               disabled={currentLang === 'ru'}
             >
               ru
@@ -48,7 +56,7 @@ function Header() {
           <DarkMode />
           {isLogIn && (
             <p className={styles.welcome}>
-              {getLocalizedText('welcome')}, {username}
+              {locText('welcome', currentLang)}, {username}
             </p>
           )}
         </div>
@@ -60,17 +68,17 @@ function Header() {
           </li>
           <li>
             <NavLink className={styles.navigation__link} to="/">
-              {getLocalizedText('main')}
+              {locText('main', currentLang)}
             </NavLink>
           </li>
           <li>
             <NavLink className={styles.navigation__link} to="/doctors">
-              {getLocalizedText('doctors')}
+              {locText('doctors', currentLang)}
             </NavLink>
           </li>
           <li>
             <NavLink className={styles.navigation__link} to="/contacts">
-              {getLocalizedText('contacts')}
+              {locText('contacts', currentLang)}
             </NavLink>
           </li>
           {isLogIn ? (
@@ -78,10 +86,10 @@ function Header() {
           ) : (
             <li className={styles.navigation__buttons}>
               <button type="button" className={styles.navigation__btn} onClick={() => handleButton('register')}>
-                {getLocalizedText('register')}
+                {locText('register', currentLang)}
               </button>
               <button type="button" className={styles.navigation__btn} onClick={() => handleButton('login')}>
-                {getLocalizedText('login')}
+                {locText('login', currentLang)}
               </button>
             </li>
           )}

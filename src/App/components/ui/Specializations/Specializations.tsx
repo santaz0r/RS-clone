@@ -1,20 +1,17 @@
 import { useAppSelector } from '../../../../hooks';
-import { getLocalizedText } from '../../../services/localizationService';
+import { locText } from '../../../services/locText';
+import { getLang } from '../../../store/language';
+
 import { getSpecializationById, getSpecializationsLoadingStatus } from '../../../store/specializations';
 
 function Specializations({ id }: { id: string }) {
   const specLoadingStatus = useAppSelector(getSpecializationsLoadingStatus());
   const spec = useAppSelector(getSpecializationById(id));
-  if (!specLoadingStatus) {
-    return (
-      <div>
-        {getLocalizedText('specialization')}: {spec?.name}
-      </div>
-    );
-  }
+  const currentLang = useAppSelector(getLang());
+
   return (
     <div>
-      {getLocalizedText('specialization')}: {getLocalizedText('loading')}
+      {locText('specialization', currentLang)}: {!specLoadingStatus ? spec?.name : 'loading'}
     </div>
   );
 }

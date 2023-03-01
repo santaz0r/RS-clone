@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 
 import styles from './TextField.module.scss';
-import { getLocalizedText } from '../../services/localizationService';
+import { useAppSelector } from '../../../hooks';
+import { getLang } from '../../store/language';
+import { locText } from '../../services/locText';
 
 type TProps = {
   label: string;
@@ -14,18 +16,18 @@ type TProps = {
 
 function TextField({ label, type, name, value, onChange, error }: TProps) {
   const [showPassword, setShowPassword] = useState(false);
-
+  const currentLang = useAppSelector(getLang());
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     onChange({ name: target.name, value: target.value });
   };
   const toggleShowPassword = () => {
     setShowPassword((prevState) => !prevState);
   };
-  // const getInputClasses = () => `default ${error ? ' invalid' : 'valid'}`;
+
   return (
     <div className={styles.input__wrapper}>
       <label className={styles.input__label} htmlFor={name}>
-        {getLocalizedText(label.toLowerCase())}
+        {locText(label.toLowerCase(), currentLang)}
       </label>
       <div>
         <input
@@ -35,13 +37,12 @@ function TextField({ label, type, name, value, onChange, error }: TProps) {
           value={value}
           onChange={handleChange}
           className={styles.input}
-          // className={getInputClasses()}
         />
-        {error && <div className={styles.error}>{error}</div>}
+        {error && <div className={styles.error}>{locText(error, currentLang)}</div>}
         {type === 'password' && (
           <label htmlFor="chk" className={styles.pass_label}>
             <input type="checkbox" id="chk" onChange={toggleShowPassword} checked={showPassword} />
-            {getLocalizedText('showPassword')}
+            {locText('showPassword', currentLang)}
           </label>
         )}
       </div>

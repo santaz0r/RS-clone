@@ -7,8 +7,9 @@ import AddNewDoctorForm from '../../components/ui/AddNewDoctorForm';
 import Modal from '../../components/modal/Modal';
 import EditDoctorForm from '../../components/ui/EditDocForm';
 import { TDoc } from '../../types/types';
-import { getLocalizedText } from '../../services/localizationService';
 import styles from './Dashboard.module.scss';
+import { getLang } from '../../store/language';
+import { locText } from '../../services/locText';
 
 type TProps = {
   docData: TDoc;
@@ -26,6 +27,7 @@ const initialState = {
 
 function Dashboard() {
   const doctors = useAppSelector(getDoctorsList());
+  const currentLang = useAppSelector(getLang());
   const [isModalActive, setModalActive] = useState(false);
   const [docData, setDocData] = useState<TProps['docData']>(initialState);
   const dispatch = useAppDispatch();
@@ -53,16 +55,16 @@ function Dashboard() {
 
             <img src={doc.image} alt="avatar" />
             <Specializations id={doc.specialization} />
-            <div>{getLocalizedText('contacts')}:</div>
+            <div>{locText('contacts', currentLang)}:</div>
             <div>
-              - {getLocalizedText('email')}: {doc.mail}
+              - {locText('email', currentLang)}: {doc.mail}
             </div>
             <div className={styles.doc__btns}>
               <button className={styles.doc__btn} onClick={() => handleDelete(doc._id)} type="button">
-                {getLocalizedText('delete')}
+                {locText('delete', currentLang)}
               </button>
               <button className={styles.doc__btn} onClick={() => handleEdit(doc)} type="button">
-                {getLocalizedText('edit')}
+                {locText('edit', currentLang)}
               </button>
             </div>
           </div>
@@ -77,7 +79,7 @@ function Dashboard() {
         </Modal>
       )}
       <NavLink to="/manage/specializations">
-        <button type="button">{getLocalizedText('manageSpecializations')}</button>
+        <button type="button">{locText('manageSpecializations', currentLang)}</button>
       </NavLink>
     </div>
   );

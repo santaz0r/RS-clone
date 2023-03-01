@@ -1,12 +1,14 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
-import { getLocalizedText } from '../../../services/localizationService';
 import { getCurrentUserData, logOut } from '../../../store/users';
 import styles from './NavProfile.module.scss';
+import { getLang } from '../../../store/language';
+import { locText } from '../../../services/locText';
 
 function NavProfile() {
   const dispatch = useAppDispatch();
   const { role } = useAppSelector(getCurrentUserData());
+  const currentLang = useAppSelector(getLang());
   const isAdmin = role === 'admin';
   const navigate = useNavigate();
   const handleLogOut = () => {
@@ -17,14 +19,14 @@ function NavProfile() {
     <li className={styles.navigation__buttons}>
       {isAdmin && (
         <NavLink className={styles.navigation__btn} to="dashboard">
-          {getLocalizedText('adminDash')}
+          {locText('adminDash', currentLang)}
         </NavLink>
       )}
       <NavLink className={styles.navigation__btn} to="/my-sessions">
-        {isAdmin ? getLocalizedText('allSessions') : getLocalizedText('mySessions')}
+        {isAdmin ? locText('allSessions', currentLang) : locText('mySessions', currentLang)}
       </NavLink>
       <button type="button" className={styles.navigation__btn} onClick={handleLogOut}>
-        {getLocalizedText('logout')}
+        {locText('logout', currentLang)}
       </button>
     </li>
   );

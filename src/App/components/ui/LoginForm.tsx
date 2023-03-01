@@ -6,7 +6,8 @@ import styles from './LoginForm.module.scss';
 import btnStyle from './FormBtn.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { getAuthErrors, login } from '../../store/users';
-import { getLocalizedText } from '../../services/localizationService';
+import { getLang } from '../../store/language';
+import { locText } from '../../services/locText';
 
 type TProps = {
   setCurrentModal: React.Dispatch<React.SetStateAction<'register' | 'login'>>;
@@ -15,6 +16,7 @@ type TProps = {
 
 function LoginForm({ setCurrentModal, setActive }: TProps) {
   const dispatch = useAppDispatch();
+  const currentLang = useAppSelector(getLang());
   const [data, setData] = useState({
     username: '',
     password: '',
@@ -34,12 +36,12 @@ function LoginForm({ setCurrentModal, setActive }: TProps) {
   const validatorConfig = {
     username: {
       isRequired: {
-        message: getLocalizedText('isRequired'),
+        message: 'isRequired',
       },
     },
     password: {
       isRequired: {
-        message: getLocalizedText('isRequired'),
+        message: 'isRequired',
       },
     },
   };
@@ -65,7 +67,7 @@ function LoginForm({ setCurrentModal, setActive }: TProps) {
   };
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <h2 className={styles.title}>{getLocalizedText('login')}</h2>
+      <h2 className={styles.title}>{locText('login', currentLang)}</h2>
       <TextField
         label="User name"
         name="username"
@@ -87,7 +89,7 @@ function LoginForm({ setCurrentModal, setActive }: TProps) {
       {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
       <div>
         <button type="button" onClick={() => setCurrentModal('register')} className={styles.changeModal__btn}>
-          {getLocalizedText('switchToRegister')}
+          {locText('switchToRegister', currentLang)}
         </button>
       </div>
     </form>

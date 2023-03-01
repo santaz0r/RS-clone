@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { getLang } from '../../store/language';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { getSpecializations } from '../../store/specializations';
 import validator from '../../utils/validator';
@@ -7,9 +8,9 @@ import SelectField from '../form/SelectedField';
 import { TSpec } from '../../types/types';
 import { createDoctor, getCreateError } from '../../store/doctors';
 import generateAvatar from '../../utils/generateAvatar';
-import { getLocalizedText } from '../../services/localizationService';
 import styles from './Form.module.scss';
 import btnStyle from './FormBtn.module.scss';
+import { locText } from '../../services/locText';
 
 const initialState = {
   name: '',
@@ -24,69 +25,70 @@ const initialState = {
 function AddNewDoctorForm() {
   const dispatch = useAppDispatch();
   const [data, setData] = useState(initialState);
-  const [errors, setErrors] = useState<{ [key: string]: string }>(initialState);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({ ...initialState, image: '' });
   const [isDisbale, setDisable] = useState(false);
   const specializations = useAppSelector(getSpecializations());
   const createError = useAppSelector(getCreateError());
+  const currentLang = useAppSelector(getLang());
 
   const validatorConfig = {
     username: {
       isRequired: {
-        message: getLocalizedText('isRequired'),
+        message: 'isRequired',
       },
       noSpaces: {
-        message: getLocalizedText('noSpaces'),
+        message: 'noSpaces',
       },
     },
     name: {
       isRequired: {
-        message: getLocalizedText('isRequired'),
+        message: 'isRequired',
       },
       noSpaces: {
-        message: getLocalizedText('noSpaces'),
+        message: 'noSpaces',
       },
     },
     surname: {
       isRequired: {
-        message: getLocalizedText('isRequired'),
+        message: 'isRequired',
       },
       noSpaces: {
-        message: getLocalizedText('noSpaces'),
+        message: 'noSpaces',
       },
     },
     specialization: {
       isRequired: {
-        message: getLocalizedText('isRequired'),
+        message: 'isRequired',
       },
       noSpaces: {
-        message: getLocalizedText('noSpaces'),
+        message: 'noSpaces',
       },
     },
     password: {
       isRequired: {
-        message: getLocalizedText('isRequired'),
+        message: 'isRequired',
       },
       noSpaces: {
-        message: getLocalizedText('noSpaces'),
+        message: 'noSpaces',
       },
     },
     mail: {
       isRequired: {
-        message: getLocalizedText('isRequired'),
+        message: 'isRequired',
       },
       noSpaces: {
-        message: getLocalizedText('noSpaces'),
+        message: 'noSpaces',
       },
     },
     image: {
       isRequired: {
-        message: getLocalizedText('isRequired'),
+        message: 'isRequired',
       },
       isUrl: {
-        message: getLocalizedText('isUrl'),
+        message: 'isUrl',
       },
       noSpaces: {
-        message: getLocalizedText('noSpaces'),
+        message: 'noSpaces',
       },
     },
   };
@@ -128,7 +130,7 @@ function AddNewDoctorForm() {
 
   return (
     <>
-      <h3 className={styles.title}>{getLocalizedText('addNewDoc')}</h3>
+      <h3 className={styles.title}>{locText('addNewDoc', currentLang)}</h3>
       <form className={styles.form} onSubmit={handleSubmit}>
         <TextField label="Name" name="name" onChange={handleChange} value={data.name} error={errors.name} />
         <TextField label="Surname" name="surname" onChange={handleChange} value={data.surname} error={errors.surname} />
@@ -161,7 +163,7 @@ function AddNewDoctorForm() {
         />
         {createError && <div style={{ color: 'red' }}>{createError}</div>}
         <button className={btnStyle.submit_btn} disabled={!isValid || isDisbale} type="submit">
-          {getLocalizedText('submit')}
+          {locText('submit', currentLang)}
         </button>
       </form>
     </>

@@ -5,8 +5,9 @@ import { getSpecializations, removeSpecialization } from '../../store/specializa
 import Modal from '../../components/modal/Modal';
 import EditSpecializationForm from '../../components/ui/Specializations/EditSpecForm';
 import AddNewSpecializationForm from '../../components/ui/Specializations/AddSpecForm';
-import { getLocalizedText } from '../../services/localizationService';
 import btnStyle from '../../components/ui/FormBtn.module.scss';
+import { getLang } from '../../store/language';
+import { locText } from '../../services/locText';
 
 type TSpec = {
   name: string;
@@ -15,6 +16,7 @@ type TSpec = {
 
 function Specializations() {
   const specializations = useAppSelector(getSpecializations()) as TSpec[];
+  const currentLang = useAppSelector(getLang());
   const [isModalActive, setModalActive] = useState(false);
   const [specData, setSpecData] = useState({
     name: '',
@@ -45,14 +47,14 @@ function Specializations() {
               className={`${styles.buttonsEdit} ${btnStyle.submit_btn}`}
               onClick={() => handleEdit(specialization)}
             >
-              {getLocalizedText('edit')}
+              {locText('edit', currentLang)}
             </button>
             <button
               type="button"
               className={`${styles.buttonsRemove} ${btnStyle.submit_btn}`}
               onClick={() => handleDelete(specialization._id as string)}
             >
-              {getLocalizedText('delete')}
+              {locText('delete', currentLang)}
             </button>
           </div>
         </div>
@@ -70,7 +72,6 @@ function ManageSpecializations() {
   return (
     <div>
       <div className={styles.add}>
-        {/* <button type="button" className={styles.addButton}>{getLocalizedText('add')}</button> */}
         <AddNewSpecializationForm />
       </div>
       <Specializations />

@@ -5,10 +5,11 @@ import { getDoctorById } from '../../store/doctors';
 import Specializations from '../../components/ui/Specializations/Specializations';
 import { getCurrentUserData } from '../../store/users';
 import SelectField from '../../components/form/SelectedField';
-import { getLocalizedText } from '../../services/localizationService';
 import validator from '../../utils/validator';
 import { createSession, getSessionsByCurrentClient, getSessionsByCurrentDoctor } from '../../store/sessions';
 import styles from './DoctorPage.module.scss';
+import { getLang } from '../../store/language';
+import { locText } from '../../services/locText';
 
 const timeOptions = [
   { label: '12:00', value: '12:00:00' },
@@ -26,6 +27,7 @@ type TParams = {
 function DoctorPage() {
   const { id } = useParams<keyof TParams>() as TParams;
   const dispatch = useAppDispatch();
+  const currentLang = useAppSelector(getLang());
   const { id: userId, role } = useAppSelector(getCurrentUserData());
   const doctor = useAppSelector(getDoctorById(id));
   const [isDisbale, setDisable] = useState(false);
@@ -75,12 +77,12 @@ function DoctorPage() {
   const validatorConfig = {
     date: {
       isRequired: {
-        message: getLocalizedText('isRequired'),
+        message: 'isRequired',
       },
     },
     time: {
       isRequired: {
-        message: getLocalizedText('isRequired'),
+        message: 'isRequired',
       },
     },
   };
@@ -122,7 +124,7 @@ function DoctorPage() {
       </h3>
       <img src={doctor.image} alt="docPhoto" width={150} />
       <Specializations id={doctor.specialization} />
-      <p className={styles.description}>{getLocalizedText('descr')}:</p>
+      <p className={styles.description}>{locText('descr', currentLang)}:</p>
       <p className={styles.description__text}>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. A officia id ducimus quidem nemo aspernatur illum
         doloribus nam quis dolorem officiis expedita, dignissimos enim accusamus quisquam quod libero, delectus sit
@@ -136,10 +138,10 @@ function DoctorPage() {
       </p>
       {role === 'client' ? (
         <div>
-          <h3 className={styles.singup_title}>{getLocalizedText('timeOfSession')}</h3>
+          <h3 className={styles.singup_title}>{locText('timeOfSession', currentLang)}</h3>
           <div>
             <form onSubmit={handleSubmit}>
-              {getLocalizedText('chooseDate')}:{' '}
+              {locText('chooseDate', currentLang)}:{' '}
               <input
                 className={styles.date__input}
                 type="date"
@@ -164,19 +166,19 @@ function DoctorPage() {
                     />
                   </div>
                 ) : (
-                  <div>{getLocalizedText('occupied')}</div>
+                  <div>{locText('occupied', currentLang)}</div>
                 )
               ) : (
-                <div>{getLocalizedText('alreadySingUp')}</div>
+                <div>{locText('alreadySingUp', currentLang)}</div>
               )}
               <button className={styles.btn} disabled={!isValid || isDisbale} type="submit">
-                {getLocalizedText('submit')}
+                {locText('submit', currentLang)}
               </button>
             </form>
           </div>
         </div>
       ) : role !== 'admin' && role !== 'doctor' ? (
-        <h3 className={styles.login_for}>{getLocalizedText('loginFor')}</h3>
+        <h3 className={styles.login_for}>{locText('loginFor', currentLang)}</h3>
       ) : null}
     </div>
   );
