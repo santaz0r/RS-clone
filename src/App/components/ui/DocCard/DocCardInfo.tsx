@@ -1,15 +1,18 @@
 import { useAppSelector } from '../../../../hooks';
-import { getLocalizedText } from '../../../services/localizationService';
+import { locText } from '../../../services/locText';
+
 import { getDoctorById } from '../../../store/doctors';
+import { getLang } from '../../../store/language';
 import Specializations from '../Specializations/Specializations';
 
 function DocCardInfo({ id }: { id: string }) {
   const doc = useAppSelector(getDoctorById(id));
+  const currentLang = useAppSelector(getLang());
   if (doc) {
     return (
       <>
         <div>
-          {getLocalizedText('name')}: {doc.name} {doc.surname}
+          {locText('name', currentLang)}: {doc.name} {doc.surname}
         </div>
         <div>
           <Specializations id={doc.specialization} />

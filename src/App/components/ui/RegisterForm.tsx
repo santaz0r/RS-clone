@@ -6,7 +6,8 @@ import styles from './LoginForm.module.scss';
 import btnStyle from './FormBtn.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { getAuthErrors, signUp } from '../../store/users';
-import { getLocalizedText } from '../../services/localizationService';
+import { getLang } from '../../store/language';
+import { locText } from '../../services/locText';
 
 type TProps = {
   setCurrentModal: React.Dispatch<React.SetStateAction<'register' | 'login'>>;
@@ -15,7 +16,7 @@ type TProps = {
 
 function RegisterForm({ setCurrentModal, setActive }: TProps) {
   const dispatch = useAppDispatch();
-
+  const currentLang = useAppSelector(getLang());
   const [data, setData] = useState({
     username: '',
     name: '',
@@ -36,28 +37,28 @@ function RegisterForm({ setCurrentModal, setActive }: TProps) {
   const validatorConfig = {
     name: {
       isRequired: {
-        message: getLocalizedText('isRequired'),
+        message: 'isRequired',
       },
     },
     username: {
       isRequired: {
-        message: getLocalizedText('isRequired'),
+        message: 'isRequired',
       },
     },
     mail: {
       isRequired: {
-        message: getLocalizedText('isRequired'),
+        message: 'isRequired',
       },
       isEmail: {
-        message: getLocalizedText('isEmail'),
+        message: 'isEmail',
       },
     },
     password: {
       isRequired: {
-        message: getLocalizedText('isRequired'),
+        message: 'isRequired',
       },
       min: {
-        message: getLocalizedText('passMin'),
+        message: 'passMin',
         value: '3',
       },
     },
@@ -83,7 +84,7 @@ function RegisterForm({ setCurrentModal, setActive }: TProps) {
   };
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <h2 className={styles.title}>{getLocalizedText('register')}</h2>
+      <h2 className={styles.title}>{locText('register', currentLang)}</h2>
       <TextField
         label="User name"
         name="username"
@@ -107,7 +108,7 @@ function RegisterForm({ setCurrentModal, setActive }: TProps) {
       {registerError && <p style={{ color: 'red' }}>{registerError}</p>}
       <div>
         <button type="button" onClick={() => setCurrentModal('login')} className={styles.changeModal__btn}>
-          {getLocalizedText('switchToLogin')}
+          {locText('switchToLogin', currentLang)}
         </button>
       </div>
     </form>

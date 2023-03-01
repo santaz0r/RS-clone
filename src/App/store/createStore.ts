@@ -3,8 +3,10 @@ import doctorsReducer from './doctors';
 import specializationsReducer from './specializations';
 import usersReducer from './users';
 import sessionsReducer from './sessions';
+import languageReducer from './language';
 
 const rootReducer = combineReducers({
+  language: languageReducer,
   doctors: doctorsReducer,
   specialization: specializationsReducer,
   users: usersReducer,

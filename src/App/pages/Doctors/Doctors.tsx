@@ -6,17 +6,19 @@ import Specializations from '../../components/ui/Specializations/Specializations
 import { getSpecializations } from '../../store/specializations';
 import { getIsLogin } from '../../store/users';
 import styles from './Doctors.module.scss';
-import { getLocalizedText } from '../../services/localizationService';
 import SelectField from '../../components/form/SelectedField';
 import { TSpec } from '../../types/types';
+import { getLang } from '../../store/language';
+import { locText } from '../../services/locText';
 
 function RenderDoctorTile(props: { filters: string }) {
   const isLogIn = useAppSelector(getIsLogin());
   const { filters } = props;
   let doctors = useAppSelector(getDoctorsList());
+  const currentLang = useAppSelector(getLang());
 
   if (filters !== 'DEFAULT') doctors = doctors.filter((doctor) => doctor.specialization === filters);
-  if (!doctors.length) return <div className={styles.emptyList}>{getLocalizedText('emptyDoctorsList')}</div>;
+  if (!doctors.length) return <div className={styles.emptyList}>{locText('emptyDoctorsList', currentLang)}</div>;
 
   return (
     <div className={styles.doctors}>
@@ -35,12 +37,14 @@ function RenderDoctorTile(props: { filters: string }) {
             <div className={styles.makeAppointment}>
               <NavLink to={`../doctor/${doctor._id}`}>
                 <button type="button" className={styles.makeAppointmentButton}>
-                  {getLocalizedText('makeAppointment')}
+                  {locText('makeAppointment', currentLang)}
                 </button>
               </NavLink>
             </div>
           ) : (
-            <div className={styles.logInRequiredToAppointment}>{getLocalizedText('logInRequiredToAppointment')}</div>
+            <div className={styles.logInRequiredToAppointment}>
+              {locText('logInRequiredToAppointment', currentLang)}
+            </div>
           )}
         </div>
       ))}
@@ -51,7 +55,6 @@ function RenderDoctorTile(props: { filters: string }) {
 function Doctors() {
   const specializations = useAppSelector(getSpecializations());
   const [filters, setFilters] = useState('DEFAULT');
-
   const handleChange = (target: { name: string; value: string }) => {
     setFilters(target.value);
   };

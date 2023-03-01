@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useAppDispatch } from '../../../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import validator from '../../../utils/validator';
 import TextField from '../../form/TextField';
 import { updateSpecialization } from '../../../store/specializations';
-import { getLocalizedText } from '../../../services/localizationService';
+
 import btnStyle from '../FormBtn.module.scss';
+import { getLang } from '../../../store/language';
+import { locText } from '../../../services/locText';
 
 type TSpec = {
   specData: {
@@ -25,21 +27,20 @@ function EditSpecializationForm({ specData, onClose }: TSpec) {
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>(initialState);
   const [isDisbale, setDisable] = useState(false);
+  const currentLang = useAppSelector(getLang());
   const validatorConfig = {
     name: {
       isRequired: {
-        message: getLocalizedText('isRequired'),
+        message: 'isRequired',
       },
       noSpaces: {
-        message: getLocalizedText('noSpaces'),
+        message: 'noSpaces',
       },
     },
   };
 
   const handleChange = (target: { name: string; value: string }) => {
-    // console.log(target);
     setData((prevState) => ({ ...prevState, [target.name]: target.value }));
-    // console.log(data);
   };
 
   const validate = () => {
@@ -73,7 +74,7 @@ function EditSpecializationForm({ specData, onClose }: TSpec) {
       <form onSubmit={handleSubmit}>
         <TextField label="Name" name="name" onChange={handleChange} value={data.name} error={errors.name} />
         <button className={btnStyle.submit_btn} disabled={!isValid || isDisbale} type="submit">
-          {getLocalizedText('submit')}
+          {locText('submit', currentLang)}
         </button>
       </form>
     </>

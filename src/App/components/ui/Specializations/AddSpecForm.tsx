@@ -3,8 +3,9 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import { createSpecialization, getErrors } from '../../../store/specializations';
 import validator from '../../../utils/validator';
 import TextField from '../../form/TextField';
-import { getLocalizedText } from '../../../services/localizationService';
 import btnStyle from '../FormBtn.module.scss';
+import { getLang } from '../../../store/language';
+import { locText } from '../../../services/locText';
 
 const initialState = {
   name: '',
@@ -15,14 +16,15 @@ function AddNewSpecializationForm() {
   const [data, setData] = useState(initialState);
   const [errors, setErrors] = useState<{ [key: string]: string }>(initialState);
   const specError = useAppSelector(getErrors());
+  const currentLang = useAppSelector(getLang());
 
   const validatorConfig = {
     name: {
       isRequired: {
-        message: getLocalizedText('isRequired'),
+        message: 'isRequired',
       },
       noSpaces: {
-        message: getLocalizedText('noSpaces'),
+        message: 'noSpaces',
       },
     },
   };
@@ -52,7 +54,7 @@ function AddNewSpecializationForm() {
 
   return (
     <>
-      <h3>{getLocalizedText('addNewSpec')}</h3>
+      <h3>{locText('addNewSpec', currentLang)}</h3>
       <form onSubmit={handleSubmit}>
         <TextField label="Name" name="name" onChange={handleChange} value={data.name} error={errors.name} />
         {specError && <div style={{ color: 'red' }}>{specError}</div>}
@@ -62,7 +64,7 @@ function AddNewSpecializationForm() {
           disabled={!isValid}
           type="submit"
         >
-          {getLocalizedText('submit')}
+          {locText('submit', currentLang)}
         </button>
       </form>
     </>

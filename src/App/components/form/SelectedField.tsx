@@ -1,7 +1,9 @@
 import React from 'react';
 import { TSpec } from '../../types/types';
-import { getLocalizedText } from '../../services/localizationService';
 import styles from './SelectField.module.scss';
+import { useAppSelector } from '../../../hooks';
+import { getLang } from '../../store/language';
+import { locText } from '../../services/locText';
 
 type TProps = {
   label: string;
@@ -18,18 +20,18 @@ function SelectField({ label, name, value, onChange, defaultOption, options, err
   const handleChange = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
     onChange({ name: target.name, value: target.value });
   };
-  // const getInputClasses = () => 'some classes';
+  const currentLang = useAppSelector(getLang());
   return (
     <div>
       <label htmlFor={name} className={styles.input__label}>
-        {getLocalizedText(label.toLowerCase())}
+        {locText(label.toLowerCase(), currentLang)}
       </label>
       <div className={styles.my_select}>
         {options.length ? (
           <>
             <select className={styles.select} id={name} name={name} value={value} onChange={handleChange}>
               <option disabled={disabledOption} value="DEFAULT" key="DEFAULT">
-                {getLocalizedText(defaultOption.toLowerCase())}
+                {locText(defaultOption.toLowerCase(), currentLang)}
               </option>
               {options &&
                 options.map((option) => (
@@ -41,10 +43,10 @@ function SelectField({ label, name, value, onChange, defaultOption, options, err
             <span className={styles.arrow} />
           </>
         ) : (
-          <p>{getLocalizedText('occupied')}</p>
+          <p>{locText('occupied', currentLang)}</p>
         )}
       </div>
-      {error && <div className={styles.error}>{error}</div>}
+      {error && <div className={styles.error}>{locText(error, currentLang)}</div>}
     </div>
   );
 }

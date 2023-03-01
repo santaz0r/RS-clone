@@ -7,7 +7,8 @@ import Specializations from '../Specializations/Specializations';
 // import noPhoto from '../../../assets/nophoto.jpg';
 
 import styles from './DoctorsCarousel.module.scss';
-import { getLocalizedText } from '../../../services/localizationService';
+import { getLang } from '../../../store/language';
+import { locText } from '../../../services/locText';
 
 const responsive = {
   desktop: {
@@ -29,6 +30,7 @@ const responsive = {
 
 function DoctorsCarousel() {
   const doctors = useAppSelector(getDoctorsList());
+  const currentLang = useAppSelector(getLang());
   return (
     <Carousel
       swipeable
@@ -54,13 +56,15 @@ function DoctorsCarousel() {
         <div key={doc._id} className={styles.card}>
           <div className={styles.card__img} style={{ backgroundImage: `url(${doc.image})` }} />
           <div className={styles.card__name}>
-            {getLocalizedText('name')}: {doc.name} {doc.surname}
+            {locText('name', currentLang)}: {doc.name} {doc.surname}
           </div>
           {/* <div>
             {getLocalizedText('surname')}: {doc.surname}
           </div> */}
           <Specializations id={doc.specialization} />
-          <NavLink className={styles.card__btn} to={`/doctor/${doc._id}`}>{getLocalizedText('more')}</NavLink>
+          <NavLink className={styles.card__btn} to={`/doctor/${doc._id}`}>
+            {locText('more', currentLang)}
+          </NavLink>
         </div>
       ))}
     </Carousel>
