@@ -1,6 +1,12 @@
 # RS-Clone Task. Instant heal project.
 ### (c) [santaz0r](https://github.com/santaz0r) [te1epuz](https://github.com/Te1epuz) [mordobiv](https://github.com/mordobiv)
 
+## Технологический стэк:
++ NodeJS + ExpressJS (Server)
++ React + React-router-DOM
++ React-Redux + toolkit
++ Axios
++ React-multi-carousel
 
 ## Инструкция к применению
  ### `Общие сведения`
