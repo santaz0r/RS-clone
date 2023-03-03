@@ -121,7 +121,7 @@ function DoctorPage() {
   return (
     <div className={styles.wrapper}>
       <h3>
-        Имя: {doctor.name} {doctor.surname}
+        {locText('name', currentLang)}: {doctor.name} {doctor.surname}
       </h3>
       <img src={doctor.image} alt="docPhoto" width={150} />
       <Specializations id={doctor.specialization} />
