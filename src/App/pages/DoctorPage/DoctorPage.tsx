@@ -69,8 +69,8 @@ function DoctorPage() {
   const dayNow = timestamp.getDate();
 
   const filteredTimeOption = filteredOptions.filter((time) => {
-    if (dayNow.toString() === sessionsData.date.split('-')[2]) {
-      return Number(time.value.split(':')[0]) < hoursNow;
+    if (dayNow.toString().padStart(2, '0') === sessionsData.date.split('-')[2]) {
+      return Number(time.value.split(':')[0]) > hoursNow;
     }
     return time;
   });
@@ -172,7 +172,7 @@ function DoctorPage() {
               ) : (
                 <div>{locText('alreadySingUp', currentLang)}</div>
               )}
-              <button className={styles.btn} disabled={!isValid || isDisbale} type="submit">
+              <button className={styles.btn} disabled={!isValid || isDisbale || hasSession} type="submit">
                 {locText('submit', currentLang)}
               </button>
             </form>
