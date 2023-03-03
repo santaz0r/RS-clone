@@ -3,6 +3,7 @@
 
 ## Технологический стэк:
 + NodeJS + ExpressJS (Server)
++ TypesScript
 + React + React-router-DOM
 + React-Redux + toolkit
 + Axios
